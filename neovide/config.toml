@@ -1,3 +1,4 @@
-wsl = true
+# wsl = true
 multigrid = true
 maximized = true
+frame = "None"
