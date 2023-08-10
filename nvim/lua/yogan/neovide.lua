@@ -10,8 +10,8 @@ vim.g.neovide_cursor_vfx_mode = 'pixiedust' -- cursor goes brrr
 vim.g.neovide_hide_mouse_when_typing = true
 
 -- transparency in percent
-vim.g.pumblen = 20
-vim.g.winblend = 20
+vim.o.pumblend = 20
+vim.o.winblend = 20
 
 -- blurring of background in transparent floats
 vim.g.neovide_floating_blur_amount_x = 2.0
