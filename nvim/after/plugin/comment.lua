@@ -15,6 +15,11 @@ require('Comment').setup {
 local ft = require('Comment.ft')
 ft.set('gitconfig', '# %s') -- default is ; but all my stuff uses # (both work)
 
--- Ctrl+/ is <C-_>, see https://vi.stackexchange.com/a/26617
-vim.keymap.set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
-vim.keymap.set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
+if vim.g.neovide then
+    vim.keymap.set('n', '<C-/>', '<Plug>(comment_toggle_linewise_current)')
+    vim.keymap.set('v', '<C-/>', '<Plug>(comment_toggle_linewise_visual)')
+else
+    -- Ctrl+/ is <C-_>, see https://vi.stackexchange.com/a/26617
+    vim.keymap.set('n', '<C-_>', '<Plug>(comment_toggle_linewise_current)')
+    vim.keymap.set('v', '<C-_>', '<Plug>(comment_toggle_linewise_visual)')
+end
