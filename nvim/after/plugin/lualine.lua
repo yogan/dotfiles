@@ -3,7 +3,7 @@ local function session_name()
     if not session_ok or not session.session_name then
         return ''
     end
-    return ' ' .. session.session_name
+    return '󱪍. ' .. session.session_name
 end
 
 require('lualine').setup {
