@@ -3,7 +3,7 @@ require('todo-comments').setup {
         FIX  = { icon = ' ', color = 'error', alt = { 'FIXME', 'FIXIT', 'BUG', 'BUGS' } },
         WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'WARNINGS', 'ATTENTION' } },
         TODO = { icon = ' ', color = 'info', alt = { 'TODOS', 'ISSUE', 'ISSUES' } },
-        NOTE = { icon = ' ', color = 'hint', alt = { 'NOTES', 'INFO', 'INFOS', 'HINT', 'HINTS' } },
+        NOTE = { icon = '󰎞 ', color = 'hint', alt = { 'NOTES', 'INFO', 'INFOS', 'HINT', 'HINTS' } },
     },
     merge_keywords = false, -- use only keywords listed above, don't include defaults
     highlight = {
