@@ -11,7 +11,7 @@ require('bufferline').setup {
             {
                 filetype = 'NvimTree',
                 text = function()
-                    return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+                    return ' ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
                 end,
                 -- HINT: :highlight or :Telescope highlights to check options
                 highlight = 'BufferLineFill',
