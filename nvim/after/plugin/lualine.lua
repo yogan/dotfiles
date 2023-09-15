@@ -10,6 +10,17 @@ require('lualine').setup {
     extensions = { 'nvim-tree', 'quickfix' },
     sections = {
         lualine_a = { session_name },
-        lualine_c = { { 'filename', path = 1 } },
+        lualine_c = {
+            {  
+                'filename',
+                path = 1,
+                symbols = {
+                    modified = '',
+                    readonly = '󰷤',
+                    unnamed  = '',
+                    newfile  = '',
+                }
+            }
+        },
     },
 }
