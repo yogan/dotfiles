@@ -11,7 +11,7 @@ require('lualine').setup {
     sections = {
         lualine_a = { session_name },
         lualine_c = {
-            {  
+            {
                 'filename',
                 path = 1,
                 symbols = {
