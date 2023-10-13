@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local lspconfig = require('lspconfig')
 
 lsp.preset('recommended')
 
@@ -17,6 +18,14 @@ lsp.configure('lua_ls', {
             'P', 'RELOAD', 'R', -- from ../../lua/yogan/globals.lua
         }
     } } }
+})
+
+-- NOTE: lspconfig seems to be the v2 way of configuring LSPs, but lsp.configure()
+-- seems to work as well. Found here:
+-- https://old.reddit.com/r/neovim/comments/12kxhkw/neovim_lsp_yamlls_key_ordering_issue/
+lspconfig.yamlls.setup({
+    -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
+    settings = { yaml = { keyOrdering = false } }
 })
 
 local cmp = require('cmp')
