@@ -13,13 +13,16 @@ require('bufferline').setup {
                 text = function()
                     return '  ' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
                 end,
-                -- HINT: :highlight or :Telescope highlights to check options
-                highlight = 'BufferLineFill',
                 separator = true, -- uses offset_separator colors
+                highlight = 'BufferLineFill',
             }
         },
     }
 }
+
+-- NOTE: we have to call this a second time (after colors.lua), otherwise stuff
+-- is broken :-/
+vim.cmd('colorscheme nightfox')
 
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<cr>',
     { noremap = true, silent = true, desc = 'Jump to buffer' }
