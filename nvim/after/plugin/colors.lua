@@ -28,14 +28,4 @@ local spec = require('nightfox.spec').load('nightfox')
 -- print(vim.inspect(spec.palette)) -- for finding stuff
 vim.g.better_whitespace_guicolor = spec.palette.red.dim
 
--- set once, required by indent_blankline config
-vim.cmd('colorscheme nightfox')
-
-require('indent_blankline').setup {
-    show_current_context = true,
-    show_first_indent_level = false,
-    show_trailing_blankline_indent = false,
-}
-
--- set again; no other way to get colors right :-(
 vim.cmd('colorscheme nightfox')
