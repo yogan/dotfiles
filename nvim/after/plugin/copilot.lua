@@ -33,4 +33,5 @@ vim.g.copilot_filetypes = {
     ['typescriptreact'] = true,
     ['vim'] = true,
     ['yaml'] = true,
+    ['zig'] = true,
 }
