@@ -2,6 +2,7 @@ vim.g.copilot_filetypes = {
     ['*'] = false,
     ['bash'] = true,
     ['c'] = true,
+    ['clojure'] = true,
     ['cpp'] = true,
     ['cs'] = true,
     ['css'] = true,
