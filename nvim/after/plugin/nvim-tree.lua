@@ -17,7 +17,7 @@ require('nvim-tree').setup {
         show_on_open_dirs = false,
     },
     filters = {
-        custom = { '^\\.git', '^node_modules' }
+        custom = { '^\\.git$', '^node_modules$' }
     },
     renderer = {
         group_empty = true, -- show foo/bar/quz/ in single line
