@@ -26,7 +26,7 @@ require('nvim-tree').setup {
         highlight_modified = "all",
         highlight_git = true,
         icons = {
-            git_placement = "before",
+            git_placement = "after",
             show = {
                 modified = true,
             },
