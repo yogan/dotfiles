@@ -30,6 +30,8 @@ require('gitsigns').setup {
         map('n', '<leader>gp', gs.preview_hunk, { desc = 'git: diff hunk' })
         map('n', '<leader>gd', gs.diffthis, { desc = 'git: diff file' })
         map('n', '<leader>gD', function() gs.diffthis('~') end, { desc = 'git: diff file (staged)' })
+        -- toggle line blame
+        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'git: toggle blame' })
         map('n', '<leader>gB', function() gs.blame_line { full = true } end, { desc = 'git: blame popup' })
 
         -- Toggles
