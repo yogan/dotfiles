@@ -3,19 +3,21 @@
 vim.opt.sessionoptions:remove('buffers')
 
 require('possession').setup {
+    silent = true,
+    load_silent = true,
     autosave = {
         current = true,
-        tmp = false,
+        tmp     = false,
         on_load = true,
         on_quit = true,
     },
     commands = {
-        save = 'SessionSave',
-        load = 'SessionLoad',
-        close = 'SessionClose',
-        delete = 'SessionDelete',
-        show = 'SessionShow',
-        list = 'SessionList',
+        save    = 'SessionSave',
+        load    = 'SessionLoad',
+        close   = 'SessionClose',
+        delete  = 'SessionDelete',
+        show    = 'SessionShow',
+        list    = 'SessionList',
         migrate = 'SessionMigrate',
     },
 }
