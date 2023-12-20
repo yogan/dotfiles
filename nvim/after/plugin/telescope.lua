@@ -36,6 +36,14 @@ telescope.setup {
 
 telescope.load_extension('fzf')
 
+local find_files = function()
+    builtin.find_files {
+        -- also show dotfiles, but not .git/ (.gitignore is still respected)
+        find_command = { 'fd', '--type', 'file', '--type', 'symlink',
+                         '--hidden', '--exclude', '.git' },
+    }
+end
+
 -- help
 vim.keymap.set('n', '<F1>',       builtin.help_tags, { desc = 'Help tags' })
 
@@ -48,11 +56,12 @@ vim.keymap.set('n', '<C-b>',      builtin.buffers, { desc = 'Buffers' })
 vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = 'Buffers' })
 
 -- files
-vim.keymap.set('n', '<C-p>',      builtin.find_files, { desc = 'Find file' })
+vim.keymap.set('n', '<C-p>',      find_files, { desc = 'Find files' })
+vim.keymap.set('n', '<leader>pf', find_files, { desc = 'Find files' })
 
 -- git
 vim.keymap.set('n', '<C-g>',      builtin.git_files,  { desc = 'Git files' })
-vim.keymap.set('n', '<leader>pg', builtin.find_files, { desc = 'Git files' })
+vim.keymap.set('n', '<leader>pg', builtin.git_files,  { desc = 'Git files' })
 vim.keymap.set('n', '<leader>pc', builtin.git_status, { desc = 'Git status (changes)' })
 
 -- vim things
