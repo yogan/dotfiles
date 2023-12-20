@@ -1,5 +1,6 @@
 vim.g.copilot_filetypes = {
     ['*'] = false,
+    ['autohotkey'] = true,
     ['bash'] = true,
     ['c'] = true,
     ['clojure'] = true,
