@@ -75,11 +75,10 @@ vim.keymap.set('n', '<leader>po', builtin.vim_options,    { desc = 'Options' })
 vim.keymap.set('n', '<leader>pr', builtin.registers,      { desc = 'Registers' })
 
 -- symbols (telescope-symbols.nvim) (ps = symbols)
-vim.keymap.set('n', '<leader>pse', function() builtin.symbols { sources = { 'emoji' } } end,
-    { desc = 'Insert Emoji' })
-vim.keymap.set('n', '<leader>psg', function() builtin.symbols { sources = { 'gitmoji' } } end,
-    { desc = 'Insert Git Emoji' })
-vim.keymap.set('n', '<leader>psn', function() builtin.symbols { sources = { 'nerd' } } end,
-    { desc = 'Insert Nerd Font icon' })
-vim.keymap.set('n', '<leader>psm', function() builtin.symbols { sources = { 'math' } } end,
-    { desc = 'Insert math symbol' })
+local symbol = function(source)
+    builtin.symbols { sources = { source } }
+end
+vim.keymap.set('n', '<leader>pse', function() symbol('emoji')   end, { desc = 'Insert Emoji' })
+vim.keymap.set('n', '<leader>psg', function() symbol('gitmoji') end, { desc = 'Insert Git Emoji' })
+vim.keymap.set('n', '<leader>psn', function() symbol('nerd')    end, { desc = 'Insert Nerd Font icon' })
+vim.keymap.set('n', '<leader>psm', function() symbol('math')    end, { desc = 'Insert math symbol' })
