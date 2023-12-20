@@ -36,7 +36,7 @@ telescope.setup {
 
 telescope.load_extension('fzf')
 
-local find_files = function()
+local function find_files()
     builtin.find_files {
         -- also show dotfiles, but not .git/ (.gitignore is still respected)
         find_command = { 'fd', '--type', 'file', '--type', 'symlink',
@@ -44,7 +44,7 @@ local find_files = function()
     }
 end
 
-local live_grep_no_regex = function()
+local function live_grep_no_regex()
     builtin.live_grep {
         additional_args = { '--fixed-strings' },
         prompt_title = 'Live Grep (no RegEx)',
