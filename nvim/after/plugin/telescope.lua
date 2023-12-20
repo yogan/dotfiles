@@ -44,11 +44,19 @@ local find_files = function()
     }
 end
 
+local live_grep_no_regex = function()
+    builtin.live_grep {
+        additional_args = { '--fixed-strings' },
+        prompt_title = 'Live Grep (no RegEx)',
+    }
+end
+
 -- help
 vim.keymap.set('n', '<F1>',       builtin.help_tags, { desc = 'Help tags' })
 
 -- search
-vim.keymap.set('n', '<C-f>',      builtin.live_grep)
+vim.keymap.set('n', '<C-f>',      builtin.live_grep,   { desc = 'Live grep' })
+vim.keymap.set('n', '<C-h>',      live_grep_no_regex,  { desc = 'Live grep (no regex)' })
 vim.keymap.set('n', '<leader>*',  builtin.grep_string, { desc = 'Search for word under cursor' })
 
 -- buffers
