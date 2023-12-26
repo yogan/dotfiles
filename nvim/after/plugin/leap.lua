@@ -1,4 +1,8 @@
-require('leap').add_default_mappings()
+-- no default mappings, to avoid clashes (e.g. with LSP's gs)
+-- require('leap').add_default_mappings()
+vim.keymap.set({'n', 'x', 'o'}, 's',  '<Plug>(leap-forward)')
+vim.keymap.set({'n', 'x', 'o'}, 'S',  '<Plug>(leap-backward)')
+vim.keymap.set({'n', 'x', 'o'}, 'gS', '<Plug>(leap-from-window)')
 
 -- grey out search area
 -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
