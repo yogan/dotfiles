@@ -15,19 +15,11 @@ require("mason-lspconfig").setup({
 
 lsp.preset('recommended')
 
-lsp.configure('lua_ls', {
-    settings = { Lua = { diagnostics = {
-        -- Fix false positive undefined global '…'
-        globals = {
-            'vim',
-            'P', 'RELOAD', 'R', -- from ../../lua/yogan/globals.lua
-        }
-    } } }
+lspconfig.lua_ls.setup({
+	-- Fix false positive undefined global '…'
+	settings = { Lua = { diagnostics = { globals = { "vim","P","RELOAD","R" } } } },
 })
 
--- NOTE: lspconfig seems to be the v2 way of configuring LSPs, but lsp.configure()
--- seems to work as well. Found here:
--- https://old.reddit.com/r/neovim/comments/12kxhkw/neovim_lsp_yamlls_key_ordering_issue/
 lspconfig.yamlls.setup({
     -- https://github.com/redhat-developer/yaml-language-server#language-server-settings
     settings = { yaml = { keyOrdering = false } }
