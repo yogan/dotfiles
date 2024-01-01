@@ -1,14 +1,19 @@
 local lsp = require('lsp-zero')
 local lspconfig = require('lspconfig')
 
-lsp.preset('recommended')
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"eslint",
+		"lua_ls",
+		"tsserver",
+	},
+	handlers = {
+		lsp.default_setup,
+	},
+})
 
-lsp.ensure_installed {
-    'tsserver',
-    'eslint',
-    'lua_ls',
-    'rust_analyzer',
-}
+lsp.preset('recommended')
 
 lsp.configure('lua_ls', {
     settings = { Lua = { diagnostics = {
