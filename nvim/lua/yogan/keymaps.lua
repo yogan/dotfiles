@@ -21,9 +21,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [['_d]], { desc = 'Delete without yank
 -- copy to system clipboard (works magically from WSL to Windows)
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [['+y]], { desc = 'Copy to system clipboard' })
 
--- format whole file
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format file' })
-
 -- navigating between entries from quickfix/location list
 -- currently not needed, but might be, so let's keep 'em ready to go
 -- vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')

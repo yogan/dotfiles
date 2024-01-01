@@ -170,6 +170,9 @@ return require('packer').startup(function(use)
     -- additional functionality for typescript server (rename file, update imports, etc.)
     use 'jose-elias-alvarez/typescript.nvim'
 
+    -- formatter
+    use 'stevearc/conform.nvim'
+
     -- Trouble: project wide diagnostics
     use {
         'folke/trouble.nvim',
