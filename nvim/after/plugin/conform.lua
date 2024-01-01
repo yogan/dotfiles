@@ -41,6 +41,12 @@ end, {
 	desc = "Re-enable autoformat-on-save",
 })
 
+vim.g.disable_autoformat = true -- start without auto format on save by default
+
+vim.keymap.set("n", "<leader>tfe", ":FormatEnable<CR>", { desc = "Enable auto format on save" })
+vim.keymap.set("n", "<leader>tfd", ":FormatDisable<CR>", { desc = "Disable auto format on save" })
+vim.keymap.set("n", "<leader>tfb", ":FormatDisable!<CR>", { desc = "Disable auto format on save (buffer)" })
+
 vim.keymap.set({ "n", "v" }, "<leader>f", function()
 	conform.format({ timeout_ms = 500, lsp_fallback = true })
 end, { desc = "Format file or range (in visual mode)" })
