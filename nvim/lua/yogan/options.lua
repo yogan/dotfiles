@@ -26,9 +26,6 @@ vim.opt.listchars = {
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 
-vim.opt.foldmethod = 'indent'
-vim.opt.foldlevelstart = 99
-
 vim.opt.updatetime = 50
 
 vim.opt.wrap = true

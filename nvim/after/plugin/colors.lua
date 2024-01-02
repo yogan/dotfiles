@@ -12,8 +12,10 @@ require('nightfox').setup {
     },
     groups = {
         nightfox = {
-            ColorColumn         = { bg = 'bg0' },
+            ColorColumn         = { bg = '#18212d' },
             CursorLine          = { bg = 'bg2' },
+            Folded              = { bg = '#151c27' },
+            UfoFoldedEllipsis   = { fg = '#71839b' },
             LineNr              = { fg = 'bg4', bg = 'bg0' },
             Substitute          = { bg = 'palette.yellow.dim' },
             NvimTreeSpecialFile = { fg = 'palette.green.dim' },
