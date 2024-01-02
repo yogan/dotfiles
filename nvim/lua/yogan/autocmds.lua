@@ -32,3 +32,23 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.txt", "*.md", "*.tex" },
 	command = "setlocal spell",
 })
+
+vim.api.nvim_create_autocmd("WinEnter", {
+	group = group,
+	desc = "Enable color column and cursor line for active window",
+	pattern = "*",
+	callback = function()
+		vim.opt.colorcolumn = "+1,+20"
+		vim.opt.cursorline = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("WinLeave", {
+	group = group,
+	desc = "Disable color column and cursor line for inactive windows",
+	pattern = "*",
+	callback = function()
+		vim.opt.colorcolumn = "0"
+		vim.opt.cursorline = false
+	end,
+})

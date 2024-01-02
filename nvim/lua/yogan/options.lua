@@ -34,7 +34,6 @@ vim.opt.updatetime = 50
 
 vim.opt.wrap = true
 vim.opt.textwidth = 80
-vim.opt.colorcolumn = "+1,+20"
 
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
