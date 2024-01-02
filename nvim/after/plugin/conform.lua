@@ -3,9 +3,8 @@ local conform = require("conform")
 conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-
 		python = { "isort", "black" }, -- run all in given order
-
+		sh = { "shfmt" },
 		-- sub list uses only first available (here: prettierd before prettier)
 		javascript = { { "prettierd", "prettier" } },
 		typescript = { { "prettierd", "prettier" } },
@@ -21,6 +20,10 @@ conform.setup({
 		return { timeout_ms = 500, lsp_fallback = true }
 	end,
 })
+
+require("conform").formatters.shfmt = {
+	prepend_args = { "-i", "4" },
+}
 
 -- Source: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#command-to-toggle-format-on-save
 vim.api.nvim_create_user_command("FormatDisable", function(args)
