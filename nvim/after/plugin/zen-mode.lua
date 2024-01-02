@@ -7,6 +7,7 @@ require("zen-mode").setup({
 			relativenumber = false, -- false = disable relative numbers
 			list = false, -- false = disable whitespace characters
 			colorcolumn = "0", -- disable color column
+			foldcolumn = "0", -- disable fold column
 		},
 	},
 	plugins = {
