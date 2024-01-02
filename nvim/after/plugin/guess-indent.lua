@@ -1,3 +1,3 @@
-require('guess-indent').setup {
-    filetype_exclude = { 'gitcommit', 'markdown', 'text' }
-}
+require("guess-indent").setup({
+	filetype_exclude = { "gitcommit", "markdown", "text" },
+})

@@ -1,5 +1,5 @@
 if vim.b.yogan_ftplugin_qf_done then
-    return
+	return
 end
 vim.b.yogan_ftplugin_qf_done = true
 

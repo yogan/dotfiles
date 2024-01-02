@@ -1,5 +1,5 @@
 if vim.b.yogan_ftplugin_trouble_done then
-    return
+	return
 end
 vim.b.yogan_ftplugin_trouble_done = true
 

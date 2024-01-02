@@ -1,12 +1,12 @@
 if not vim.g.neovide then
-    return
+	return
 end
 
-vim.keymap.set({'i', 'c'}, '<S-Insert>', '<C-R>+')
+vim.keymap.set({ "i", "c" }, "<S-Insert>", "<C-R>+")
 
-vim.o.guifont = 'VictorMono Nerd Font:h12'
+vim.o.guifont = "VictorMono Nerd Font:h12"
 
-vim.g.neovide_cursor_vfx_mode = 'pixiedust' -- cursor goes brrr
+vim.g.neovide_cursor_vfx_mode = "pixiedust" -- cursor goes brrr
 vim.g.neovide_hide_mouse_when_typing = true
 
 -- transparency in percent
