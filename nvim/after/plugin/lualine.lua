@@ -14,6 +14,14 @@ local function auto_format()
 	return ""
 end
 
+local function indent_setting()
+	if vim.opt.expandtab:get() then
+		return "␣" .. vim.opt.shiftwidth:get()
+	else
+		return "↹"
+	end
+end
+
 require("lualine").setup({
 	extensions = { "nvim-tree", "quickfix" },
 	sections = {
@@ -31,5 +39,6 @@ require("lualine").setup({
 				},
 			},
 		},
+		lualine_x = { indent_setting, "encoding", "fileformat", "filetype" },
 	},
 })
