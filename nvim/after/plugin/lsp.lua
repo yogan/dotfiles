@@ -15,6 +15,8 @@ require("mason-lspconfig").setup({
 
 lsp.preset("recommended")
 
+require("neodev").setup()
+
 lspconfig.lua_ls.setup({
 	-- Fix false positive undefined global '…'
 	settings = { Lua = { diagnostics = { globals = { "vim", "P", "RELOAD", "R" } } } },

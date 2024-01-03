@@ -199,10 +199,14 @@ return require("packer").startup(function(use)
 			{ "rafamadriz/friendly-snippets" },
 		},
 	})
-	-- additional functionality for typescript server (rename file, update imports, etc.)
+
+	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
 	use("jose-elias-alvarez/typescript.nvim")
 
-	-- formatter
+	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
+	use("folke/neodev.nvim")
+
+	-- (Auto) Formatter
 	use("stevearc/conform.nvim")
 
 	-- Trouble: project wide diagnostics
