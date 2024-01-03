@@ -3,7 +3,7 @@ local theme = require("alpha.themes.startify")
 
 local query = require("possession.query")
 local get_layout = function()
-	return query.alpha_workspace_layout({}, theme.button, { others_name = "ﮛ Sessions" })
+	return query.alpha_workspace_layout({}, theme.button, { others_name = "  Sessions" })
 end
 local utils = require("possession.utils")
 local function session()
