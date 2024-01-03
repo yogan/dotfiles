@@ -8,6 +8,7 @@ end
 
 local function auto_format()
 	-- see :FormatEnable and :FormatDisable in conform.lua
+	---@diagnostic disable-next-line: undefined-field
 	if vim.b.disable_autoformat or vim.g.disable_autoformat then
 		return ""
 	end
