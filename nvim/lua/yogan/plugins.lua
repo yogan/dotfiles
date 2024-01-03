@@ -166,8 +166,8 @@ return require("packer").startup(function(use)
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 500
+			vim.opt.timeout = true
+			vim.opt.timeoutlen = 500
 			require("which-key").setup()
 		end,
 	})

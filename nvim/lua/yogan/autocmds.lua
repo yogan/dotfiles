@@ -19,8 +19,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	group = group,
 	desc = "Setup defaults for new terminal windows",
 	callback = function()
-		vim.o.number = false
-		vim.o.relativenumber = false
+		vim.opt.number = false
+		vim.opt.relativenumber = false
 		vim.cmd("DisableWhitespace")
 		vim.cmd("startinsert")
 	end,

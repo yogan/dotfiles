@@ -1,6 +1,6 @@
-vim.o.number = false
-vim.o.relativenumber = false
-vim.o.spell = true
+vim.opt.number = false
+vim.opt.relativenumber = false
+vim.opt.spell = true
 
 vim.cmd([[
     iab grt Greetings,<CR>Frank')
