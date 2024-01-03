@@ -4,10 +4,10 @@ require("nightfox").setup({
 		dim_inactive = true, -- Non focused panes set to alternative background
 		styles = {
 			comments = "italic",
-			-- keywords = 'italic',
-			-- functions = 'italic',
-			-- strings = 'italic',
-			-- variables = 'italic',
+			-- keywords = "bold",
+			-- functions = "italic",
+			-- strings = "italic",
+			-- variables = "italic",
 		},
 	},
 	groups = {
@@ -20,14 +20,17 @@ require("nightfox").setup({
 			Substitute = { bg = "palette.yellow.dim" },
 			NvimTreeSpecialFile = { fg = "palette.green.dim" },
 		},
+		duskfox = {
+			ColorColumn = { bg = "#27243b" },
+		},
 	},
 })
 
--- Setting a dimmed red (taken from color scheme) as backgroud for trailing
+-- Setting a dimmed red (taken from color scheme) as background for trailing
 -- whitespace. Needs to be at the very end, any further call to 'colorscheme'
 -- resets to the default full bright red. :-/
 local spec = require("nightfox.spec").load("nightfox")
 -- print(vim.inspect(spec.palette)) -- for finding stuff
 vim.g.better_whitespace_guicolor = spec.palette.red.dim
 
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme duskfox")
