@@ -27,7 +27,20 @@ require("lualine").setup({
 	extensions = { "nvim-tree", "quickfix" },
 	sections = {
 		lualine_a = { session_name },
-		lualine_b = { auto_format },
+		lualine_b = {
+			{
+				"copilot",
+				show_running = true,
+				symbols = {
+					status = {
+						enabled = " ",
+						disabled = "",
+					},
+					spinners = require("copilot-status.spinners").dots,
+				},
+			},
+			auto_format,
+		},
 		lualine_c = {
 			{
 				"filename",

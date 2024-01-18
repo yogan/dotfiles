@@ -220,6 +220,7 @@ return require("packer").startup(function(use)
 
 	-- GitHub Copilot
 	use("github/copilot.vim")
+	use("ofseed/copilot-status.nvim")
 
 	-- Find and display URLs (:UrlView)
 	-- :UrlView packer shows URLs of all installed packer plugins
