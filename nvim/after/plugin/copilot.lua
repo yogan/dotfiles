@@ -21,6 +21,7 @@ vim.g.copilot_filetypes = {
 	["jsx"] = true,
 	["lua"] = true,
 	["markdown"] = true,
+	["mips"] = true,
 	["nim"] = true,
 	["perl"] = true,
 	["php"] = true,

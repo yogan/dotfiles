@@ -206,6 +206,9 @@ return require("packer").startup(function(use)
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
 	use("folke/neodev.nvim")
 
+	-- MIPS Assembly Syntax Highlighting
+	use("harenome/vim-mipssyntax")
+
 	-- (Auto) Formatter
 	use("stevearc/conform.nvim")
 
