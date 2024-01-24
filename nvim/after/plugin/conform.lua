@@ -27,6 +27,8 @@ require("conform").formatters.shfmt = {
 
 -- Source: https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#command-to-toggle-format-on-save
 vim.api.nvim_create_user_command("FormatDisable", function(args)
+	---@type table<any, any>
+	vim.b = vim.b -- to make luals happy
 	if args.bang then
 		-- FormatDisable! will disable formatting just for this buffer
 		vim.b.disable_autoformat = true
