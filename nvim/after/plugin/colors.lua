@@ -14,6 +14,7 @@ require("nightfox").setup({
 		nightfox = {
 			ColorColumn = { bg = "#18212d" },
 			CursorLine = { bg = "bg2" },
+			EndOfBuffer = { bg = "#141d27" },
 			Folded = { bg = "#151c27" },
 			UfoFoldedEllipsis = { fg = "#71839b" },
 			LineNr = { fg = "bg4", bg = "bg0" },
@@ -22,6 +23,7 @@ require("nightfox").setup({
 		},
 		duskfox = {
 			ColorColumn = { bg = "#27243b" },
+			EndOfBuffer = { bg = "#1b192a" },
 		},
 	},
 })

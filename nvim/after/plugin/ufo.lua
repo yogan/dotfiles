@@ -15,7 +15,7 @@ vim.opt.foldcolumn = "1"
 vim.opt.foldlevel = 99 -- ufo provider needs a large value
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
-vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.fillchars = [[eob:∞,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
 vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
