@@ -28,10 +28,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [['+y]], { desc = "Copy to system clip
 -- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
 -- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
--- navigate through buffers with meta-h / meta-l
-vim.keymap.set("n", "<M-h>", "<cmd>bp<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<M-l>", "<cmd>bn<CR>", { desc = "Next buffer" })
-
 -- replace current word under cursor (with live preview)
 vim.keymap.set(
 	"n",
