@@ -19,6 +19,7 @@ vim.g.copilot_filetypes = {
 	["javascriptreact"] = true,
 	["json"] = true,
 	["jsx"] = true,
+	["julia"] = true,
 	["lua"] = true,
 	["markdown"] = true,
 	["mips"] = true,
