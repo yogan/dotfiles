@@ -1,6 +1,14 @@
 local conform = require("conform")
 
 conform.setup({
+	formatters = {
+		gleam = {
+			command = "gleam",
+			args = { "format", "--stdin" },
+			stdin = true,
+		},
+	},
+
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "isort", "black" }, -- run all in given order
@@ -10,6 +18,7 @@ conform.setup({
 		typescript = { { "prettierd", "prettier" } },
 		javascriptreact = { { "prettierd", "prettier" } },
 		typescriptreact = { { "prettierd", "prettier" } },
+		gleam = { "gleam" },
 	},
 
 	format_on_save = function(bufnr)
