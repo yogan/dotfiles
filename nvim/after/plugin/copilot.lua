@@ -33,6 +33,7 @@ vim.g.copilot_filetypes = {
 	["rust"] = true,
 	["scss"] = true,
 	["sh"] = true,
+	["sml"] = true,
 	["sql"] = true,
 	["toml"] = true,
 	["typescript"] = true,
