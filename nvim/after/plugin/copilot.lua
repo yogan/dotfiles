@@ -15,6 +15,7 @@ vim.g.copilot_filetypes = {
 	["gitcommit"] = true,
 	["gleam"] = true,
 	["go"] = true,
+	["haskell"] = true,
 	["html"] = true,
 	["java"] = true,
 	["javascript"] = true,
