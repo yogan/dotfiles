@@ -28,6 +28,7 @@ vim.g.copilot_filetypes = {
 	["nim"] = true,
 	["perl"] = true,
 	["php"] = true,
+	["ps1"] = true,
 	["python"] = true,
 	["ruby"] = true,
 	["rust"] = true,
