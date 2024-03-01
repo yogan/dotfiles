@@ -47,7 +47,11 @@ local function find_files()
 			"symlink",
 			"--hidden",
 			"--exclude",
-			".git",
+			".git/",
+			"--exclude",
+			".stack-work/",
+			"--exclude",
+			"node_modules",
 		},
 	})
 end
