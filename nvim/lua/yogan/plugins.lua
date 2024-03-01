@@ -66,6 +66,9 @@ return require("packer").startup(function(use)
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	use("kazhala/close-buffers.nvim")
 
+	-- Noice (fancy UI stuff)
+	use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
+
 	-- File explorer
 	use({
 		"nvim-tree/nvim-tree.lua",
