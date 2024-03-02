@@ -1,4 +1,6 @@
-require("noice").setup({
+local noice = require("noice")
+
+noice.setup({
 	lsp = {
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 		override = {
@@ -16,3 +18,10 @@ require("noice").setup({
 		lsp_doc_border = false, -- add a border to hover docs and signature help
 	},
 })
+
+vim.keymap.set("n", "<leader><leader>", function()
+	noice.cmd("dismiss")
+end, { desc = "Noice: dismiss all visible messages" })
+vim.keymap.set("n", "<leader>m", function()
+	noice.cmd("history")
+end, { desc = "Noice: show message history" })
