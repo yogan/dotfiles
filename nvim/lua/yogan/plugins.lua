@@ -60,7 +60,14 @@ return require("packer").startup(function(use)
 
 	-- Comments.nvim
 	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
+
+	-- use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
+	-- switch to my fork until PR is merged
+	-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/pull/97
+	use({
+		"yogan/nvim-ts-context-commentstring",
+		branch = "fix/haskell-char-node-function-match",
+	})
 
 	-- Bufferline and close buffers (config for both: after/plugin/buffer.lua)
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
