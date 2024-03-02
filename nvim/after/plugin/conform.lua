@@ -19,6 +19,7 @@ conform.setup({
 		javascriptreact = { { "prettierd", "prettier" } },
 		typescriptreact = { { "prettierd", "prettier" } },
 		gleam = { "gleam" },
+		haskell = { "hls" },
 	},
 
 	format_on_save = function(bufnr)
