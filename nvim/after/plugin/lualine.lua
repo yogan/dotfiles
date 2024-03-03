@@ -25,18 +25,8 @@ end
 
 local noice = require("noice")
 
-local function noice_message()
-	local message = noice.api.status.message.get()
-
-	local search_term = vim.fn.getreg("/")
-	if search_term and message == "/" .. search_term then
-		return "" -- don't show the search term as a message (redundant)
-	end
-
-	return message
-end
-
 local function noice_search()
+	---@diagnostic disable-next-line: undefined-field
 	local search = noice.api.status.search.get()
 	search = search:gsub("^/", "  "):gsub("^?", "  ")
 	return search:gsub("%s+", " ")
@@ -74,14 +64,20 @@ require("lualine").setup({
 		},
 		lualine_x = {
 			{
-				noice_message,
-				cond = function ()
-					return noice.api.status.message.has() and vim.o.columns > 140
+				---@diagnostic disable-next-line: undefined-field
+				noice.api.status.message.get,
+				cond = function()
+					---@diagnostic disable-next-line: undefined-field
+					return noice.api.status.message.has() --
+						---@diagnostic disable-next-line: undefined-field
+						and not noice.api.status.search.has()
+						and vim.o.columns > 140
 				end,
-				color = { fg = "#868593" },
+				color = { fg = "#7b7a89" },
 			},
 			{
 				noice_search,
+				---@diagnostic disable-next-line: undefined-field
 				cond = noice.api.status.search.has,
 				color = { fg = "#4f8ca6" },
 			},
