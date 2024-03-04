@@ -67,8 +67,8 @@ lsp.on_attach(function(client, bufnr)
 		preserve_mappings = false,
 	})
 
-	local opts = { buffer = bufnr, remap = false }
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)"}
+	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
