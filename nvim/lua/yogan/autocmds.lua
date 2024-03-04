@@ -52,3 +52,12 @@ vim.api.nvim_create_autocmd("WinLeave", {
 		vim.opt.cursorline = false
 	end,
 })
+
+-- Highlight when yanking text, see `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = group,
+	desc = "Highlight when yanking (copying) text",
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
