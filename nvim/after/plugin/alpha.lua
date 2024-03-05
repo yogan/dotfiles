@@ -16,3 +16,5 @@ end
 table.insert(theme.config.layout, 5, session())
 
 alpha.setup(theme.config)
+
+vim.keymap.set("n", "<leader>a", ":Alpha<cr>", { desc = "Alpha" })
