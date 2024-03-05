@@ -41,6 +41,22 @@ local file_symbols = {
 
 require("lualine").setup({
 	extensions = { "nvim-tree", "quickfix" },
+	options = {
+		disabled_filetypes = {
+			winbar = {
+				"NvimTree",
+				"TelescopePrompt",
+				"TelescopeResults",
+				"Trouble",
+				"WhichKey",
+				"alpha",
+				"help",
+				"neo-tree",
+				"packer",
+				"qf",
+			},
+		},
+	},
 	sections = {
 		lualine_a = { session_name },
 		lualine_b = {
