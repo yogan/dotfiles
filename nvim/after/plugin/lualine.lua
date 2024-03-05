@@ -91,25 +91,11 @@ require("lualine").setup({
 	},
 	winbar = {
 		lualine_b = {
-			{
-				"filetype",
-				colored = true,
-				icon_only = true,
-			},
-			{
-				"filename",
-				path = 0,
-				symbols = file_symbols,
-			},
+			"buffers",
 		},
 	},
 	inactive_winbar = {
 		lualine_b = {
-			{
-				"filetype",
-				colored = false,
-				icon_only = true,
-			},
 			{
 				"filename",
 				path = 0,
