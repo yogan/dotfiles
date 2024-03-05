@@ -8,6 +8,16 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
+-- Remove statusline when in Alpha
+vim.api.nvim_create_autocmd("User", {
+	pattern = "AlphaReady",
+	callback = function()
+		vim.cmd([[
+			set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+		]])
+	end,
+})
+
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = group,
 	desc = "Setup defaults for new terminal windows",
@@ -64,7 +74,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		if vim.tbl_contains(no_cursorline_fts, vim.bo.filetype) then
 			vim.opt_local.cursorline = false
-
 		else
 			vim.opt_local.cursorline = true
 		end
