@@ -69,18 +69,22 @@ return require("packer").startup(function(use)
 		branch = "fix/haskell-char-node-function-match",
 	})
 
-	use("kazhala/close-buffers.nvim")
-
 	-- Noice (fancy UI stuff)
 	use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
 
-	-- File explorer
+	-- File/Buffer/Git changes explorer
 	use({
-		"nvim-tree/nvim-tree.lua",
-		-- nighly is actually weekly, see:
-		-- https://github.com/nvim-tree/nvim-tree.lua/issues/1193#issuecomment-1120178402
-		tag = "nightly",
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
 	})
+
+	-- Close buffer helpers
+	use("kazhala/close-buffers.nvim")
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
