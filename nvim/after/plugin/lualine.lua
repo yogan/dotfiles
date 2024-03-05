@@ -32,6 +32,13 @@ local function noice_search()
 	return search:gsub("%s+", " ")
 end
 
+local file_symbols = {
+	modified = "",
+	readonly = "󰷤",
+	unnamed = "",
+	newfile = "",
+}
+
 require("lualine").setup({
 	extensions = { "nvim-tree", "quickfix" },
 	sections = {
@@ -54,12 +61,7 @@ require("lualine").setup({
 			{
 				"filename",
 				path = 1,
-				symbols = {
-					modified = "",
-					readonly = "󰷤",
-					unnamed = "",
-					newfile = "",
-				},
+				symbols = file_symbols,
 			},
 		},
 		lualine_x = {
@@ -85,6 +87,34 @@ require("lualine").setup({
 			"encoding",
 			"fileformat",
 			"filetype",
+		},
+	},
+	winbar = {
+		lualine_b = {
+			{
+				"filetype",
+				colored = true,
+				icon_only = true,
+			},
+			{
+				"filename",
+				path = 0,
+				symbols = file_symbols,
+			},
+		},
+	},
+	inactive_winbar = {
+		lualine_b = {
+			{
+				"filetype",
+				colored = false,
+				icon_only = true,
+			},
+			{
+				"filename",
+				path = 0,
+				symbols = file_symbols,
+			},
 		},
 	},
 })

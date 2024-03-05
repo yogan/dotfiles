@@ -69,8 +69,6 @@ return require("packer").startup(function(use)
 		branch = "fix/haskell-char-node-function-match",
 	})
 
-	-- Bufferline and close buffers (config for both: after/plugin/buffer.lua)
-	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	use("kazhala/close-buffers.nvim")
 
 	-- Noice (fancy UI stuff)
