@@ -107,7 +107,10 @@ require("lualine").setup({
 	},
 	winbar = {
 		lualine_a = {
-			"buffers",
+			{
+				"buffers",
+				use_mode_colors = true,
+			},
 		},
 	},
 	inactive_winbar = {
