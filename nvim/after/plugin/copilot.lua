@@ -34,6 +34,7 @@ vim.g.copilot_filetypes = {
 	["python"] = true,
 	["ruby"] = true,
 	["rust"] = true,
+	["scala"] = true,
 	["scss"] = true,
 	["sh"] = true,
 	["sml"] = true,
