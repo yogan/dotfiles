@@ -33,7 +33,7 @@ local function noice_search()
 end
 
 local file_symbols = {
-	modified = "",
+	modified = "●",
 	readonly = "󰷤",
 	unnamed = "",
 	newfile = "",
@@ -106,12 +106,19 @@ require("lualine").setup({
 		},
 	},
 	winbar = {
-		lualine_b = {
+		lualine_a = {
 			"buffers",
 		},
 	},
 	inactive_winbar = {
-		lualine_b = {
+		lualine_a = {
+			{
+				"filetype",
+				colored = false,
+				icon_only = true,
+				separator = "",
+				padding = 0,
+			},
 			{
 				"filename",
 				path = 0,
