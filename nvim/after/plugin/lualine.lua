@@ -40,7 +40,7 @@ local file_symbols = {
 }
 
 require("lualine").setup({
-	extensions = { "nvim-tree", "quickfix" },
+	extensions = { "neo-tree", "trouble" },
 	options = {
 		disabled_filetypes = {
 			winbar = {
