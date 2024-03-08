@@ -1,14 +1,6 @@
 require("neo-tree").setup({
 	window = {
 		position = "current",
-		mappings = {
-			-- / is fuzzy finder by default, which is weird as it opens the
-			-- first file on <enter> (I have Telescope ^P for that)
-			-- In a file tree, I want to use / to filter, which is what
-			-- filter_on_submit does. Default mapping "f" is kept as well.
-			["/"] = "filter_on_submit",
-			["f"] = "filter_on_submit",
-		},
 	},
 	source_selector = {
 		winbar = true,
@@ -34,6 +26,14 @@ require("neo-tree").setup({
 				"node_modules",
 				".git",
 			},
+		},
+		mappings = {
+			-- / is fuzzy finder by default, which is weird as it opens the
+			-- first file on <enter> (I have Telescope ^P for that)
+			-- In a file tree, I want to use / to filter, which is what
+			-- filter_on_submit does. Default mapping "f" is kept as well.
+			["/"] = "filter_on_submit",
+			["f"] = "filter_on_submit",
 		},
 		use_libuv_file_watcher = true,
 	},
