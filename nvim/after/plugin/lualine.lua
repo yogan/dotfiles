@@ -17,7 +17,7 @@ end
 
 local function indent_setting()
 	if vim.opt.expandtab:get() then
-		return "␣" .. vim.opt.shiftwidth:get()
+		return vim.opt.shiftwidth:get() .. " ␣"
 	else
 		return "↹"
 	end
@@ -58,7 +58,9 @@ require("lualine").setup({
 		},
 	},
 	sections = {
-		lualine_a = { session_name },
+		lualine_a = {
+			session_name,
+		},
 		lualine_b = {
 			{
 				"copilot",
