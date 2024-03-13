@@ -44,3 +44,9 @@ vim.opt.splitbelow = true
 
 vim.opt.spelllang = "en_us,de_20" -- de_20 = new spelling (see spell-german)
 vim.opt.spellsuggest = "best,9"
+
+-- keep right click menu for casual copypasta, but remove noob advice entry
+vim.cmd([[
+	aunmenu PopUp.How-to\ disable\ mouse
+	aunmenu PopUp.-1-
+]])
