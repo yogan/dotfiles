@@ -72,6 +72,12 @@ require("lualine").setup({
 				},
 			},
 			auto_format,
+			{
+				---@diagnostic disable-next-line: undefined-field
+				noice.api.status.mode.get,
+				---@diagnostic disable-next-line: undefined-field
+				cond = noice.api.status.mode.has,
+			},
 		},
 		lualine_c = {
 			{
