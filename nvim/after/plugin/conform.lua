@@ -20,6 +20,7 @@ conform.setup({
 		typescriptreact = { { "prettierd", "prettier" } },
 		gleam = { "gleam" },
 		haskell = { "hls" },
+		nim = { "nimpretty" },
 	},
 
 	format_on_save = function(bufnr)
