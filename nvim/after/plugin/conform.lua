@@ -21,6 +21,7 @@ conform.setup({
 		gleam = { "gleam" },
 		haskell = { "hls" },
 		nim = { "nimpretty" },
+		elm = { "elm_format" },
 	},
 
 	format_on_save = function(bufnr)
