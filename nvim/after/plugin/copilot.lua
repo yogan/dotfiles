@@ -10,6 +10,7 @@ vim.g.copilot_filetypes = {
 	["css"] = true,
 	["dockerfile"] = true,
 	["elixir"] = true,
+	["elm"] = true,
 	["fish"] = true,
 	["fortran"] = true,
 	["gitcommit"] = true,
