@@ -7,6 +7,10 @@ conform.setup({
 			args = { "format", "--stdin" },
 			stdin = true,
 		},
+		fprettify = {
+			command = "fprettify", -- can be installed with Mason
+			stdin = true,
+		},
 	},
 
 	formatters_by_ft = {
@@ -22,6 +26,7 @@ conform.setup({
 		haskell = { "hls" },
 		nim = { "nimpretty" },
 		elm = { "elm_format" },
+		fortran = { "fprettify" },
 	},
 
 	format_on_save = function(bufnr)
