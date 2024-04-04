@@ -27,6 +27,7 @@ conform.setup({
 		nim = { "nimpretty" },
 		elm = { "elm_format" },
 		fortran = { "fprettify" },
+		perl = { "perltidy" }, -- install with cpan Perl::Tidy
 	},
 
 	format_on_save = function(bufnr)
