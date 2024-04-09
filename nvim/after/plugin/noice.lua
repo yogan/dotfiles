@@ -25,6 +25,14 @@ noice.setup({
 			},
 			opts = { skip = true },
 		},
+		{
+			filter = {
+				event = "msg_show",
+				kind = "wmsg",
+				find = "search hit BOTTOM",
+			},
+			opts = { skip = true },
+		},
 	},
 })
 
