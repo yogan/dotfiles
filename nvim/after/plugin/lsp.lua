@@ -27,6 +27,10 @@ lspconfig.yamlls.setup({
 	settings = { yaml = { keyOrdering = false } },
 })
 
+-- No plugin needed, LSP is built-in, see:
+-- https://github.com/gleam-lang/gleam.vim?tab=readme-ov-file#neovim-users
+lspconfig.gleam.setup({})
+
 local cmp = require("cmp")
 
 local cmp_config = lsp.defaults.cmp_config({
