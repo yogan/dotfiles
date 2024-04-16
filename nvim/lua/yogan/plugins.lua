@@ -221,6 +221,9 @@ return require("packer").startup(function(use)
 	-- MIPS Assembly Syntax Highlighting
 	use("harenome/vim-mipssyntax")
 
+	-- Web Assembly Syntax Highlighting
+	use("rhysd/vim-wasm")
+
 	-- F# Syntax Highlighting
 	use("adelarsq/neofsharp.vim")
 
