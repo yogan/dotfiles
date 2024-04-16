@@ -27,6 +27,7 @@ conform.setup({
 		nim = { "nimpretty" },
 		elm = { "elm_format" },
 		fortran = { "fprettify" },
+		swift = { "swiftformat" }, -- install: clone and build: https://github.com/nicklockwood/SwiftFormat
 		perl = { "perltidy" }, -- install with cpan Perl::Tidy
 	},
 
