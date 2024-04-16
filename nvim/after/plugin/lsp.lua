@@ -8,12 +8,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"tsserver",
 	},
-	handlers = {
-		lsp.default_setup,
-	},
 })
-
-lsp.preset("recommended")
 
 require("neodev").setup()
 
