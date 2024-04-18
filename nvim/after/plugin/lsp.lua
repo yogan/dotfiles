@@ -26,6 +26,9 @@ lspconfig.yamlls.setup({
 -- https://github.com/gleam-lang/gleam.vim?tab=readme-ov-file#neovim-users
 lspconfig.gleam.setup({})
 
+-- Haskell Language Server
+lspconfig.hls.setup({})
+
 local cmp = require("cmp")
 
 local cmp_config = lsp.defaults.cmp_config({
@@ -66,7 +69,7 @@ lsp.on_attach(function(client, bufnr)
 		preserve_mappings = false,
 	})
 
-	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)"}
+	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
