@@ -42,6 +42,10 @@ cmp.setup({
 		{ name = "path" }, -- file system paths
 	},
 	formatting = cmp_format, -- show source name in completion menu
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
