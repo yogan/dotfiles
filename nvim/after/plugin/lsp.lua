@@ -1,4 +1,4 @@
-local lsp = require("lsp-zero")
+local lsp_zero = require("lsp-zero")
 local lspconfig = require("lspconfig")
 
 require("mason").setup()
@@ -29,42 +29,31 @@ lspconfig.gleam.setup({})
 -- Haskell Language Server
 lspconfig.hls.setup({})
 
+-- Completions
 local cmp = require("cmp")
+---@diagnostic disable-next-line: redundant-parameter
+local cmp_format = require("lsp-zero").cmp_format({ details = true })
 
-local cmp_config = lsp.defaults.cmp_config({
-	sources = cmp.config.sources({
+cmp.setup({
+	sources = {
 		{ name = "nvim_lsp" }, -- lsp
 		{ name = "luasnip" }, -- snippets
 		{ name = "buffer" }, -- text within current buffer
 		{ name = "path" }, -- file system paths
-	}),
+	},
+	formatting = cmp_format, -- show source name in completion menu
+	mapping = {
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+		["<C-y>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+	},
 })
 
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
-})
-
--- Do NOT use <Return> to confirm the menu entry, but use <Ctrl><y> (see above)
--- The reason for this is to allow abbreviation expansion with <Return>.
-cmp_mappings["<CR>"] = nil
-
--- Disable completion with <Tab>, those clash with GitHub Copilot.
-cmp_mappings["<Tab>"] = nil
-cmp_mappings["<S-Tab>"] = nil
-
-lsp.setup_nvim_cmp({
-	config = cmp_config,
-	mapping = cmp_mappings,
-})
-
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
 	-- for default key mappings, see:
 	-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#lsp-actions
-	lsp.default_keymaps({
+	lsp_zero.default_keymaps({
 		buffer = bufnr,
 		preserve_mappings = false,
 	})
@@ -99,7 +88,7 @@ lsp.on_attach(function(client, bufnr)
 	end
 end)
 
-lsp.setup()
+lsp_zero.setup()
 
 vim.diagnostic.config({
 	virtual_text = true, -- show inline errors at the end of lines
