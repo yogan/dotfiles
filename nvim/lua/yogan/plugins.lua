@@ -205,6 +205,9 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 
+			-- Fancy icons in completion menu
+			{ "onsails/lspkind-nvim" },
+
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			-- Snippet Collection (Optional)

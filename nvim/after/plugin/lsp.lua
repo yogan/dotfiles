@@ -31,8 +31,7 @@ lspconfig.hls.setup({})
 
 -- Completions
 local cmp = require("cmp")
----@diagnostic disable-next-line: redundant-parameter
-local cmp_format = require("lsp-zero").cmp_format({ details = true })
+local lspkind = require("lspkind")
 
 cmp.setup({
 	sources = {
@@ -41,7 +40,13 @@ cmp.setup({
 		{ name = "buffer" }, -- text within current buffer
 		{ name = "path" }, -- file system paths
 	},
-	formatting = cmp_format, -- show source name in completion menu
+	---@diagnostic disable-next-line: missing-fields
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol", -- only icons, not "method" etc. text
+			ellipsis_char = "…",
+		}),
+	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
