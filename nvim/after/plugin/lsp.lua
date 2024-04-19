@@ -35,10 +35,10 @@ local lspkind = require("lspkind")
 
 cmp.setup({
 	sources = {
-		{ name = "nvim_lsp" }, -- lsp
-		{ name = "luasnip" }, -- snippets
-		{ name = "buffer" }, -- text within current buffer
-		{ name = "path" }, -- file system paths
+		{ name = "nvim_lsp", keyword_length = 3 },
+		{ name = "luasnip", keyword_length = 2, max_item_count = 10 },
+		{ name = "buffer", keyword_length = 3, max_item_count = 15 },
+		{ name = "path", keyword_length = 2 },
 	},
 	---@diagnostic disable-next-line: missing-fields
 	formatting = {
