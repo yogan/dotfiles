@@ -39,6 +39,6 @@ require("neo-tree").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>n", ":Neotree reveal<cr>", { desc = "Neotee: [n]eo files" })
-vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal<cr>", { desc = "Neotee: [b]uffers" })
-vim.keymap.set("n", "<leader>c", ":Neotree git_status reveal<cr>", { desc = "Neotee: Git [c]hanges" })
+vim.keymap.set("n", "<leader>n", ":Neotree reveal<cr>", { desc = "Neotree: [n]eo files" })
+vim.keymap.set("n", "<leader>b", ":Neotree buffers reveal<cr>", { desc = "Neotree: [b]uffers" })
+vim.keymap.set("n", "<leader>c", ":Neotree git_status reveal<cr>", { desc = "Neotree: Git [c]hanges" })
