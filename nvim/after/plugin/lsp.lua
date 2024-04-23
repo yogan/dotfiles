@@ -29,6 +29,21 @@ lspconfig.gleam.setup({})
 -- Haskell Language Server
 lspconfig.hls.setup({})
 
+-- Julia (install julia-lsp with Mason)
+-- Taken from https://www.juliabloggers.com/setting-up-julia-lsp-for-neovim
+-- Make sure ~/.julia/environments/nvim-lspconfig is set up as described
+-- Don't copy/paste makefile, instead download from here:
+-- https://raw.githubusercontent.com/fredrikekre/.dotfiles/master/.julia/environments/nvim-lspconfig/Makefile
+lspconfig.julials.setup({
+	on_new_config = function(new_config, _)
+		local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")
+		if require("lspconfig").util.path.is_file(julia) then
+			vim.notify("Hello!")
+			new_config.cmd[1] = julia
+		end
+	end,
+})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
