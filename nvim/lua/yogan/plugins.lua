@@ -221,6 +221,16 @@ return require("packer").startup(function(use)
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
 	use("folke/neodev.nvim")
 
+	-- Elixir
+	use({
+		"elixir-tools/elixir-tools.nvim",
+		tag = "stable",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("elixir").setup()
+		end,
+	})
+
 	-- MIPS Assembly Syntax Highlighting
 	use("harenome/vim-mipssyntax")
 
