@@ -44,6 +44,11 @@ lspconfig.julials.setup({
 	end,
 })
 
+-- Go
+-- NOTE: install gopls via apt, not Mason, at least when golang itself is
+-- installed via apt, otherwise it complains about version stuff
+lspconfig.gopls.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
