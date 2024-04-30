@@ -49,6 +49,9 @@ lspconfig.julials.setup({
 -- installed via apt, otherwise it complains about version stuff
 lspconfig.gopls.setup({})
 
+-- Shell scripts
+lspconfig.bashls.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
