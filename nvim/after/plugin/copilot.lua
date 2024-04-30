@@ -12,6 +12,7 @@ vim.g.copilot_filetypes = {
 	["dockerfile"] = true,
 	["elixir"] = true,
 	["elm"] = true,
+	["erlang"] = true,
 	["fish"] = true,
 	["fortran"] = true,
 	["gitcommit"] = true,
