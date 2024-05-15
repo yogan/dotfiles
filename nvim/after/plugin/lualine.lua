@@ -1,6 +1,6 @@
 local function session_name()
 	local session_ok, session = pcall(require, "possession.session")
-	if not session_ok or not session.session_name then
+	if not session_ok or not session.get_session_name() then
 		return ""
 	end
 	return " " .. session.session_name
