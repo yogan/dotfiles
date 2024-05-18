@@ -3,7 +3,7 @@ local function session_name()
 	if not session_ok or not session.get_session_name() then
 		return ""
 	end
-	return " " .. session.session_name
+	return " " .. session.get_session_name()
 end
 
 local function auto_format()
