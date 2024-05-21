@@ -35,6 +35,7 @@ vim.g.copilot_filetypes = {
 	["php"] = true,
 	["ps1"] = true,
 	["python"] = true,
+	["prolog"] = true,
 	["r"] = true,
 	["ruby"] = true,
 	["rust"] = true,
