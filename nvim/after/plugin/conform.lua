@@ -29,6 +29,7 @@ conform.setup({
 		fortran = { "fprettify" },
 		swift = { "swiftformat" }, -- install: clone and build: https://github.com/nicklockwood/SwiftFormat
 		perl = { "perltidy" }, -- install with cpan Perl::Tidy
+		crystal = { "crystal" },
 	},
 
 	format_on_save = function(bufnr)
