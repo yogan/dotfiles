@@ -240,6 +240,9 @@ return require("packer").startup(function(use)
 	-- F# Syntax Highlighting
 	use("adelarsq/neofsharp.vim")
 
+	-- Crystal
+	use("vim-crystal/vim-crystal")
+
 	-- (Auto) Formatter
 	use("stevearc/conform.nvim")
 
