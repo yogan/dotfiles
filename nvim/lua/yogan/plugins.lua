@@ -70,7 +70,8 @@ return require("packer").startup(function(use)
 	})
 
 	-- Noice (fancy UI stuff)
-	use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
+    -- FIXME currently broken
+	-- use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
 
 	-- File/Buffer/Git changes explorer
 	use({
