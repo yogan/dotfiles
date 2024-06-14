@@ -16,14 +16,14 @@ local normal_mappings = {
 	["<F4>"] = action_layout.toggle_preview,
 }
 
-local trouble_ok, trouble = pcall(require, "trouble.providers.telescope")
+local trouble_ok, trouble = pcall(require, "trouble.sources.telescope")
 if trouble_ok then
 	-- Move telescope results to trouble window with <C-t>
 	-- Usage example:
 	--     <leader>* to search for word under cursor (see mapping below),
 	--     preview results in telescope, <C-t> to move to trouble window.
-	insert_mappings["<C-t>"] = trouble.open_with_trouble
-	normal_mappings["<C-t>"] = trouble.open_with_trouble
+	insert_mappings["<C-t>"] = trouble.open
+	normal_mappings["<C-t>"] = trouble.open
 end
 
 telescope.setup({
