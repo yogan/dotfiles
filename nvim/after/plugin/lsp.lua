@@ -17,6 +17,8 @@ lspconfig.lua_ls.setup({
 	settings = { Lua = { diagnostics = { globals = { "vim", "P", "RELOAD", "R" } } } },
 })
 
+lspconfig.eslint.setup({})
+
 lspconfig.yamlls.setup({
 	-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 	settings = { yaml = { keyOrdering = false } },
