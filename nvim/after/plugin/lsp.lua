@@ -31,6 +31,17 @@ lspconfig.gleam.setup({})
 -- Haskell Language Server
 lspconfig.hls.setup({})
 
+-- Rust
+lspconfig.rust_analyzer.setup({
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
+			},
+		},
+	},
+})
+
 -- Julia (install julia-lsp with Mason)
 -- Taken from https://www.juliabloggers.com/setting-up-julia-lsp-for-neovim
 -- Make sure ~/.julia/environments/nvim-lspconfig is set up as described
