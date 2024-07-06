@@ -31,9 +31,9 @@ telescope.setup({
 		-- mappings used while telescope prompt is open
 		mappings = { i = insert_mappings, n = normal_mappings },
 		file_ignore_patterns = {
-			"node_modules",
-			".yarn",
-			".gradle",
+			"node_modules/",
+			".yarn/",
+			".gradle/",
 			"_compiled.lua",
 		},
 	},
