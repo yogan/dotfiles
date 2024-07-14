@@ -28,6 +28,9 @@ lspconfig.yamlls.setup({
 -- https://github.com/gleam-lang/gleam.vim?tab=readme-ov-file#neovim-users
 lspconfig.gleam.setup({})
 
+-- Crystal (install crystalline with Mason)
+lspconfig.crystalline.setup({})
+
 -- Haskell Language Server
 lspconfig.hls.setup({})
 
