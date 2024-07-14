@@ -12,6 +12,8 @@ require("mason-lspconfig").setup({
 
 require("neodev").setup()
 
+-- NOTE: to see available LSP configs, see :help lspconfig-all
+
 lspconfig.lua_ls.setup({
 	-- Fix false positive undefined global '…'
 	settings = { Lua = { diagnostics = { globals = { "vim", "P", "RELOAD", "R" } } } },
