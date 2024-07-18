@@ -99,6 +99,13 @@ vim.keymap.set("n", "<leader>pm", builtin.marks, { desc = "Marks" })
 vim.keymap.set("n", "<leader>po", builtin.vim_options, { desc = "Options" })
 vim.keymap.set("n", "<leader>pr", builtin.registers, { desc = "Registers" })
 
+-- LSP
+-- Pro-Tip: <C-l> in Telescope to filter for function/method/constant/…
+vim.keymap.set("n", "<leader>pl", builtin.lsp_document_symbols, { desc = "LSP: Document symbols" })
+vim.keymap.set("n", "<leader>pp", function()
+	builtin.lsp_document_symbols({ symbols = { "function", "method" } })
+end, { desc = "LSP: document functions/methods" })
+
 -- symbols (telescope-symbols.nvim) (ps = symbols)
 local symbol = function(source)
 	builtin.symbols({ sources = { source } })
