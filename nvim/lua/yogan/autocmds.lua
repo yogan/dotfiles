@@ -2,6 +2,16 @@
 -- this file without having to clear the autocmds first
 local group = vim.api.nvim_create_augroup("yogan-autocmds", { clear = true })
 
+-- do not add comment leaders (like //)  after 'o' or 'O' (see :help fo-table)
+-- (setting it statically in options.lua does not work, probably changed by some
+-- LSP stuff)
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = group,
+	desc = "Do not add comment leaders after 'o' or 'O'",
+	pattern = "*",
+	command = "setlocal formatoptions-=o",
+})
+
 vim.api.nvim_create_autocmd("VimResized", {
 	group = group,
 	desc = "Resize windows when terminal size changes",
