@@ -82,6 +82,9 @@ lspconfig.gopls.setup({})
 -- Shell scripts
 lspconfig.bashls.setup({})
 
+-- Python: Pyright (Mason)
+lspconfig.pyright.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
