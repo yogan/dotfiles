@@ -33,6 +33,9 @@ lspconfig.gleam.setup({})
 -- Crystal (install crystalline with Mason)
 lspconfig.crystalline.setup({})
 
+-- Clojure (install clojure-lsp with Mason)
+lspconfig.clojure_lsp.setup({})
+
 -- Haskell Language Server
 lspconfig.hls.setup({})
 
