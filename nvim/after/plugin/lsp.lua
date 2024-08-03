@@ -88,6 +88,9 @@ lspconfig.bashls.setup({})
 -- Python: Pyright (Mason)
 lspconfig.pyright.setup({})
 
+-- Zig
+lspconfig.zls.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
