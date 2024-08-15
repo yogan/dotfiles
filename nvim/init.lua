@@ -1,5 +1,6 @@
 require("yogan.autocmds")
 require("yogan.filetype")
+require("yogan.functions")
 require("yogan.globals")
 require("yogan.keymaps")
 require("yogan.neovide")
