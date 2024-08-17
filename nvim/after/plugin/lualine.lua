@@ -117,7 +117,9 @@ require("lualine").setup({
 		lualine_a = {
 			{
 				"buffers",
+				hide_filename_extension = true,
 				use_mode_colors = true,
+				symbols = { alternate_file = "" },
 			},
 		},
 	},
