@@ -91,6 +91,9 @@ lspconfig.pyright.setup({})
 -- Zig
 lspconfig.zls.setup({})
 
+-- Nim: nimlangserver (Mason)
+lspconfig.nim_langserver.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
