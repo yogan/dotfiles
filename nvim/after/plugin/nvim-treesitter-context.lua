@@ -1,3 +1,10 @@
+local tc = require("treesitter-context")
+
+tc.setup({
+	max_lines = 8,
+	multiline_threshold = 3,
+})
+
 vim.keymap.set("n", "[a", function()
-	require("treesitter-context").go_to_context()
-end, { silent = true })
+	tc.go_to_context(vim.v.count1)
+end, { silent = true, desc = "Go to outer context (at level <count>)" })
