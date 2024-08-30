@@ -17,11 +17,11 @@ conform.setup({
 		lua = { "stylua" },
 		python = { "isort", "black" }, -- run all in given order
 		sh = { "shfmt" },
-		-- sub list uses only first available (here: prettierd before prettier)
-		javascript = { { "prettierd", "prettier" } },
-		typescript = { { "prettierd", "prettier" } },
-		javascriptreact = { { "prettierd", "prettier" } },
-		typescriptreact = { { "prettierd", "prettier" } },
+		-- use prettierd if available, otherwise fallback to prettier
+		javascript = { "prettierd", "prettier", stop_after_first = true },
+		typescript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		gleam = { "gleam" },
 		haskell = { "hls" },
 		nim = { "nimpretty" },
