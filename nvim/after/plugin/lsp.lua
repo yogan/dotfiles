@@ -62,6 +62,14 @@ lspconfig.rust_analyzer.setup({
 	},
 })
 
+-- Perl Navigator
+lspconfig.perlnavigator.setup({
+	-- The default is the Git root directory, but this breaks in my AoC
+	-- solutions, where my Perl solutions are in a subdirectory.
+	-- This might not be the right setting all the time, but there it works.
+	root_dir = lspconfig.util.root_pattern("."),
+})
+
 -- Julia (install julia-lsp with Mason)
 -- Taken from https://www.juliabloggers.com/setting-up-julia-lsp-for-neovim
 -- Make sure ~/.julia/environments/nvim-lspconfig is set up as described
