@@ -70,7 +70,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- Noice (fancy UI stuff)
-    -- FIXME currently broken
+	-- FIXME currently broken
 	-- use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
 
 	-- File/Buffer/Git changes explorer
@@ -221,7 +221,11 @@ return require("packer").startup(function(use)
 	use("jose-elias-alvarez/typescript.nvim")
 
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
-	use("folke/neodev.nvim")
+	-- (successor of neodev.nvim)
+	use({
+		"folke/lazydev.nvim",
+		requires = { "LuaCATS/busted", "LuaCATS/luassert" },
+	})
 
 	-- Elixir
 	use({

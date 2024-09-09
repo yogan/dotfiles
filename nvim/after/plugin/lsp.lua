@@ -10,13 +10,18 @@ require("mason-lspconfig").setup({
 	},
 })
 
-require("neodev").setup()
-
 -- NOTE: to see available LSP configs, see :help lspconfig-all
 
-lspconfig.lua_ls.setup({
-	-- Fix false positive undefined global '…'
-	settings = { Lua = { diagnostics = { globals = { "vim", "P", "RELOAD", "R" } } } },
+lspconfig.lua_ls.setup({})
+
+-- Hacky library stuff for lazydev (busted an luassert types are added as
+-- requirements to lazydev, see lsp.lua)
+local packer_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start"
+require("lazydev").setup({
+	library = {
+		{ path = packer_dir .. "/busted/library", words = { "describe" } },
+		{ path = packer_dir .. "/luassert/library", words = { "assert" } },
+	},
 })
 
 lspconfig.eslint.setup({})
