@@ -217,6 +217,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
+	-- TODO: replace this with https://github.com/yioneko/nvim-vtsls
 	use("jose-elias-alvarez/typescript.nvim")
 
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)

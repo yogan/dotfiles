@@ -6,7 +6,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"eslint",
 		"lua_ls",
-		"tsserver",
+		"ts_ls",
 	},
 })
 
@@ -143,7 +143,7 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
 
 	-- typescript specific keymaps (e.g. rename file and update imports)
-	if client.name == "tsserver" then
+	if client.name == "ts_ls" then
 		vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
 		vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>")
 		vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>")
