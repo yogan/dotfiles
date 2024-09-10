@@ -28,6 +28,11 @@ require("lazydev").setup({
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 require("lspconfig").vtsls.setup({})
 
+-- JSON with JSON Schema support, see:
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
+-- TL;DR: npm i -g vscode-langservers-extracted
+lspconfig.jsonls.setup({})
+
 lspconfig.eslint.setup({})
 
 lspconfig.yamlls.setup({
