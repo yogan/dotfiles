@@ -6,7 +6,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"eslint",
 		"lua_ls",
-		"ts_ls",
+		"vtsls",
 	},
 })
 
@@ -23,6 +23,10 @@ require("lazydev").setup({
 		{ path = packer_dir .. "/luassert/library", words = { "assert" } },
 	},
 })
+
+-- Extended TypeScript LSP functionality from VS Code
+require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+require("lspconfig").vtsls.setup({})
 
 lspconfig.eslint.setup({})
 
@@ -146,13 +150,6 @@ lsp_zero.on_attach(function(client, bufnr)
 
 	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
-
-	-- typescript specific keymaps (e.g. rename file and update imports)
-	if client.name == "ts_ls" then
-		vim.keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>")
-		vim.keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>")
-		vim.keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>")
-	end
 
 	-- highlight all references to symbol under cursor
 	if client.server_capabilities.documentHighlightProvider then
