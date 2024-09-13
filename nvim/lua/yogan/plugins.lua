@@ -54,7 +54,7 @@ return require("packer").startup(function(use)
 	-- Config for all of those in after/plugin/colors.lua (cross dependencies)
 	use("EdenEast/nightfox.nvim")
 	use("nvim-lualine/lualine.nvim")
-	use("kyazdani42/nvim-web-devicons") -- also used by nvim-tree
+	use("nvim-tree/nvim-web-devicons")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("ntpeters/vim-better-whitespace")
 
