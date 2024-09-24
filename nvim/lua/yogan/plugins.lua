@@ -172,8 +172,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Leap (similar to EasyMotion)
-	use("ggandor/leap.nvim")
+	-- Jump around like a boss (used to be EasyMotion and Leap)
+	use("folke/flash.nvim")
 
 	-- Shows not only key mappings, but also registers, marks, etc.
 	use({
