@@ -55,7 +55,7 @@ return require("packer").startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("nvim-tree/nvim-web-devicons")
-	use("lukas-reineke/indent-blankline.nvim")
+	use("shellRaining/hlchunk.nvim")
 	use("ntpeters/vim-better-whitespace")
 
 	-- Comments.nvim
