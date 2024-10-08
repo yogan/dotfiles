@@ -1,3 +1,5 @@
+local wk = require("which-key")
+
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
 	textobjects = {
@@ -47,15 +49,25 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 
-local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+local rep = require("nvim-treesitter.textobjects.repeatable_move")
 
 -- Repeat movement with ; and ,
 -- ensure ; goes forward and , goes backward regardless of the last direction
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next, { desc = "Repeat last movement (forward)" })
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous, { desc = "Repeat last movement (backward)" })
+wk.add({
+	{ mode = { "n", "x", "o" }, ";", rep.repeat_last_move_next, desc = "Repeat last movement (forward)" },
+	{ mode = { "n", "x", "o" }, ",", rep.repeat_last_move_previous, desc = "Repeat last movement (backward)" },
+})
 
 -- Make builtin f, F, t, T also repeatable with ; and ,
-vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "f", rep.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", rep.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", rep.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", rep.builtin_T_expr, { expr = true })
+
+-- Make gitsigns.nvim movements repeatable with ; and , keys
+local gs = require("gitsigns")
+local next_hunk_repeat, prev_hunk_repeat = rep.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+wk.add({
+	{ mode = { "n", "x", "o" }, "]h", next_hunk_repeat, icon = "", desc = "Next Git change hunk" },
+	{ mode = { "n", "x", "o" }, "[h", prev_hunk_repeat, icon = "", desc = "Previous Git change hunk" },
+})

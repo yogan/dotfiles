@@ -9,25 +9,25 @@ require("gitsigns").setup({
 		end
 
 		-- Navigation
-		map("n", "]c", function()
-			if vim.wo.diff then
-				return "]c"
-			end
-			vim.schedule(function()
-				gs.next_hunk()
-			end)
-			return "<Ignore>"
-		end, { expr = true, desc = "Next git change" })
-
-		map("n", "[c", function()
-			if vim.wo.diff then
-				return "[c"
-			end
-			vim.schedule(function()
-				gs.prev_hunk()
-			end)
-			return "<Ignore>"
-		end, { expr = true, desc = "Previous git change" })
+		-- map("n", "]c", function()
+		-- 	if vim.wo.diff then
+		-- 		return "]c"
+		-- 	end
+		-- 	vim.schedule(function()
+		-- 		gs.next_hunk()
+		-- 	end)
+		-- 	return "<Ignore>"
+		-- end, { expr = true, desc = "Next git change" })
+		--
+		-- map("n", "[c", function()
+		-- 	if vim.wo.diff then
+		-- 		return "[c"
+		-- 	end
+		-- 	vim.schedule(function()
+		-- 		gs.prev_hunk()
+		-- 	end)
+		-- 	return "<Ignore>"
+		-- end, { expr = true, desc = "Previous git change" })
 
 		-- Actions
 		map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", { desc = "git: stage hunk" })
