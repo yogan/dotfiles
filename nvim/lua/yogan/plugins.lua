@@ -151,6 +151,7 @@ return require("packer").startup(function(use)
 	})
 	use("nvim-treesitter/playground")
 	use("nvim-treesitter/nvim-treesitter-context")
+	use("nvim-treesitter/nvim-treesitter-textobjects")
 
 	-- Harpoon (jump around and shit)
 	-- NOTE: https://github.com/toppair/reach.nvim might be nicer
