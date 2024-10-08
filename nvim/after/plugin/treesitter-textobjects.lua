@@ -50,24 +50,44 @@ require("nvim-treesitter.configs").setup({
 })
 
 local rep = require("nvim-treesitter.textobjects.repeatable_move")
+local modes = { "n", "x", "o" }
 
 -- Repeat movement with ; and ,
 -- ensure ; goes forward and , goes backward regardless of the last direction
 wk.add({
-	{ mode = { "n", "x", "o" }, ";", rep.repeat_last_move_next, desc = "Repeat last movement (forward)" },
-	{ mode = { "n", "x", "o" }, ",", rep.repeat_last_move_previous, desc = "Repeat last movement (backward)" },
+	{ mode = modes, ";", rep.repeat_last_move_next, desc = "Repeat last movement (forward)" },
+	{ mode = modes, ",", rep.repeat_last_move_previous, desc = "Repeat last movement (backward)" },
 })
 
 -- Make builtin f, F, t, T also repeatable with ; and ,
-vim.keymap.set({ "n", "x", "o" }, "f", rep.builtin_f_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "F", rep.builtin_F_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "t", rep.builtin_t_expr, { expr = true })
-vim.keymap.set({ "n", "x", "o" }, "T", rep.builtin_T_expr, { expr = true })
+vim.keymap.set(modes, "f", rep.builtin_f_expr, { expr = true })
+vim.keymap.set(modes, "F", rep.builtin_F_expr, { expr = true })
+vim.keymap.set(modes, "t", rep.builtin_t_expr, { expr = true })
+vim.keymap.set(modes, "T", rep.builtin_T_expr, { expr = true })
 
 -- Make gitsigns.nvim movements repeatable with ; and , keys
 local gs = require("gitsigns")
 local next_hunk_repeat, prev_hunk_repeat = rep.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
 wk.add({
-	{ mode = { "n", "x", "o" }, "]h", next_hunk_repeat, icon = "", desc = "Next Git change hunk" },
-	{ mode = { "n", "x", "o" }, "[h", prev_hunk_repeat, icon = "", desc = "Previous Git change hunk" },
+	{ mode = modes, "]h", next_hunk_repeat, icon = "", desc = "Next Git change hunk" },
+	{ mode = modes, "[h", prev_hunk_repeat, icon = "", desc = "Previous Git change hunk" },
+})
+
+-- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
+local next_error = function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end
+local prev_error = function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end
+local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
+
+local next_diag_rep, prev_diag_rep =
+	rep.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
+
+wk.add({
+	{ mode = modes, "]d", next_diag_rep, icon = "", desc = "Next diagnostic" },
+	{ mode = modes, "[d", prev_diag_rep, icon = "", desc = "Previous diagnostic" },
+	{ mode = modes, "]e", next_error_rep, icon = "", desc = "Next error" },
+	{ mode = modes, "[e", prev_error_rep, icon = "", desc = "Previous error" },
 })
