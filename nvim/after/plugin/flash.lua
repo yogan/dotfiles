@@ -6,6 +6,18 @@ flash.setup({
 		search = {
 			enabled = true,
 		},
+		-- disable handling of `f`, `F`, `t`, `T`, `;` and `,` motions
+		-- (defaults for fFtT are fine, and ; and , are handled by
+		-- treesitter-textobjects to repeat all kinds of motions)
+		char = {
+			enabled = false,
+		},
+	},
+	label = {
+		rainbow = {
+			enabled = true,
+			shade = 9, -- number between 1 and 9
+		},
 	},
 })
 
@@ -44,11 +56,11 @@ local function jump_to_line()
 end
 
 wk.add({
-	{ "s", mode = { "n", "x", "o" }, jump, desc = "Flash" },
-	{ "S", mode = { "n", "x", "o" }, treesitter, desc = "Flash Treesitter" },
-	{ "<leader>S", mode = { "n", "x", "o" }, jump_continue, desc = "Flash Continue" },
-	{ "R", mode = { "o", "x" }, treesitter_search, desc = "Treesitter Search" },
-	{ "<c-s>", mode = { "c" }, toggle, desc = "Toggle Flash Search" },
-	{ "<leader>l", mode = { "n", "v" }, jump_to_line, desc = "Flash Line" },
-	{ "<leader>w", mode = { "n", "v" }, current_word, desc = "Flash Current Word" },
+	{ "s", mode = { "n", "x", "o" }, jump, desc = " Flash" },
+	{ "S", mode = { "n", "x", "o" }, treesitter, desc = " Flash Treesitter Select" },
+	{ "<leader>S", mode = { "n", "x", "o" }, jump_continue, desc = " Flash Continue" },
+	{ "R", mode = { "o", "x" }, treesitter_search, desc = " Flash Treesitter Search" },
+	{ "<c-s>", mode = { "c" }, toggle, desc = " Flash Toggle Search" },
+	{ "<leader>l", mode = { "n", "v" }, jump_to_line, desc = " Flash Line" },
+	{ "<leader>w", mode = { "n", "v" }, current_word, desc = " Flash Current Word" },
 })
