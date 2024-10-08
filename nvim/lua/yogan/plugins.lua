@@ -58,16 +58,9 @@ return require("packer").startup(function(use)
 	use("shellRaining/hlchunk.nvim")
 	use("ntpeters/vim-better-whitespace")
 
-	-- Comments.nvim
+	-- Commenting stuff
 	use("numToStr/Comment.nvim")
-
-	-- use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
-	-- switch to my fork until PR is merged
-	-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring/pull/97
-	use({
-		"yogan/nvim-ts-context-commentstring",
-		branch = "fix/haskell-char-node-function-match",
-	})
+	use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
 
 	-- Noice (fancy UI stuff)
 	-- FIXME currently broken
