@@ -67,10 +67,25 @@ vim.keymap.set(modes, "T", rep.builtin_T_expr, { expr = true })
 
 -- Make gitsigns.nvim movements repeatable with ; and , keys
 local gs = require("gitsigns")
-local next_hunk_repeat, prev_hunk_repeat = rep.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+local next_hunk = function()
+	gs.nav_hunk("next", { preview = false, target = "all" })
+end
+local prev_hunk = function()
+	gs.nav_hunk("prev", { preview = false, target = "all" })
+end
+local next_hunk_preview = function()
+	gs.nav_hunk("next", { preview = true, target = "all" })
+end
+local prev_hunk_preview = function()
+	gs.nav_hunk("prev", { preview = true, target = "all" })
+end
+local next_hunk_rep, prev_hunk_rep = rep.make_repeatable_move_pair(next_hunk, prev_hunk)
+local next_hunk_preview_rep, prev_hunk_preview_rep = rep.make_repeatable_move_pair(next_hunk_preview, prev_hunk_preview)
 wk.add({
-	{ mode = modes, "]h", next_hunk_repeat, icon = "", desc = "Next Git change hunk" },
-	{ mode = modes, "[h", prev_hunk_repeat, icon = "", desc = "Previous Git change hunk" },
+	{ mode = modes, "]h", next_hunk_rep, icon = "", desc = "Next Git change hunk" },
+	{ mode = modes, "[h", prev_hunk_rep, icon = "", desc = "Previous Git change hunk" },
+	{ mode = modes, "]H", next_hunk_preview_rep, icon = "", desc = "Next Git change hunk (preview)" },
+	{ mode = modes, "[H", prev_hunk_preview_rep, icon = "", desc = "Previous Git change hunk (preview)" },
 })
 
 -- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
@@ -80,11 +95,8 @@ end
 local prev_error = function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end
+local next_diag_rep, prev_diag_rep = rep.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
 local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
-
-local next_diag_rep, prev_diag_rep =
-	rep.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
-
 wk.add({
 	{ mode = modes, "]d", next_diag_rep, icon = "", desc = "Next diagnostic" },
 	{ mode = modes, "[d", prev_diag_rep, icon = "", desc = "Previous diagnostic" },
