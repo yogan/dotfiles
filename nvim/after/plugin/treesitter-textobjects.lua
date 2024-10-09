@@ -46,6 +46,13 @@ require("nvim-treesitter.configs").setup({
 				["[]"] = { query = "@class.outer", desc = "Previous class end" },
 			},
 		},
+		lsp_interop = {
+			enable = true,
+			border = "none",
+			peek_definition_code = {
+				["<leader>e"] = "@function.outer",
+			},
+		},
 	},
 })
 
