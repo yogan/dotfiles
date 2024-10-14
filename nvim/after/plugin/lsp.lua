@@ -103,6 +103,9 @@ lspconfig.julials.setup({
 -- installed via apt, otherwise it complains about version stuff
 lspconfig.gopls.setup({})
 
+-- C# (install csharp-language-server via Mason)
+lspconfig.csharp_ls.setup({})
+
 -- Shell scripts
 lspconfig.bashls.setup({})
 
