@@ -8,27 +8,6 @@ require("gitsigns").setup({
 			vim.keymap.set(mode, l, r, opts)
 		end
 
-		-- Navigation
-		-- map("n", "]c", function()
-		-- 	if vim.wo.diff then
-		-- 		return "]c"
-		-- 	end
-		-- 	vim.schedule(function()
-		-- 		gs.next_hunk()
-		-- 	end)
-		-- 	return "<Ignore>"
-		-- end, { expr = true, desc = "Next git change" })
-		--
-		-- map("n", "[c", function()
-		-- 	if vim.wo.diff then
-		-- 		return "[c"
-		-- 	end
-		-- 	vim.schedule(function()
-		-- 		gs.prev_hunk()
-		-- 	end)
-		-- 	return "<Ignore>"
-		-- end, { expr = true, desc = "Previous git change" })
-
 		-- Actions
 		map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", { desc = "git: stage hunk" })
 		map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "git: reset hunk" })
@@ -52,5 +31,8 @@ require("gitsigns").setup({
 
 		-- Text object (e.g. vig -> select current hunk)
 		map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", { desc = "git: select hunk" })
+
+		-- NOTE: there are also gitsigns mappings in treesitter-textobjects.lua
+		-- (navigation between hunks, made repeatable via ts-to)
 	end,
 })
