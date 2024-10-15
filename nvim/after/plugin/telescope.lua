@@ -105,6 +105,8 @@ vim.keymap.set("n", "<leader>pl", builtin.lsp_document_symbols, { desc = "LSP: D
 vim.keymap.set("n", "<leader>pp", function()
 	builtin.lsp_document_symbols({ symbols = { "function", "method" } })
 end, { desc = "LSP: document functions/methods" })
+-- gR, similar to the LSP built-in gr (which opens refs in quickfix list)
+vim.keymap.set("n", "gR", builtin.lsp_references, { desc = "LSP: References (Telescope)" })
 
 -- symbols (telescope-symbols.nvim) (ps = symbols)
 local symbol = function(source)
