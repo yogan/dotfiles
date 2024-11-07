@@ -51,3 +51,9 @@ vim.cmd([[
 	aunmenu PopUp.How-to\ disable\ mouse
 	aunmenu PopUp.-1-
 ]])
+
+-- Integrate with system clipboard
+-- On Windows (within WSL) this requires win32yank:
+-- scoop install win32yank
+-- sudo ln -s /home/yogan/winhome/scoop/shims/win32yank.exe /usr/local/bin/win32yank
+vim.opt.clipboard = "unnamedplus"
