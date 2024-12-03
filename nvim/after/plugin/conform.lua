@@ -30,6 +30,9 @@ conform.setup({
 		swift = { "swiftformat" }, -- install: clone and build: https://github.com/nicklockwood/SwiftFormat
 		perl = { "perltidy" }, -- install with cpan Perl::Tidy
 		crystal = { "crystal" },
+		-- TODO: csharpier does a pretty bad job, and dotnet format is slow as
+		-- fuck; find something else
+		-- csharp = { "csharpier" }, -- install with Mason
 	},
 
 	format_on_save = function(bufnr)
