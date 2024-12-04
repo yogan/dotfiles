@@ -9,6 +9,7 @@ vim.g.copilot_filetypes = {
 	["crystal"] = true,
 	["cs"] = true,
 	["css"] = true,
+	["dart"] = true,
 	["dockerfile"] = true,
 	["elixir"] = true,
 	["elm"] = true,
