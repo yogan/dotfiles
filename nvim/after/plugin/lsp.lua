@@ -125,6 +125,9 @@ lspconfig.zls.setup({})
 -- Nim: nimlangserver (Mason)
 lspconfig.nim_langserver.setup({})
 
+-- Dart (works out of the box when dart is installed)
+lspconfig.dartls.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")
