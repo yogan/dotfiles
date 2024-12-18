@@ -49,6 +49,7 @@ vim.g.copilot_filetypes = {
 	["sql"] = true,
 	["swift"] = true,
 	["tcl"] = true,
+	["text"] = true,
 	["toml"] = true,
 	["typescript"] = true,
 	["typescriptreact"] = true,
