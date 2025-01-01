@@ -57,6 +57,7 @@ return require("packer").startup(function(use)
 	use("nvim-tree/nvim-web-devicons")
 	use("shellRaining/hlchunk.nvim")
 	use("ntpeters/vim-better-whitespace")
+	use("HiPhish/rainbow-delimiters.nvim")
 
 	-- Commenting stuff
 	use("numToStr/Comment.nvim")
