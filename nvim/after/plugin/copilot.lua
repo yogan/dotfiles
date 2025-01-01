@@ -22,6 +22,7 @@ vim.g.copilot_filetypes = {
 	["groovy"] = true,
 	["haskell"] = true,
 	["html"] = true,
+	["idris2"] = true,
 	["java"] = true,
 	["javascript"] = true,
 	["javascriptreact"] = true,

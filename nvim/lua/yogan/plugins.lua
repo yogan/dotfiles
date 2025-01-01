@@ -244,6 +244,17 @@ return require("packer").startup(function(use)
 	-- Crystal
 	use("vim-crystal/vim-crystal")
 
+	-- Idris
+	-- Install idris2-lsp via pack as described here:
+	-- https://github.com/idris-community/idris2-lsp?tab=readme-ov-file
+	use({
+		"ShinKage/idris2-nvim",
+		requires = { "neovim/nvim-lspconfig", "MunifTanjim/nui.nvim" },
+		config = function()
+			require("idris2").setup({})
+		end,
+	})
+
 	-- (Auto) Formatter
 	use("stevearc/conform.nvim")
 
