@@ -67,6 +67,14 @@ return require("packer").startup(function(use)
 	-- FIXME currently broken
 	-- use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
 
+	-- Oil File Explorer
+	use({
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup()
+		end,
+	})
+
 	-- File/Buffer/Git changes explorer
 	use({
 		"nvim-neo-tree/neo-tree.nvim",
