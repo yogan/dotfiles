@@ -23,7 +23,6 @@ conform.setup({
 		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		gleam = { "gleam" },
-		haskell = { "hls" },
 		nim = { "nimpretty" },
 		elm = { "elm_format" },
 		fortran = { "fprettify" },
