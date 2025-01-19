@@ -50,11 +50,26 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	-- Icons; many other plugins depend on this. Config is intentionally inline,
+	-- it has to be set up before other plugins are loaded.
+	use({
+		"nvim-tree/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup({
+				override_by_extension = {
+					["m"] = {
+						icon = "󰻊",
+						name = "MATLAB",
+					},
+				},
+			})
+		end,
+	})
+
 	-- Color scheme, status line, icons, indent guides, trailing whitespace
 	-- Config for all of those in after/plugin/colors.lua (cross dependencies)
 	use("EdenEast/nightfox.nvim")
 	use("nvim-lualine/lualine.nvim")
-	use("nvim-tree/nvim-web-devicons")
 	use("shellRaining/hlchunk.nvim")
 	use("ntpeters/vim-better-whitespace")
 	use("HiPhish/rainbow-delimiters.nvim")
@@ -262,6 +277,13 @@ return require("packer").startup(function(use)
 			require("idris2").setup({})
 		end,
 	})
+
+	-- GNU Octave (MATLAB)
+	-- This is only syntax highlighting, not a full LSP
+	-- (info pages for Octave functions can be shown with `K`, though)
+	-- There is https://github.com/mathworks/MATLAB-language-server, but this
+	-- requires a real MATLAB installation, not just GNU Octave.
+	use("gnu-octave/vim-octave")
 
 	-- (Auto) Formatter
 	use("stevearc/conform.nvim")
