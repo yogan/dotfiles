@@ -27,3 +27,5 @@ npm
 Clojure
 github
 checksum
+stringify
+programmatically
