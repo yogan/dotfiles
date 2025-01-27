@@ -128,6 +128,9 @@ lspconfig.nim_langserver.setup({})
 -- Dart (works out of the box when dart is installed)
 lspconfig.dartls.setup({})
 
+-- OCaml (install ocaml-lsp via Mason)
+lspconfig.ocamllsp.setup({})
+
 -- Completions
 local cmp = require("cmp")
 local lspkind = require("lspkind")

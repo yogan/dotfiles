@@ -35,6 +35,7 @@ vim.g.copilot_filetypes = {
 	["matlab"] = true,
 	["mips"] = true,
 	["nim"] = true,
+	["ocaml"] = true,
 	["octave"] = true,
 	["perl"] = true,
 	["php"] = true,

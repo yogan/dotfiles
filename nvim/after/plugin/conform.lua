@@ -32,6 +32,7 @@ conform.setup({
 		-- TODO: csharpier does a pretty bad job, and dotnet format is slow as
 		-- fuck; find something else
 		-- csharp = { "csharpier" }, -- install with Mason
+		ocaml = { "ocamlformat" },  -- install ocamlformat with Mason
 	},
 
 	format_on_save = function(bufnr)
