@@ -234,6 +234,14 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	-- LSP Fidget
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	})
+
 	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
 	-- :VtsExec <tab> / :VtsRename
 	use("yioneko/nvim-vtsls")
