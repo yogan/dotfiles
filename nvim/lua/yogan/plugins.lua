@@ -306,6 +306,9 @@ return require("packer").startup(function(use)
 	use("folke/zen-mode.nvim")
 	use("folke/twilight.nvim") -- integrates with Zen mode, dim inactive areas
 
+	-- Animated cursor
+	use("sphamba/smear-cursor.nvim")
+
 	-- Just for fun
 	use("eandrju/cellular-automaton.nvim")
 
