@@ -14,12 +14,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- keep cursor in place when joining lines (J)
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
--- keep cursor in the middle while scrolling (^U/^D) or searching (n/N)
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result" })
-
 -- delete into blackhole register (keep current paste)
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yank" })
 -- copy to system clipboard (works magically from WSL to Windows)
