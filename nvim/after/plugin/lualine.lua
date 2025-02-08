@@ -15,15 +15,15 @@ local function auto_format()
 	return ""
 end
 
-local function indent_setting()
-	---@diagnostic disable-next-line: undefined-field
-	if vim.opt.expandtab:get() then
-		---@diagnostic disable-next-line: undefined-field
-		return vim.opt.shiftwidth:get() .. " ␣"
-	else
-		return "↹"
-	end
-end
+-- local function indent_setting()
+-- 	---@diagnostic disable-next-line: undefined-field
+-- 	if vim.opt.expandtab:get() then
+-- 		---@diagnostic disable-next-line: undefined-field
+-- 		return vim.opt.shiftwidth:get() .. " ␣"
+-- 	else
+-- 		return "↹"
+-- 	end
+-- end
 
 -- local noice = require("noice")
 --
@@ -59,29 +59,8 @@ require("lualine").setup({
 		},
 	},
 	sections = {
-		lualine_a = {
-			session_name,
-		},
-		lualine_b = {
-			{
-				"copilot",
-				show_running = true,
-				symbols = {
-					status = {
-						enabled = " ",
-						disabled = "",
-					},
-					spinners = require("copilot-status.spinners").dots,
-				},
-			},
-			auto_format,
-			-- {
-			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	noice.api.status.mode.get,
-			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	cond = noice.api.status.mode.has,
-			-- },
-		},
+		lualine_a = {},
+		lualine_b = { session_name },
 		lualine_c = {
 			{
 				"filename",
@@ -89,36 +68,39 @@ require("lualine").setup({
 				symbols = file_symbols,
 			},
 		},
-		lualine_x = {
+		lualine_x = { "location" },
+		lualine_y = {
+			{
+				auto_format,
+				separator = " ",
+				padding = { left = 1, right = 0 },
+			},
+			{
+				"copilot",
+				show_running = true,
+				symbols = {
+					status = {
+						enabled = "",
+						disabled = "",
+					},
+					spinners = require("copilot-status.spinners").dots,
+				},
+				padding = { left = 0, right = 1 },
+			},
 			-- {
 			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	noice.api.status.message.get,
-			-- 	cond = function()
-			-- 		---@diagnostic disable-next-line: undefined-field
-			-- 		return noice.api.status.message.has() --
-			-- 			---@diagnostic disable-next-line: undefined-field
-			-- 			and not noice.api.status.search.has()
-			-- 			and vim.o.columns > 140
-			-- 	end,
-			-- 	color = { fg = "#7b7a89" },
-			-- },
-			-- {
-			-- 	noice_search,
+			-- 	noice.api.status.mode.get,
 			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	cond = noice.api.status.search.has,
-			-- 	color = { fg = "#4f8ca6" },
+			-- 	cond = noice.api.status.mode.has,
 			-- },
-			indent_setting,
-			"encoding",
-			"fileformat",
-			"filetype",
 		},
+		lualine_z = {},
 	},
 	winbar = {
-		lualine_a = {
+		lualine_b = {
 			{
 				"filetype",
-				colored = true,
+				colored = false,
 				icon_only = true,
 				separator = "",
 				padding = { left = 1, right = 0 },
@@ -131,10 +113,10 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { "diagnostics" },
-		lualine_y = { "diff" },
+		lualine_y = { "branch", "diff" },
 	},
 	inactive_winbar = {
-		lualine_b = {
+		lualine_c = {
 			{
 				"filetype",
 				colored = false,
