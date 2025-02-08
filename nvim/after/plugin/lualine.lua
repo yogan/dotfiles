@@ -16,7 +16,9 @@ local function auto_format()
 end
 
 local function indent_setting()
+	---@diagnostic disable-next-line: undefined-field
 	if vim.opt.expandtab:get() then
+		---@diagnostic disable-next-line: undefined-field
 		return vim.opt.shiftwidth:get() .. " ␣"
 	else
 		return "↹"
@@ -50,7 +52,6 @@ require("lualine").setup({
 				"Trouble",
 				"WhichKey",
 				"alpha",
-				"help",
 				"neo-tree",
 				"packer",
 				"qf",
@@ -116,26 +117,36 @@ require("lualine").setup({
 	winbar = {
 		lualine_a = {
 			{
-				"buffers",
-				hide_filename_extension = true,
-				use_mode_colors = true,
-				symbols = { alternate_file = "" },
-			},
-		},
-	},
-	inactive_winbar = {
-		lualine_a = {
-			{
 				"filetype",
-				colored = false,
+				colored = true,
 				icon_only = true,
 				separator = "",
-				padding = 0,
+				padding = { left = 1, right = 0 },
 			},
 			{
 				"filename",
 				path = 0,
 				symbols = file_symbols,
+				padding = { left = 0, right = 1 },
+			},
+		},
+		lualine_x = { "diagnostics" },
+		lualine_y = { "diff" },
+	},
+	inactive_winbar = {
+		lualine_b = {
+			{
+				"filetype",
+				colored = false,
+				icon_only = true,
+				separator = "",
+				padding = { left = 1, right = 0 },
+			},
+			{
+				"filename",
+				path = 0,
+				symbols = file_symbols,
+				padding = { left = 0, right = 1 },
 			},
 		},
 	},
