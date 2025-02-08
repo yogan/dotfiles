@@ -1,38 +1,18 @@
-require("nightfox").setup({
-	options = {
-		transparent = false, -- Disable setting background
-		dim_inactive = true, -- Non focused panes set to alternative background
-		styles = {
-			comments = "italic",
-			-- keywords = "bold",
-			-- functions = "italic",
-			-- strings = "italic",
-			-- variables = "italic",
-		},
+require("ashen").setup({
+	style_presets = {
+		italic_comments = true,
 	},
-	groups = {
-		nightfox = {
-			ColorColumn = { bg = "#18212d" },
-			CursorLine = { bg = "bg2" },
-			EndOfBuffer = { bg = "#141d27" },
-			Folded = { bg = "#151c27" },
-			UfoFoldedEllipsis = { fg = "#71839b" },
-			LineNr = { fg = "bg4", bg = "bg0" },
-			Substitute = { bg = "palette.yellow.dim" },
-			NvimTreeSpecialFile = { fg = "palette.green.dim" },
+	hl = {
+		merge_override = {
+			ColorColumn = { bg = "#111111" },
+			EndOfBuffer = { fg = "#424242", bg = "#0c0c0c" },
+			ExtraWhitespace = { bg = "#562727" },
+			Folded = { bg = "#181818" },
 		},
-		duskfox = {
-			ColorColumn = { bg = "#27243b" },
-			EndOfBuffer = { bg = "#1b192a" },
+		link = {
+			TreesitterContext = "CursorLine",
 		},
 	},
 })
 
--- Setting a dimmed red (taken from color scheme) as background for trailing
--- whitespace. Needs to be at the very end, any further call to 'colorscheme'
--- resets to the default full bright red. :-/
-local spec = require("nightfox.spec").load("nightfox")
--- print(vim.inspect(spec.palette)) -- for finding stuff
-vim.g.better_whitespace_guicolor = spec.palette.red.dim
-
-vim.cmd("colorscheme duskfox")
+vim.cmd("colorscheme ashen")

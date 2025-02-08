@@ -67,8 +67,8 @@ return require("packer").startup(function(use)
 	})
 
 	-- Color scheme, status line, icons, indent guides, trailing whitespace
-	-- Config for all of those in after/plugin/colors.lua (cross dependencies)
-	use("EdenEast/nightfox.nvim")
+	-- Config for colorscheme: after/plugin/colors.lua
+	use("ficcdaf/ashen.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("shellRaining/hlchunk.nvim")
 	use("ntpeters/vim-better-whitespace")
