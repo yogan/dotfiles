@@ -32,10 +32,16 @@ conform.setup({
 		-- TODO: csharpier does a pretty bad job, and dotnet format is slow as
 		-- fuck; find something else
 		-- csharp = { "csharpier" }, -- install with Mason
-		ocaml = { "ocamlformat" },  -- install ocamlformat with Mason
+		ocaml = { "ocamlformat" }, -- install ocamlformat with Mason
 	},
 
 	format_on_save = function(bufnr)
+		-- Disable autoformat on certain filetypes
+		local ignore_filetypes = { "sh", "bash" }
+		if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+			return
+		end
+
 		-- Disable with a global or buffer-local variable
 		if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 			return
@@ -69,7 +75,7 @@ end, {
 	desc = "Re-enable autoformat-on-save",
 })
 
-vim.g.disable_autoformat = true -- start without auto format on save by default
+vim.g.disable_autoformat = false -- start with auto format on save by default
 
 vim.keymap.set("n", "<leader>tfe", ":FormatEnable<CR>", { desc = "Enable auto format on save" })
 vim.keymap.set("n", "<leader>tfd", ":FormatDisable<CR>", { desc = "Disable auto format on save" })
