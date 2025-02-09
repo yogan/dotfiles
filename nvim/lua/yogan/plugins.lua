@@ -115,24 +115,7 @@ return require("packer").startup(function(use)
 		"kevinhwang91/nvim-ufo",
 		requires = {
 			"kevinhwang91/promise-async",
-			{
-				-- This replaces ugly -/+/1/2/… fold column entries with nice
-				-- clickable icons. See:
-				-- https://github.com/kevinhwang91/nvim-ufo/issues/4#issuecomment-1411582218
-				-- (and vim.opt.fillchars in ufo.lua)
-				"luukvbaal/statuscol.nvim",
-				config = function()
-					local builtin = require("statuscol.builtin")
-					require("statuscol").setup({
-						relculright = true,
-						segments = {
-							{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-							{ text = { "%s" }, click = "v:lua.ScSa" },
-							{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-						},
-					})
-				end,
-			},
+			"luukvbaal/statuscol.nvim",
 		},
 	})
 
