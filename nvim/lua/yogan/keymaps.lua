@@ -1,8 +1,10 @@
 vim.g.mapleader = " "
 
+local noremap_silent = { noremap = true, silent = true }
+
 -- navigate buffers with <Tab> and <Shift>+<Tab>
-vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", noremap_silent)
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", noremap_silent)
 
 -- clear search highlight
 vim.keymap.set("n", "<leader>/", ":noh<CR>", { desc = "Clear search highlight" })
