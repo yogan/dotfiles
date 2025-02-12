@@ -21,11 +21,24 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yank
 -- copy to system clipboard (works magically from WSL to Windows)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 
--- navigating between entries from quickfix/location list
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
+-- toggle quickfix window with <C-c>, taken from:
+-- https://old.reddit.com/r/neovim/comments/vramof/better_keymaps_for_toggling_quickfix_focus_and/ievet6c/
+vim.keymap.set("n", "<C-c>", function()
+	local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
+	local action = qf_winid > 0 and "cclose" or "copen"
+	vim.cmd("botright " .. action)
+end, noremap_silent)
+-- navigate between quickfix items with <C-j> and <C-k>
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
+
+-- Currently disabled, as I don't really use the location list.
+-- It might be cool, though, it's a window-specific qflist, see:
+-- https://stackoverflow.com/a/20934608
+-- TL;DR: :lvim foo % / :lopen / :lnext / :lprev
+--        for buffer/window local search results in the location list
+-- vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
+-- vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
 
 -- replace current word under cursor (with live preview)
 vim.keymap.set(
