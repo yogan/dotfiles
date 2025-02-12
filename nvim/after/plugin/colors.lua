@@ -10,6 +10,7 @@ require("ashen").setup({
 			Folded = { bg = "#181818" },
 		},
 		link = {
+			QuickFixLine = "MsgSeparator",
 			TreesitterContext = "CursorLine",
 		},
 	},

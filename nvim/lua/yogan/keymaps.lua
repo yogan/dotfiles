@@ -20,11 +20,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yank
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 
 -- navigating between entries from quickfix/location list
--- currently not needed, but might be, so let's keep 'em ready to go
--- vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
--- vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
--- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
--- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
 
 -- replace current word under cursor (with live preview)
 vim.keymap.set(
