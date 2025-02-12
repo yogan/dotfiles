@@ -286,6 +286,9 @@ return require("packer").startup(function(use)
 	use("github/copilot.vim")
 	use("ofseed/copilot-status.nvim")
 
+	-- Writable quickfix window
+	use("stefandtw/quickfix-reflector.vim")
+
 	-- Find and display URLs (:UrlView)
 	-- :UrlView packer shows URLs of all installed packer plugins
 	use("axieax/urlview.nvim")
