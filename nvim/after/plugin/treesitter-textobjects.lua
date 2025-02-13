@@ -105,8 +105,8 @@ end
 local next_diag_rep, prev_diag_rep = rep.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
 local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
 wk.add({
-	{ mode = modes, "]d", next_diag_rep, icon = "", desc = "Next diagnostic" },
-	{ mode = modes, "[d", prev_diag_rep, icon = "", desc = "Previous diagnostic" },
+	{ mode = modes, "]d", next_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Next diagnostic" },
+	{ mode = modes, "[d", prev_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Previous diagnostic" },
 	{ mode = modes, "]e", next_error_rep, icon = "", desc = "Next error" },
 	{ mode = modes, "[e", prev_error_rep, icon = "", desc = "Previous error" },
 })
