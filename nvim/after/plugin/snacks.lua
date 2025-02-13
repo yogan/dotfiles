@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: missing-fields
 require("snacks").setup({
 	picker = {
 		enabled = true,
@@ -21,32 +22,56 @@ require("snacks").setup({
 	toggle = { enabled = true },
 })
 
--- Files
-vim.keymap.set("n", "<C-p>", function()
-	Snacks.picker.smart({ hidden = true })
-end, { desc = "Find files" })
+local sp = require("snacks.picker")
+local wk = require("which-key")
 
--- Grep
-vim.keymap.set("n", "<C-f>", function()
-	Snacks.picker.grep()
-end, { desc = "Grep" })
-vim.keymap.set("n", "<C-g>", function()
-	Snacks.picker.grep_buffers()
-end, { desc = "Grep buffers" })
-vim.keymap.set({ "n", "x" }, "<leader>*", function()
-	Snacks.picker.grep_word()
-end, { desc = "Live grep (word or selection)" })
+local function map(l, r, desc, mode)
+	wk.add({
+		{ mode = mode or "n", l, r, desc = desc },
+		group = "Snacks",
+	})
+end
 
--- Vim things: buffers, registers, etc.
-vim.keymap.set("n", "<F1>", function()
-	Snacks.picker.help()
-end, { desc = "Help Pages" })
-vim.keymap.set("n", "<C-b>", function()
-	Snacks.picker.buffers()
-end, { desc = "Buffers" })
-vim.keymap.set("n", "<leader>pr", function()
-	Snacks.picker.registers()
-end, { desc = "Registers" })
-vim.keymap.set("n", "<leader>,", function()
-	Snacks.picker.spelling()
-end, { desc = "Spelling" })
+local function smart_picker()
+	sp.smart({ hidden = true })
+end
+
+local function vim_config_files()
+	---@diagnostic disable-next-line: assign-type-mismatch
+	sp.files({ cwd = vim.fn.stdpath("config") })
+end
+
+-- Important pickers on control + key
+map("<C-b>", sp.buffers, "Buffers")
+map("<C-f>", sp.grep, "Grep")
+map("<C-g>", sp.grep_buffers, "Grep buffers")
+map("<C-p>", smart_picker, "Find files")
+map("<C-x>", sp.explorer, "Explorer")
+
+-- Special things
+map("<F1>", sp.help, "Help Pages")
+map("<leader>,", sp.spelling, "Spelling")
+map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
+
+-- <leader>s namespace for various snacks pickers
+map('<leader>s"', sp.registers, "Registers")
+map("<leader>s/", sp.search_history, "Search History")
+map("<leader>sa", sp.autocmds, "Autocmds")
+map("<leader>sb", sp.lines, "Buffer Lines")
+map("<leader>sc", sp.command_history, "Command History")
+map("<leader>sC", sp.commands, "Commands")
+map("<leader>sd", sp.diagnostics, "Diagnostics")
+map("<leader>sD", sp.diagnostics_buffer, "Buffer Diagnostics")
+map("<leader>sh", sp.help, "Help Pages")
+map("<leader>sH", sp.highlights, "Highlights")
+map("<leader>si", sp.icons, "Icons")
+map("<leader>sj", sp.jumps, "Jumps")
+map("<leader>sk", sp.keymaps, "Keymaps")
+map("<leader>sl", sp.loclist, "Location List")
+map("<leader>sM", sp.man, "Man Pages")
+map("<leader>sm", sp.marks, "Marks")
+map("<leader>so", sp.colorschemes, "Colorschemes")
+map("<leader>sq", sp.qflist, "Quickfix List")
+map("<leader>sR", sp.resume, "Resume")
+map("<leader>su", sp.undo, "Undo History")
+map("<leader>sv", vim_config_files, "Vim Config Files")
