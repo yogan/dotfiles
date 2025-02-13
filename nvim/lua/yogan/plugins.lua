@@ -143,14 +143,8 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
-	-- Telescope fuzzy thingy
-	use({
-		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	use("nvim-telescope/telescope-symbols.nvim")
+	-- Snacks plugin collection
+	use("folke/snacks.nvim")
 
 	-- Todo comments
 	use({
