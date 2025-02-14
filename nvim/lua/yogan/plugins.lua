@@ -71,12 +71,24 @@ return require("packer").startup(function(use)
 	use("ficcdaf/ashen.nvim")
 	use("nvim-lualine/lualine.nvim")
 	use("shellRaining/hlchunk.nvim")
-	use("ntpeters/vim-better-whitespace")
 	use("HiPhish/rainbow-delimiters.nvim")
 
 	-- Commenting stuff
 	use("numToStr/Comment.nvim")
 	use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
+
+	use({
+		"ntpeters/vim-better-whitespace",
+		config = function()
+			-- Strip whitespace operator, also works on visual selection
+			-- Operator mode examples:
+			--    <leader>Wj  - current line
+			--    <leader>Wap - current paragraph
+			--    <leader>Wib - current block (e.g. {…})
+			--    <leader>Wig - current git change hunk
+			vim.cmd([[ let g:better_whitespace_operator = "<leader>W" ]])
+		end,
+	})
 
 	-- Noice (fancy UI stuff)
 	-- FIXME currently broken
