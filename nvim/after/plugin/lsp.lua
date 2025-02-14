@@ -19,6 +19,10 @@ lspconfig.lua_ls.setup({})
 local packer_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start"
 require("lazydev").setup({
 	library = {
+		-- Only load luvit types when the `vim.uv` word is found
+		-- from: https://github.com/folke/lazydev.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+		-- busted an luassert support when needed
 		{ path = packer_dir .. "/busted/library", words = { "describe" } },
 		{ path = packer_dir .. "/luassert/library", words = { "assert" } },
 	},
@@ -92,7 +96,7 @@ lspconfig.perlnavigator.setup({
 lspconfig.julials.setup({
 	on_new_config = function(new_config, _)
 		local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")
-		if require("lspconfig").util.path.is_file(julia) then
+		if (vim.uv.fs_stat(julia) or {}).type == "file" then
 			new_config.cmd[1] = julia
 		end
 	end,
