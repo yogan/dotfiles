@@ -4,7 +4,8 @@ local wk = require("which-key")
 ---@diagnostic disable-next-line: missing-fields
 flash.setup({
 	modes = {
-		search = { enabled = true },
+		-- can be enabled when needed with <C-s> during search, see bottom
+		search = { enabled = false },
 		-- disable handling of `f`, `F`, `t`, `T`, `;` and `,` motions
 		-- (defaults for fFtT are fine, and ; and , are handled by
 		-- treesitter-textobjects to repeat all kinds of motions)
@@ -65,4 +66,4 @@ map({ "n", "x", "o" }, "<leader>S", jump_continue, "Flash Continue")
 map({ "n", "v" }, "<leader>l", jump_to_line, "Flash Line")
 map({ "n", "v" }, "<leader>w", current_word, "Flash Current Word")
 map({ "x", "o" }, "R", treesitter_search, "Flash Treesitter Search")
-map({ "c" }, "<c-s>", toggle, "Flash Toggle Search")
+map({ "c" }, "<C-s>", toggle, "Flash Toggle Search")
