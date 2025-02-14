@@ -167,10 +167,11 @@ lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.default_keymaps({
 		buffer = bufnr,
 		preserve_mappings = false,
-		-- skipping a few of the default mappings, are I'm using Snack's LSP
-		-- pickers instead (see snacks.lua)
-		omit = { "gd", "gD", "gr", "gi", "gy" },
+		-- Skipping some default mappings, using Snacks instead (see snacks.lua)
+		omit = { "gd", "gD", "gr", "gi", "gy", "<F2>" },
 	})
+
+	vim.keymap.set("n", "<F2>", ":IncRename ", { buffer = bufnr })
 
 	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
