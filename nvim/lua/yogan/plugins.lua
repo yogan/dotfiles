@@ -90,9 +90,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Noice (fancy UI stuff)
-	-- FIXME currently broken
-	-- use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
+	-- Noice (fancy UI, only for cmdline and completion)
+	use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim" } })
 
 	-- Oil File Explorer
 	use({

@@ -25,14 +25,14 @@ end
 -- 	end
 -- end
 
--- local noice = require("noice")
---
--- local function noice_search()
--- 	---@diagnostic disable-next-line: undefined-field
--- 	local search = noice.api.status.search.get()
--- 	search = search:gsub("^/", "  "):gsub("^?", "  ")
--- 	return search:gsub("%s+", " ")
--- end
+local noice = require("noice")
+
+local function noice_search()
+	---@diagnostic disable-next-line: undefined-field
+	local search = noice.api.status.search.get()
+	search = search:gsub("^/", "  "):gsub("^?", "  ")
+	return search:gsub("%s+", " ")
+end
 
 local file_symbols = {
 	modified = "●",
@@ -87,14 +87,8 @@ require("lualine").setup({
 				},
 				padding = { left = 0, right = 1 },
 			},
-			-- {
-			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	noice.api.status.mode.get,
-			-- 	---@diagnostic disable-next-line: undefined-field
-			-- 	cond = noice.api.status.mode.has,
-			-- },
 		},
-		lualine_z = {},
+		lualine_z = { noice_search },
 	},
 	winbar = {
 		lualine_b = {
