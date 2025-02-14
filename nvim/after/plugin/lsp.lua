@@ -204,6 +204,7 @@ lsp_zero.setup()
 
 vim.diagnostic.config({
 	virtual_text = true, -- show inline errors at the end of lines
+	update_in_insert = false,
 	float = {
 		header = "",
 		border = "rounded",
