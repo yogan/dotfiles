@@ -199,6 +199,11 @@ lsp_zero.setup()
 
 vim.diagnostic.config({
 	virtual_text = true, -- show inline errors at the end of lines
+	float = {
+		header = "",
+		border = "rounded",
+		focusable = true,
+	},
 })
 
 -- Diagnostic icons in gutter, see:
