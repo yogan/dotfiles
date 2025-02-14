@@ -42,7 +42,7 @@ vim.opt.laststatus = 3 -- one global status line at the bottom
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.spell = true
+vim.opt.spell = false -- see autocmds.lua for some auto-enabled file types
 vim.opt.spelllang = "en_us,de_20" -- de_20 = new spelling (see spell-german)
 vim.opt.spellsuggest = "best,9"
 

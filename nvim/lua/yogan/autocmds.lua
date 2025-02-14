@@ -41,8 +41,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	group = group,
-	desc = "Enable spell checking for text files",
-	pattern = { "*.txt", "*.md", "*.tex" },
+	desc = "Enable spell checking for certain file types",
+	pattern = {
+		"*.js?",
+		"*.lua",
+		"*.md",
+		"*.py",
+		"*.tex",
+		"*.ts?",
+		"*.txt",
+		"*.vim",
+		"CHANGELOG",
+		"README",
+	},
 	command = "setlocal spell",
 })
 
