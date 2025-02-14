@@ -1,22 +1,19 @@
 local flash = require("flash")
 local wk = require("which-key")
 
+---@diagnostic disable-next-line: missing-fields
 flash.setup({
 	modes = {
-		search = {
-			enabled = true,
-		},
+		search = { enabled = true },
 		-- disable handling of `f`, `F`, `t`, `T`, `;` and `,` motions
 		-- (defaults for fFtT are fine, and ; and , are handled by
 		-- treesitter-textobjects to repeat all kinds of motions)
-		char = {
-			enabled = false,
-		},
+		char = { enabled = false },
 	},
 	label = {
 		rainbow = {
 			enabled = true,
-			shade = 9, -- number between 1 and 9
+			shade = 3, -- number between 1 and 9
 		},
 	},
 })
@@ -55,12 +52,17 @@ local function jump_to_line()
 	})
 end
 
-wk.add({
-	{ "s", mode = { "n", "x", "o" }, jump, desc = " Flash" },
-	{ "S", mode = { "n", "x", "o" }, treesitter, desc = " Flash Treesitter Select" },
-	{ "<leader>S", mode = { "n", "x", "o" }, jump_continue, desc = " Flash Continue" },
-	{ "R", mode = { "o", "x" }, treesitter_search, desc = " Flash Treesitter Search" },
-	{ "<c-s>", mode = { "c" }, toggle, desc = " Flash Toggle Search" },
-	{ "<leader>l", mode = { "n", "v" }, jump_to_line, desc = " Flash Line" },
-	{ "<leader>w", mode = { "n", "v" }, current_word, desc = " Flash Current Word" },
-})
+local function map(mode, l, r, desc)
+	wk.add({
+		{ mode = mode, l, r, desc = desc, icon = { icon = "", color = "yellow" } },
+		group = "Flash",
+	})
+end
+
+map({ "n", "x", "o" }, "s", jump, "Flash")
+map({ "n", "x", "o" }, "S", treesitter, "Flash Treesitter Select")
+map({ "n", "x", "o" }, "<leader>S", jump_continue, "Flash Continue")
+map({ "n", "v" }, "<leader>l", jump_to_line, "Flash Line")
+map({ "n", "v" }, "<leader>w", current_word, "Flash Current Word")
+map({ "x", "o" }, "R", treesitter_search, "Flash Treesitter Search")
+map({ "c" }, "<c-s>", toggle, "Flash Toggle Search")
