@@ -101,17 +101,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- File/Buffer/Git changes explorer
-	use({
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-		},
-	})
-
 	-- Close buffer helpers
 	use("kazhala/close-buffers.nvim")
 

@@ -57,7 +57,6 @@ local no_cursorline_fts = {
 	"TelescopeResults",
 	"WhichKey",
 	"help",
-	"neo-tree",
 }
 
 local no_colorcolumn_fts = {
@@ -68,7 +67,6 @@ local no_colorcolumn_fts = {
 	"WhichKey",
 	"alpha",
 	"help",
-	"neo-tree",
 	"packer",
 	"qf",
 }

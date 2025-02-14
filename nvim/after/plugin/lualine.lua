@@ -42,7 +42,7 @@ local file_symbols = {
 }
 
 require("lualine").setup({
-	extensions = { "neo-tree", "trouble" },
+	extensions = { "trouble" },
 	options = {
 		disabled_filetypes = {
 			winbar = {
@@ -52,7 +52,6 @@ require("lualine").setup({
 				"Trouble",
 				"WhichKey",
 				"alpha",
-				"neo-tree",
 				"packer",
 				"qf",
 			},
