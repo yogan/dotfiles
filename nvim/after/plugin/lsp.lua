@@ -167,6 +167,9 @@ lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.default_keymaps({
 		buffer = bufnr,
 		preserve_mappings = false,
+		-- skipping a few of the default mappings, are I'm using Snack's LSP
+		-- pickers instead (see snacks.lua)
+		omit = { "gd", "gD", "gr", "gi", "gy" },
 	})
 
 	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }

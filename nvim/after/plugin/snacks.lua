@@ -75,3 +75,14 @@ map("<leader>sq", sp.qflist, "Quickfix List")
 map("<leader>sR", sp.resume, "Resume")
 map("<leader>su", sp.undo, "Undo History")
 map("<leader>sv", vim_config_files, "Vim Config Files")
+
+-- LSP
+-- Remember to keep this in sync with the `omit` list of
+-- `lsp_zero.default_keymaps` in `lsp.lua`.
+map("gd", sp.lsp_definitions, "Goto Definitions")
+map("gD", sp.lsp_declarations, "Goto Declarations")
+map("gr", sp.lsp_references, "References")
+map("gi", sp.lsp_implementations, "Goto Implementations")
+map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
+map("<leader>ss", sp.lsp_symbols, "LSP Symbols")
+map("<leader>sS", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
