@@ -19,6 +19,7 @@ require("snacks").setup({
 			},
 		},
 	},
+	bigfile = { enabled = true },
 	toggle = { enabled = true },
 })
 
