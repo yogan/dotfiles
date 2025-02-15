@@ -292,10 +292,6 @@ return require("packer").startup(function(use)
 	-- :UrlView packer shows URLs of all installed packer plugins
 	use("axieax/urlview.nvim")
 
-	-- Zen mode (toggle buffer to full-screen floating window)
-	use("folke/zen-mode.nvim")
-	use("folke/twilight.nvim") -- integrates with Zen mode, dim inactive areas
-
 	-- Animated cursor
 	use("sphamba/smear-cursor.nvim")
 

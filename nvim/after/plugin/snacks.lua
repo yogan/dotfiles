@@ -37,6 +37,43 @@ require("snacks").setup({
 	},
 	bigfile = { enabled = true },
 	words = { enabled = true },
+	zen = {
+		-- You can add any `Snacks.toggle` id here.
+		-- Toggle state is restored when the window is closed.
+		-- Toggle config options are NOT merged.
+		toggles = {
+			dim = true,
+			mini_diff_signs = false,
+			inlay_hints = false,
+			spell = false,
+			number = false,
+			relativenumber = false,
+			foldcolumn = false,
+			git_blame = false,
+			git_signs = false,
+			git_sign_column = false,
+		},
+		win = {
+			-- Based on the default from:
+			-- https://github.com/folke/snacks.nvim/blob/main/docs/zen.md#zen
+			style = {
+				enter = true,
+				fixbuf = false,
+				minimal = true,
+				width = 120,
+				height = 0,
+				backdrop = { transparent = true, blend = 15 },
+				keys = { q = false },
+				zindex = 40,
+				wo = {
+					winhighlight = "NormalFloat:Normal",
+				},
+				w = {
+					snacks_main = true,
+				},
+			},
+		},
+	},
 })
 
 local sp = require("snacks.picker")
@@ -69,6 +106,7 @@ map("<C-x>", sp.explorer, "Explorer")
 map("<F1>", sp.help, "Help Pages")
 map("<leader>,", sp.spelling, "Spelling")
 map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
+Snacks.toggle.zen():map("<leader>z") -- not under <leader>t because it's special
 
 -- <leader>s namespace for various snacks pickers
 map('<leader>s"', sp.registers, "Registers")
@@ -128,6 +166,19 @@ Snacks.toggle
 		end,
 	})
 	:map("<leader>tb")
+
+Snacks.toggle
+	.new({
+		id = "git_sign_column",
+		name = " Git Sign Column",
+		get = function()
+			return require("gitsigns.config").config.signcolumn
+		end,
+		set = function(state)
+			require("gitsigns").toggle_signs(state)
+		end,
+	})
+	:map("<leader>tg")
 
 Snacks.toggle
 	.new({
