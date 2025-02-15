@@ -52,6 +52,7 @@ require("snacks").setup({
 			git_blame = false,
 			git_signs = false,
 			git_sign_column = false,
+			diag_virtual_text = false,
 		},
 		win = {
 			-- Based on the default from:
@@ -59,7 +60,7 @@ require("snacks").setup({
 			style = {
 				enter = true,
 				fixbuf = false,
-				minimal = true,
+				minimal = false,
 				width = 120,
 				height = 0,
 				backdrop = { transparent = true, blend = 15 },
@@ -153,6 +154,20 @@ Snacks.toggle.option("spell", { name = "󰓆 Spell" }):map("<leader>ts")
 Snacks.toggle.option("wrap", { name = "󰖶 Wrap" }):map("<leader>tw")
 Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
 Snacks.toggle.treesitter({ name = " Treesitter Highlight" }):map("<leader>tt")
+
+Snacks.toggle
+	.new({
+		id = "diag_virtual_text",
+		name = " Diagnostics Virtual Text",
+		get = function()
+			---@diagnostic disable-next-line: return-type-mismatch
+			return vim.diagnostic.config().virtual_text
+		end,
+		set = function(state)
+			vim.diagnostic.config({ virtual_text = state })
+		end,
+	})
+	:map("<leader>tv")
 
 Snacks.toggle
 	.new({
