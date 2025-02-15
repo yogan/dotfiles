@@ -78,6 +78,10 @@ map("<leader>sR", sp.resume, "Resume")
 map("<leader>su", sp.undo, "Undo History")
 map("<leader>sv", vim_config_files, "Vim Config Files")
 
+local function quick_lsp()
+	sp.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
+end
+
 -- LSP
 -- Remember to keep this in sync with the `omit` list of
 -- `lsp_zero.default_keymaps` in `lsp.lua`.
@@ -88,4 +92,4 @@ map("gi", sp.lsp_implementations, "Goto Implementations")
 map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
 map("<leader>ss", sp.lsp_symbols, "LSP Symbols")
 map("<leader>sS", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
--- also see namu.lua for <leader><leader> (LSP Symbols "light"/small)
+map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
