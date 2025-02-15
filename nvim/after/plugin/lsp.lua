@@ -165,6 +165,7 @@ cmp.setup({
 	},
 })
 
+---@diagnostic disable-next-line: unused-local
 lsp_zero.on_attach(function(client, bufnr)
 	-- for default key mappings, see:
 	-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#lsp-actions
@@ -179,25 +180,6 @@ lsp_zero.on_attach(function(client, bufnr)
 
 	local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
-
-	-- highlight all references to symbol under cursor
-	if client.server_capabilities.documentHighlightProvider then
-		local LspDocumentHighlight = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			callback = vim.lsp.buf.document_highlight,
-			group = LspDocumentHighlight,
-			buffer = bufnr,
-			desc = "Highlight symbol under cursor",
-		})
-
-		vim.api.nvim_create_autocmd("CursorMoved", {
-			callback = vim.lsp.buf.clear_references,
-			group = LspDocumentHighlight,
-			buffer = bufnr,
-			desc = "Clear old highlights",
-		})
-	end
 end)
 
 lsp_zero.setup()
