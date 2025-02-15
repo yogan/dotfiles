@@ -7,12 +7,12 @@ local function session_name()
 end
 
 local function auto_format()
-	-- see :FormatEnable and :FormatDisable in conform.lua
+	-- see usage in conform.lua and toggle in snacks.lua
 	---@diagnostic disable-next-line: undefined-field
 	if vim.b.disable_autoformat or vim.g.disable_autoformat then
-		return ""
+		return "󰉥"
 	end
-	return ""
+	return "󰊄"
 end
 
 -- local function indent_setting()
@@ -35,7 +35,7 @@ local function noice_search()
 end
 
 local file_symbols = {
-	modified = "●",
+	modified = "",
 	readonly = "󰷤",
 	unnamed = "",
 	newfile = "",
@@ -69,22 +69,13 @@ require("lualine").setup({
 		},
 		lualine_x = { "location" },
 		lualine_y = {
-			{
-				auto_format,
-				separator = " ",
-				padding = { left = 1, right = 0 },
-			},
+			{ auto_format },
 			{
 				"copilot",
 				show_running = true,
 				symbols = {
-					status = {
-						enabled = "",
-						disabled = "",
-					},
 					spinners = require("copilot-status.spinners").dots,
 				},
-				padding = { left = 0, right = 1 },
 			},
 		},
 		lualine_z = { noice_search },

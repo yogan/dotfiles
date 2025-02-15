@@ -51,12 +51,6 @@ vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc =
 vim.keymap.set("n", "Q", "q", { desc = "Record macro" })
 vim.keymap.set("n", "q", "<nop>")
 
--- toggles
-vim.keymap.set("n", "<leader>tn", "<cmd>set invnumber<CR>", { desc = "Toggle line numbers" })
-vim.keymap.set("n", "<leader>tl", "<cmd>set invlist<CR>", { desc = "Toggle invisible char (list mode)" })
-vim.keymap.set("n", "<leader>tw", "<cmd>set invwrap<CR>", { desc = "Toggle line wrapping" })
-vim.keymap.set("n", "<leader>ts", "<cmd>set invspell<CR>", { desc = "Toggle spell checking" })
-
 -- command line, map <C-p>/<C-n> to work like up/down (history /w matching prefix)
 -- see https://stackoverflow.com/a/60355468/183582 for a good explanation
 local cmd_history_opts = { expr = true, replace_keycodes = false }

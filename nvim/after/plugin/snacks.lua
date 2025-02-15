@@ -19,8 +19,23 @@ require("snacks").setup({
 			},
 		},
 	},
+	toggle = {
+		which_key = true,
+		notify = true,
+		icon = {
+			enabled = " ",
+			disabled = " ",
+		},
+		color = {
+			enabled = "yellow",
+			disabled = "red",
+		},
+		wk_desc = {
+			enabled = "",
+			disabled = "",
+		},
+	},
 	bigfile = { enabled = true },
-	toggle = { enabled = true },
 	words = { enabled = true },
 })
 
@@ -93,3 +108,128 @@ map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
 map("<leader>ss", sp.lsp_symbols, "LSP Symbols")
 map("<leader>sS", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
 map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
+
+--- Toggles (using <leader>t namespace) ----------------------------------------
+
+Snacks.toggle.option("spell", { name = "󰓆 Spell" }):map("<leader>ts")
+Snacks.toggle.option("wrap", { name = "󰖶 Wrap" }):map("<leader>tw")
+Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
+Snacks.toggle.treesitter({ name = " Treesitter Highlight" }):map("<leader>tt")
+
+Snacks.toggle
+	.new({
+		id = "git_blame",
+		name = " Git Blame",
+		get = function()
+			return require("gitsigns.config").config.current_line_blame
+		end,
+		set = function(state)
+			require("gitsigns").toggle_current_line_blame(state)
+		end,
+	})
+	:map("<leader>tb")
+
+Snacks.toggle
+	.new({
+		id = "number",
+		name = " Line Numbers",
+		get = function()
+			return vim.wo.number
+		end,
+		set = function(state)
+			if state then
+				vim.wo.relativenumber = false
+			end
+			vim.wo.number = state
+		end,
+	})
+	:map("<leader>tn")
+
+Snacks.toggle
+	.new({
+		id = "relativenumber",
+		name = " Relative Line Numbers",
+		get = function()
+			return vim.wo.relativenumber
+		end,
+		set = function(state)
+			if state then
+				vim.wo.number = false
+			end
+			vim.wo.relativenumber = state
+		end,
+	})
+	:map("<leader>tN")
+
+Snacks.toggle
+	.new({
+		id = "format_on_save",
+		name = "󰊄 Format on Save (global)",
+		get = function()
+			return not vim.g.disable_autoformat
+		end,
+		set = function(state)
+			vim.g.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tf")
+
+Snacks.toggle
+	.new({
+		id = "format_on_save_buffer",
+		name = "󰊄 Format on Save (buffer)",
+		get = function()
+			return not vim.b.disable_autoformat
+		end,
+		set = function(state)
+			vim.b.disable_autoformat = not state
+		end,
+	})
+	:map("<leader>tF")
+
+Snacks.toggle
+	.new({
+		id = "copilot",
+		name = " Copilot",
+		get = function()
+			return require("copilot-status").is_enabled()
+		end,
+		set = function(state)
+			if state then
+				vim.cmd("Copilot enable")
+			else
+				vim.cmd("Copilot disable")
+			end
+		end,
+	})
+	:map("<leader>tc")
+
+Snacks.toggle
+	.new({
+		id = "dim",
+		name = "󰱊 Dimming",
+		get = function()
+			return Snacks.dim.enabled
+		end,
+		set = function(state)
+			if state then
+				Snacks.dim.enable()
+			else
+				Snacks.dim.disable()
+			end
+		end,
+	})
+	:map("<leader>td")
+
+Snacks.toggle
+	.new({
+		id = "foldcolumn",
+		name = " Fold Column",
+		get = function()
+			return vim.o.foldcolumn ~= "0"
+		end,
+		set = function(state)
+			vim.o.foldcolumn = state and "1" or "0"
+		end,
+	})
+	:map("<leader>tC")

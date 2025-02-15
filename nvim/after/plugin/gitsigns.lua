@@ -31,15 +31,13 @@ require("gitsigns").setup({
 		map("n", "<leader>gD", diff_file_staged, "Diff file (staged)")
 		map("n", "<leader>gb", blame_popup, "Blame popup")
 
-		-- Toggles
-		map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle blame")
-		map("n", "<leader>td", gs.toggle_deleted, "Toggle deleted")
-
 		-- Text object (e.g. vig -> select current hunk)
 		map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
 
 		-- NOTE: there are also gitsigns mappings in treesitter-textobjects.lua
 		-- (navigation between hunks, made repeatable via ts-to)
+
+		-- NOTE: snacks-toggles.lua also has two Gitsigns toggle mappings
 	end,
 })
 
