@@ -110,3 +110,17 @@ wk.add({
 	{ mode = modes, "]e", next_error_rep, icon = "", desc = "Next error" },
 	{ mode = modes, "[e", prev_error_rep, icon = "", desc = "Previous error" },
 })
+
+-- Make Snacks word LSP reference movements repeatable with ; and , keys
+local sw = require("snacks.words")
+local function next_word()
+	sw.jump(vim.v.count1, true)
+end
+local function prev_word()
+	sw.jump(-vim.v.count1, true)
+end
+local next_word_rep, prev_word_rep = rep.make_repeatable_move_pair(next_word, prev_word)
+wk.add({
+	{ mode = modes, "]w", next_word_rep, icon = "", desc = "Next word" },
+	{ mode = modes, "[w", prev_word_rep, icon = "", desc = "Previous word" },
+})

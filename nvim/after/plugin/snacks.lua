@@ -25,7 +25,6 @@ require("snacks").setup({
 })
 
 local sp = require("snacks.picker")
-local sw = require("snacks.words")
 local wk = require("which-key")
 
 local function map(l, r, desc, mode)
@@ -42,14 +41,6 @@ end
 local function vim_config_files()
 	---@diagnostic disable-next-line: assign-type-mismatch
 	sp.files({ cwd = vim.fn.stdpath("config") })
-end
-
-local function words_next()
-	sw.jump(vim.v.count1, true)
-end
-
-local function words_prev()
-	sw.jump(-vim.v.count1, true)
 end
 
 -- Important pickers on control + key
@@ -97,5 +88,3 @@ map("gi", sp.lsp_implementations, "Goto Implementations")
 map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
 map("<leader>ss", sp.lsp_symbols, "LSP Symbols")
 map("<leader>sS", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
-map("]]", words_next, "Next Reference", { "n", "t" })
-map("[[", words_prev, "Previous Reference", { "n", "t" })
