@@ -227,6 +227,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- LSP Symbol Navigation
+	use("bassamsdata/namu.nvim")
+
 	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
 	-- :VtsExec <tab> / :VtsRename
 	use("yioneko/nvim-vtsls")
