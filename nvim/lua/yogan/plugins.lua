@@ -57,10 +57,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("nvim-web-devicons").setup({
 				override_by_extension = {
-					["m"] = {
-						icon = "󰻊",
-						name = "MATLAB",
-					},
+					["m"] = { icon = "󰻊", name = "MATLAB" },
 				},
 			})
 		end,
