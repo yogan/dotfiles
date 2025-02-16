@@ -51,7 +51,6 @@ require("lualine").setup({
 				"TelescopeResults",
 				"Trouble",
 				"WhichKey",
-				"alpha",
 				"packer",
 				"qf",
 			},

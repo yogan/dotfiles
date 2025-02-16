@@ -18,16 +18,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
--- Remove statusline when in Alpha
-vim.api.nvim_create_autocmd("User", {
-	pattern = "AlphaReady",
-	callback = function()
-		vim.cmd([[
-			set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
-		]])
-	end,
-})
-
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = group,
 	desc = "Setup defaults for new terminal windows",
@@ -76,7 +66,6 @@ local no_colorcolumn_fts = {
 	"TelescopeResults",
 	"Trouble",
 	"WhichKey",
-	"alpha",
 	"help",
 	"packer",
 	"qf",

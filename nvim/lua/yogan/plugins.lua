@@ -84,6 +84,15 @@ return require("packer").startup(function(use)
 			--    <leader>Wib - current block (e.g. {…})
 			--    <leader>Wig - current git change hunk
 			vim.cmd([[ let g:better_whitespace_operator = "<leader>W" ]])
+
+			-- NOTE: Snacks dashboard has either '' or 'snacks_dashboard' as
+			-- `filetype`, depending on whether it's opened on startup or later
+			-- with `:Snacks.dashboard()`, see:
+			-- https://github.com/folke/snacks.nvim/issues/1220
+			-- But it seems wise to blacklist buffers without a filetype anyway.
+			vim.cmd(
+				[[ let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'snacks_dashboard', ''] ]]
+			)
 		end,
 	})
 
@@ -114,12 +123,6 @@ return require("packer").startup(function(use)
 			"kevinhwang91/promise-async",
 			"luukvbaal/statuscol.nvim",
 		},
-	})
-
-	-- Start screen
-	use({
-		"goolord/alpha-nvim",
-		requires = { "nvim-tree/nvim-web-devicons" },
 	})
 
 	-- Session management
