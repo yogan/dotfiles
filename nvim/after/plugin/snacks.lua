@@ -97,6 +97,13 @@ local function map(l, r, desc, mode)
 	})
 end
 
+local function map_with_icon(l, r, desc, icon, mode)
+	wk.add({
+		{ mode = mode or "n", l, r, desc = desc, icon = icon },
+		group = "Snacks",
+	})
+end
+
 local function smart_picker()
 	sp.smart({ hidden = true })
 end
@@ -116,7 +123,7 @@ map("<C-p>", smart_picker, "Find files")
 map("<F1>", sp.help, "Help Pages")
 map("<leader>,", sp.spelling, "Spelling")
 map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
-map("<leader>x", sp.explorer, "Explorer")
+map_with_icon("<leader>E", sp.explorer, "Explorer", "")
 Snacks.toggle.zen():map("<leader>z")
 
 -- <leader>s namespace for various snacks pickers
