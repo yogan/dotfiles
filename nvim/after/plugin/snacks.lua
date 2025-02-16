@@ -111,13 +111,13 @@ map("<C-b>", sp.buffers, "Buffers")
 map("<C-f>", sp.grep, "Grep")
 map("<C-g>", sp.grep_buffers, "Grep buffers")
 map("<C-p>", smart_picker, "Find files")
-map("<C-x>", sp.explorer, "Explorer")
 
 -- Special things
 map("<F1>", sp.help, "Help Pages")
 map("<leader>,", sp.spelling, "Spelling")
 map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
-Snacks.toggle.zen():map("<leader>z") -- not under <leader>t because it's special
+map("<leader>x", sp.explorer, "Explorer")
+Snacks.toggle.zen():map("<leader>z")
 
 -- <leader>s namespace for various snacks pickers
 map('<leader>s"', sp.registers, "Registers")
