@@ -148,6 +148,7 @@ local function search_lines(pattern)
 	sp.lines({
 		pattern = pattern,
 		matcher = { fuzzy = false },
+		sort = { fields = { "idx" } },
 		title = "Search Buffer",
 		layout = {
 			preset = "vscode",
