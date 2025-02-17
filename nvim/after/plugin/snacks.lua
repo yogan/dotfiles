@@ -108,6 +108,37 @@ local function smart_picker()
 	sp.smart({ hidden = true })
 end
 
+-- NOTE: keep in sync with definitions in todo-comments.lua
+local function comments_todo()
+	---@diagnostic disable-next-line: undefined-field
+	sp.todo_comments({
+		keywords = {
+			"FIXME",
+			"FIXIT",
+			"BUG",
+			"BUGS",
+			"WARNING",
+			"WARNINGS",
+			"ATTENTION",
+			"TODO",
+			"TODOS",
+			"ISSUE",
+			"ISSUES",
+			"NOTE",
+			"NOTES",
+			"INFO",
+			"INFOS",
+			"HINT",
+			"HINTS",
+		},
+	})
+end
+
+local function comments_fixme()
+	---@diagnostic disable-next-line: undefined-field
+	sp.todo_comments({ keywords = { "FIXME", "FIXIT", "BUG", "BUGS" } })
+end
+
 local function vim_config_files()
 	---@diagnostic disable-next-line: assign-type-mismatch
 	sp.files({ cwd = vim.fn.stdpath("config") })
@@ -159,6 +190,8 @@ map("<leader>sq", sp.qflist, "Quickfix List")
 map("<leader>sR", sp.resume, "Resume")
 map("<leader>su", sp.undo, "Undo History")
 map("<leader>sv", vim_config_files, "Vim Config Files")
+map("<leader>st", comments_todo, "TODO Comments")
+map("<leader>sT", comments_fixme, "FIXME Comments")
 
 local function quick_lsp()
 	sp.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
