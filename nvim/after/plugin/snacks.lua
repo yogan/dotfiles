@@ -113,6 +113,14 @@ local function vim_config_files()
 	sp.files({ cwd = vim.fn.stdpath("config") })
 end
 
+local function search_lines()
+	sp.lines({ matcher = { fuzzy = false } })
+end
+
+local function search_lines_cword()
+	sp.lines({ pattern = vim.fn.expand("<cword>"), matcher = { fuzzy = false } })
+end
+
 -- Important pickers on control + key
 map("<C-b>", sp.buffers, "Buffers")
 map("<C-f>", sp.grep, "Grep")
@@ -122,10 +130,13 @@ map("<C-p>", smart_picker, "Find files")
 -- Special things
 map("<F1>", sp.help, "Help Pages")
 map("<leader>,", sp.spelling, "Spelling")
-map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
-map("<leader>/", sp.lines, "Search Buffer Lines")
 map_with_icon("<leader>E", sp.explorer, "Explorer", "")
 Snacks.toggle.zen():map("<leader>z")
+
+-- Fancy search stuff
+map("<leader>/", search_lines, "Search Buffer Lines")
+map("<leader>8", search_lines_cword, "Search Buffer Lines with Current Word")
+map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
 
 -- <leader>s namespace for various snacks pickers
 map('<leader>s"', sp.registers, "Registers")
