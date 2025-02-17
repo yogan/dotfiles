@@ -21,9 +21,9 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yank
 -- copy to system clipboard (works magically from WSL to Windows)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 
--- toggle quickfix window with <C-c>, taken from:
+-- toggle quickfix window with <C-q>, taken from:
 -- https://old.reddit.com/r/neovim/comments/vramof/better_keymaps_for_toggling_quickfix_focus_and/ievet6c/
-vim.keymap.set("n", "<C-c>", function()
+vim.keymap.set("n", "<C-q>", function()
 	local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
 	local action = qf_winid > 0 and "cclose" or "copen"
 	vim.cmd("botright " .. action)
