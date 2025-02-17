@@ -70,37 +70,21 @@ return require("packer").startup(function(use)
 	use("shellRaining/hlchunk.nvim")
 	use("HiPhish/rainbow-delimiters.nvim")
 
-	-- Commenting stuff
-	use("numToStr/Comment.nvim")
-	use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
-
+	-- Highlighting and trimming of trailing whitespace
 	use({
 		"ntpeters/vim-better-whitespace",
 		-- Loading the plugin on this event helps that the initial Snacks dashboard
 		-- has its filetype set to 'snacks_dashboard', see:
 		-- https://github.com/folke/snacks.nvim/issues/1220#issuecomment-2661542968
 		event = "BufReadPost",
-		config = function()
-			-- Strip whitespace operator, also works on visual selection
-			-- Operator mode examples:
-			--    <leader>Wj  - current line
-			--    <leader>Wap - current paragraph
-			--    <leader>Wib - current block (e.g. {…})
-			--    <leader>Wig - current git change hunk
-			vim.cmd([[ let g:better_whitespace_operator = "<leader>W" ]])
-
-			-- Intentionally including '' (no filetype) here, even though with
-			-- the `event = "BufReadPost"` above, this is not needed for the
-			-- dashboard, but highlighting whitespace in buffers without ft
-			-- seems wrong anyway.
-			vim.cmd(
-				[[ let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'snacks_dashboard', ''] ]]
-			)
-		end,
 	})
 
 	-- Noice (fancy UI, only for cmdline and completion)
 	use({ "folke/noice.nvim", requires = { "MunifTanjim/nui.nvim" } })
+
+	-- Commenting stuff
+	use("numToStr/Comment.nvim")
+	use("JoosepAlviste/nvim-ts-context-commentstring") -- for jsx/tsx support
 
 	-- Oil File Explorer
 	use({
