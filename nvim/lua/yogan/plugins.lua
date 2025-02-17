@@ -76,6 +76,10 @@ return require("packer").startup(function(use)
 
 	use({
 		"ntpeters/vim-better-whitespace",
+		-- Loading the plugin on this event helps that the initial Snacks dashboard
+		-- has its filetype set to 'snacks_dashboard', see:
+		-- https://github.com/folke/snacks.nvim/issues/1220#issuecomment-2661542968
+		event = "BufReadPost",
 		config = function()
 			-- Strip whitespace operator, also works on visual selection
 			-- Operator mode examples:
@@ -85,11 +89,10 @@ return require("packer").startup(function(use)
 			--    <leader>Wig - current git change hunk
 			vim.cmd([[ let g:better_whitespace_operator = "<leader>W" ]])
 
-			-- NOTE: Snacks dashboard has either '' or 'snacks_dashboard' as
-			-- `filetype`, depending on whether it's opened on startup or later
-			-- with `:Snacks.dashboard()`, see:
-			-- https://github.com/folke/snacks.nvim/issues/1220
-			-- But it seems wise to blacklist buffers without a filetype anyway.
+			-- Intentionally including '' (no filetype) here, even though with
+			-- the `event = "BufReadPost"` above, this is not needed for the
+			-- dashboard, but highlighting whitespace in buffers without ft
+			-- seems wrong anyway.
 			vim.cmd(
 				[[ let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'fugitive', 'snacks_dashboard', ''] ]]
 			)
