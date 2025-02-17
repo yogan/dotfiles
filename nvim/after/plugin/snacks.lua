@@ -144,12 +144,20 @@ local function vim_config_files()
 	sp.files({ cwd = vim.fn.stdpath("config") })
 end
 
-local function search_lines()
-	sp.lines({ matcher = { fuzzy = false } })
+local function search_lines(pattern)
+	sp.lines({
+		pattern = pattern,
+		matcher = { fuzzy = false },
+		title = "Search Buffer",
+		layout = {
+			preset = "vscode",
+			layout = { height = 0.25, width = 0.6 },
+		},
+	})
 end
 
 local function search_lines_cword()
-	sp.lines({ pattern = vim.fn.expand("<cword>"), matcher = { fuzzy = false } })
+	search_lines(vim.fn.expand("<cword>"))
 end
 
 -- Important pickers on control + key
