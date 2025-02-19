@@ -65,7 +65,7 @@ return require("packer").startup(function(use)
 
 	-- Color scheme, status line, icons, indent guides, trailing whitespace
 	-- Config for colorscheme: after/plugin/colors.lua
-	use("ficcdaf/ashen.nvim")
+	use({ "catppuccin/nvim", as = "catppuccin" })
 	use("nvim-lualine/lualine.nvim")
 	use("shellRaining/hlchunk.nvim")
 	use("HiPhish/rainbow-delimiters.nvim")

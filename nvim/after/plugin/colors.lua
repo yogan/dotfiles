@@ -1,25 +1,15 @@
-require("ashen").setup({
-	style_presets = {
-		italic_comments = true,
-	},
-	hl = {
-		merge_override = {
-			ColorColumn = { bg = "#111111" },
-			EndOfBuffer = { fg = "#424242", bg = "#0c0c0c" },
-			ExtraWhitespace = { bg = "#562727" },
-			Folded = { bg = "#181818" },
-			WhichKeyGroup = { "g_7", { italic = true } },
-		},
-		link = {
-			MoreMsg = "AshenGreenLight",
-			QuickFixLine = "MsgSeparator",
-			TreesitterContext = "CursorLine",
-		},
-	},
+require("catppuccin").setup({
+	custom_highlights = function(colors)
+		return {
+			ColorColumn = { bg = "#1a1a2a" },
+			Folded = { bg = colors.surface0 },
+			UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surface0 },
+		}
+	end,
+	dim_inactive = { enabled = true },
+	show_end_of_buffer = true,
 })
 
-vim.cmd("colorscheme ashen")
+vim.api.nvim_set_hl(0, "ExtraWhitespace", { link = "DiagnosticVirtualTextError" })
 
--- Putting this in hl.link doesn't work, even like this:
--- ["@markup.raw"] = "@markup.italic"
-vim.cmd("highlight! link @markup.raw @markup.italic")
+vim.cmd("colorscheme catppuccin")

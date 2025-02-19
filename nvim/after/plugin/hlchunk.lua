@@ -2,8 +2,8 @@ require("hlchunk").setup({
 	chunk = {
 		enable = true,
 		style = {
-			{ fg = "#8e3434" }, -- normal chunk
-			{ fg = "#e11811" }, -- chunk with error(s)
+			{ fg = "#435D95" }, -- normal chunk
+			{ fg = "#f38ba8" }, -- chunk with error(s)
 		},
 	},
 	indent = {
@@ -14,10 +14,7 @@ require("hlchunk").setup({
 			end,
 		},
 		style = {
-			{ fg = "#351f1e" },
-			{ fg = "#3c1a19" },
-			{ fg = "#421411" },
-			{ fg = "#4d0706" },
+			{ fg = "#2a2b3c" }, -- taken from CursorLine bg
 		},
 	},
 })
