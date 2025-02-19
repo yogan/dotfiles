@@ -15,23 +15,14 @@ local function auto_format()
 	return "󰊄"
 end
 
--- local function indent_setting()
--- 	---@diagnostic disable-next-line: undefined-field
--- 	if vim.opt.expandtab:get() then
--- 		---@diagnostic disable-next-line: undefined-field
--- 		return vim.opt.shiftwidth:get() .. " ␣"
--- 	else
--- 		return "↹"
--- 	end
--- end
-
-local noice = require("noice")
-
-local function noice_search()
+local function indent_setting()
 	---@diagnostic disable-next-line: undefined-field
-	local search = noice.api.status.search.get()
-	search = search:gsub("^/", "  "):gsub("^?", "  ")
-	return search:gsub("%s+", " ")
+	if vim.opt.expandtab:get() then
+		---@diagnostic disable-next-line: undefined-field
+		return vim.opt.shiftwidth:get() .. "␣"
+	else
+		return "↹"
+	end
 end
 
 local file_symbols = {
@@ -57,8 +48,8 @@ require("lualine").setup({
 		},
 	},
 	sections = {
-		lualine_a = {},
-		lualine_b = { session_name },
+		lualine_a = { session_name },
+		lualine_b = { "branch" },
 		lualine_c = {
 			{
 				"filename",
@@ -68,16 +59,18 @@ require("lualine").setup({
 		},
 		lualine_x = { "location" },
 		lualine_y = {
-			{ auto_format },
+			indent_setting,
+			auto_format,
 			{
 				"copilot",
 				show_running = true,
 				symbols = {
 					spinners = require("copilot-status.spinners").dots,
 				},
+				padding = { left = 1, right = 0 },
 			},
 		},
-		lualine_z = { noice_search },
+		lualine_z = {},
 	},
 	winbar = {
 		lualine_b = {
@@ -96,7 +89,7 @@ require("lualine").setup({
 			},
 		},
 		lualine_x = { "diagnostics" },
-		lualine_y = { "branch", "diff" },
+		lualine_y = { "diff" },
 	},
 	inactive_winbar = {
 		lualine_c = {
