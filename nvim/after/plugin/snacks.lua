@@ -222,6 +222,7 @@ map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
 
 Snacks.toggle.option("spell", { name = "󰓆 Spell" }):map("<leader>ts")
 Snacks.toggle.option("wrap", { name = "󰖶 Wrap" }):map("<leader>tw")
+Snacks.toggle.option("list", { name = "󱁐 List" }):map("<leader>tl")
 Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
 Snacks.toggle.treesitter({ name = " Treesitter Highlight" }):map("<leader>tt")
 
