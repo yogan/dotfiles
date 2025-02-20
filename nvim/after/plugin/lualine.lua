@@ -57,7 +57,7 @@ require("lualine").setup({
 				symbols = file_symbols,
 			},
 		},
-		lualine_x = { "location" },
+		lualine_x = { "location", "selectioncount" },
 		lualine_y = {
 			indent_setting,
 			auto_format,
