@@ -227,6 +227,8 @@ require("lazy").setup({
 		{
 			"ShinKage/idris2-nvim",
 			dependencies = { "neovim/nvim-lspconfig", "MunifTanjim/nui.nvim" },
+			config = true,
+			ft = "idris2", -- lazy-load on file type
 		},
 
 		-- GNU Octave (MATLAB)
