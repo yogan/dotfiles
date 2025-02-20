@@ -25,6 +25,14 @@ local function indent_setting()
 	end
 end
 
+local function macro()
+	local reg = vim.fn.reg_recording()
+	if reg == "" then
+		return ""
+	end
+	return " REC " .. reg
+end
+
 local file_symbols = {
 	modified = "",
 	readonly = "󰷤",
@@ -52,7 +60,7 @@ require("lualine").setup({
 		},
 	},
 	sections = {
-		lualine_a = { session_name },
+		lualine_a = { session_name, macro },
 		lualine_b = { "branch" },
 		lualine_c = {
 			{
