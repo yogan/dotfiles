@@ -62,6 +62,7 @@
   "vim-crystal": { "branch": "master", "commit": "dc21188ec8c2ee77bb81dffca02e1a29d87cfd9f" },
   "vim-mipssyntax": { "branch": "master", "commit": "e2dd66e83a5b8f1ab1416b86b96856e0cb913faa" },
   "vim-octave": { "branch": "master", "commit": "61268df03ceb49c2b4433d7d47db08f91d550b2e" },
+  "vim-startuptime": { "branch": "master", "commit": "b6f0d93f6b8cf6eee0b4c94450198ba2d6a05ff6" },
   "vim-wasm": { "branch": "master", "commit": "8ee107a8c2034ef2b195fc82214ed2b4530a99b6" },
   "which-key.nvim": { "branch": "main", "commit": "5bf7a73fe851896d5ac26d313db849bf00f45b78" }
 }

@@ -29,6 +29,15 @@ require("lazy").setup({
 		},
 		{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 
+		{
+			"dstein64/vim-startuptime",
+			cmd = "StartupTime", -- lazy-load on a command
+			-- init since this is a plain old vim plugin
+			init = function()
+				vim.g.startuptime_tries = 10
+			end,
+		},
+
 		-- Highlighting and trimming of trailing whitespace
 		{
 			"ntpeters/vim-better-whitespace",
