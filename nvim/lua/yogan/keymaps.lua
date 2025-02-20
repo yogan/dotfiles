@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 local noremap_silent = { noremap = true, silent = true }
 
