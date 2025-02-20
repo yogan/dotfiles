@@ -36,6 +36,9 @@ require("lualine").setup({
 	extensions = { "trouble" },
 	options = {
 		disabled_filetypes = {
+			statusline = {
+				"snacks_dashboard",
+			},
 			winbar = {
 				"NvimTree",
 				"TelescopePrompt",
@@ -44,6 +47,7 @@ require("lualine").setup({
 				"WhichKey",
 				"packer",
 				"qf",
+				"snacks_dashboard",
 			},
 		},
 	},

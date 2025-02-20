@@ -39,7 +39,14 @@ require("snacks").setup({
 	dashboard = {
 		enabled = true,
 		sections = {
-			{ section = "header" },
+			{
+				section = "terminal",
+				cmd = "nvim-logo.sh",
+				ttl = 5, -- sec.; so that cache output (~/.cache/nvim/snacks) won't break animation
+				height = 9,
+				width = 69,
+				indent = -5,
+			},
 			{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
 			{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
 			{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
@@ -170,6 +177,7 @@ map("<C-p>", smart_picker, "Find files")
 -- Special things
 map("<F1>", sp.help, "Help Pages")
 map("<leader>,", sp.spelling, "Spelling")
+map_with_icon("<leader>D", "<Cmd>lua Snacks.dashboard()<CR>", "Dashboard", "󱥇")
 map_with_icon("<leader>E", sp.explorer, "Explorer", "")
 Snacks.toggle.zen():map("<leader>z")
 

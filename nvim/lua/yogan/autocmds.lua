@@ -18,17 +18,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
-vim.api.nvim_create_autocmd("TermOpen", {
-	group = group,
-	desc = "Setup defaults for new terminal windows",
-	callback = function()
-		vim.opt.number = false
-		vim.opt.relativenumber = false
-		vim.cmd("DisableWhitespace")
-		vim.cmd("startinsert")
-	end,
-})
-
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	group = group,
 	desc = "Enable spell checking for certain file types",
@@ -50,6 +39,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 local fully_ignore_fts = {
 	"noice",
 	"notify",
+	"snacks_dashboard",
 }
 
 local no_cursorline_fts = {
