@@ -1,20 +1,76 @@
 return {
 	-- Treesitter
-	-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
-	-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
 	{
 		"nvim-treesitter/nvim-treesitter",
+
+		-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
+		-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
 		build = ":TSUpdate",
+
 		-- see https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/treesitter.lua
 		init = function(plugin)
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
 		end,
+
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		event = { "VeryLazy" },
 
 		---@class TSConfig
 		opts = {
+			-- A list of parser names, or 'all'
+			ensure_installed = {
+				"c",
+				"javascript",
+				"lua",
+				"python",
+				"regex",
+				"rust",
+				"typescript",
+				"vim",
+				"vimdoc",
+			},
+
+			-- Install parsers synchronously (only applied to `ensure_installed`)
+			sync_install = false,
+
+			-- Automatically install missing parsers when entering buffer
+			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+			auto_install = true,
+
+			highlight = {
+				-- Enable by default, but disable for some file types (where default
+				-- highlighting looks better; e.g. gitcommit only has diff green/red
+				-- highlighting without treesitter)
+				enable = true,
+				disable = { "gitcommit", "markdown" },
+
+				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+				-- Using this option may slow down your editor, and you may see some duplicate highlights.
+				-- Instead of true it can also be a list of languages
+				additional_vim_regex_highlighting = false,
+			},
+
+			-- see https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#incremental-selection
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					-- Starting the selection with meta-v already starts with the
+					-- current node selected and does not have the bug that when
+					-- shrinking the selection it shrinks down to the last selection.
+					-- This only happens when we entered visual mode normally and then
+					-- use `L` and `H` to grow and shrink the selection, but it should
+					-- usually not be a problem.
+					-- HINT: there is also `S` from `flash` to directly select a
+					-- (arbitrary) node region around the cursor
+					init_selection = "<M-v>",
+					node_incremental = "L",
+					node_decremental = "H",
+					scope_incremental = false, -- disabled, not needed
+				},
+			},
+
 			textobjects = {
 				select = {
 					enable = true,
