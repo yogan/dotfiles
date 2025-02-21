@@ -27,6 +27,12 @@ vim.opt.listchars = {
 	precedes = "‹",
 }
 
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99 -- ufo provider needs a large value
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.opt.fillchars = [[eob:󱙝,fold: ,foldopen:,foldsep: ,foldclose:]]
+
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 

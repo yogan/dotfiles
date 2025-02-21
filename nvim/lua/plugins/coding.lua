@@ -11,7 +11,38 @@ return {
 		dependencies = {
 			"kevinhwang91/promise-async",
 			"luukvbaal/statuscol.nvim",
+			"folke/which-key.nvim",
 		},
+		config = function()
+			local ufo = require("ufo")
+			local wk = require("which-key")
+
+			local ftMap = {
+				yaml = "indent",
+				-- add empty entry when a ft shall have no folding
+			}
+
+			ufo.setup({
+				provider_selector = function(_, filetype)
+					return ftMap[filetype] -- default fallback is { "lsp", "indent" }
+				end,
+			})
+
+			local function map(l, r, desc)
+				wk.add({ { mode = "n", l, r, desc = desc, icon = "󱃅" } })
+			end
+
+			local function peek()
+				local winid = ufo.peekFoldedLinesUnderCursor()
+				if not winid then
+					vim.lsp.buf.hover()
+				end
+			end
+
+			map("zR", ufo.openAllFolds, "Open all folds")
+			map("zM", ufo.closeAllFolds, "Close all folds")
+			map("zK", peek, "Peek Fold")
+		end,
 	},
 
 	-- Commenting stuff
