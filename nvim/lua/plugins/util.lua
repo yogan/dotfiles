@@ -18,7 +18,14 @@ return {
 	-- Oil file explorer
 	{
 		"stevearc/oil.nvim",
-		config = true,
+		dependencies = "folke/which-key.nvim",
+		lazy = false,
+		config = function()
+			require("oil").setup()
+			require("which-key").add({
+				{ mode = "n", "-", ":Oil<CR>", desc = "Open Oil file explorer" },
+			})
+		end,
 	},
 
 	-- Analyze nvim startup time
@@ -33,7 +40,7 @@ return {
 	-- Close buffer helpers
 	{
 		"kazhala/close-buffers.nvim",
-		dependencies = { "folke/which-key.nvim" },
+		dependencies = "folke/which-key.nvim",
 		config = function()
 			local cb = require("close_buffers")
 			local wk = require("which-key")
