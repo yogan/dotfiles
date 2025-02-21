@@ -258,13 +258,9 @@ require("lazy").setup({
 		-- :UrlView packer shows URLs of all installed packer plugins
 		"axieax/urlview.nvim",
 
-		-- Animated cursor
-		"sphamba/smear-cursor.nvim",
-
 		-- Just for fun
 		"eandrju/cellular-automaton.nvim",
 
-		-- TODO: move single plugin specs out of here and to plugins/ dir
-		-- { import = "plugins" },
+		{ import = "plugins" },
 	},
 })
