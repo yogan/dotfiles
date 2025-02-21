@@ -71,6 +71,7 @@ return {
 				},
 			},
 
+			-- See: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 			textobjects = {
 				select = {
 					enable = true,
@@ -113,6 +114,15 @@ return {
 					goto_previous_end = {
 						["[M"] = { query = "@function.outer", desc = "Previous function end" },
 						["[C"] = { query = "@class.outer", desc = "Previous class end" },
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["<leader>a"] = "@parameter.inner",
+					},
+					swap_previous = {
+						["<leader>A"] = "@parameter.inner",
 					},
 				},
 				lsp_interop = {
