@@ -1,12 +1,19 @@
 return {
-	-- colorscheme with high prio so that it is loaded first
+	-- Color scheme with high prio so that it is loaded first
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
-	"nvim-lualine/lualine.nvim", -- status line / winbar
-	"shellRaining/hlchunk.nvim", -- indent guides
-	"HiPhish/rainbow-delimiters.nvim", -- rainbow parens
+	-- Fancy command line / search bar / messages
+	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 
-	-- animated cursor
+	-- Nerd font icons
+	{
+		"nvim-tree/nvim-web-devicons",
+		opts = { override_by_extension = {
+			["m"] = { icon = "󰻊", name = "MATLAB" },
+		} },
+	},
+
+	-- Animated cursor
 	{
 		"sphamba/smear-cursor.nvim",
 		opts = {
@@ -17,4 +24,35 @@ return {
 			smear_insert_mode = false,
 		},
 	},
+
+	-- Indent guides
+	{
+		"shellRaining/hlchunk.nvim",
+		opts = {
+			chunk = {
+				enable = true,
+				style = {
+					{ fg = "#435D95" }, -- normal chunk
+					{ fg = "#f38ba8" }, -- chunk with error(s)
+				},
+			},
+			indent = {
+				enable = true,
+				filter_list = {
+					function(v)
+						return v.level ~= 1
+					end,
+				},
+				style = {
+					{ fg = "#2a2b3c" }, -- taken from CursorLine bg
+				},
+			},
+		},
+	},
+
+	-- Rainbow parens
+	"HiPhish/rainbow-delimiters.nvim",
+
+	-- TODO move to own file with config
+	"nvim-lualine/lualine.nvim", -- status line / winbar
 }

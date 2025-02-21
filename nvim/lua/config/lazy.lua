@@ -18,13 +18,6 @@ require("lazy").setup({
 	install = { colorscheme = { "catppuccin-mocha" } },
 	checker = { enabled = true },
 	spec = {
-		-- Color scheme, status bar, icons, other UI stuff
-		{
-			"nvim-tree/nvim-web-devicons",
-			opts = { override_by_extension = { ["m"] = { icon = "󰻊", name = "MATLAB" } } },
-		},
-		{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
-
 		{
 			"dstein64/vim-startuptime",
 			cmd = "StartupTime", -- lazy-load on a command
