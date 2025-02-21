@@ -52,7 +52,4 @@ return {
 
 	-- Rainbow parens
 	"HiPhish/rainbow-delimiters.nvim",
-
-	-- TODO move to own file with config
-	"nvim-lualine/lualine.nvim", -- status line / winbar
 }
