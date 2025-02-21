@@ -178,6 +178,7 @@ return {
 		map("<C-b>", sp.buffers, "Buffers")
 		map("<C-f>", sp.grep, "Grep")
 		map("<C-g>", sp.grep_buffers, "Grep buffers")
+		map("<C-l>", search_lines, "Search Buffer Lines")
 		map("<C-p>", smart_picker, "Find files")
 
 		-- Special things
@@ -188,7 +189,6 @@ return {
 		Snacks.toggle.zen():map("<leader>z")
 
 		-- Fancy search stuff
-		map("<leader>/", search_lines, "Search Buffer Lines")
 		map("<leader>8", search_lines_cword, "Search Buffer Lines with Current Word")
 		map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
 
