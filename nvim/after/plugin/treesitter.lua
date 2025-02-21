@@ -21,8 +21,11 @@ require("nvim-treesitter.configs").setup({
 	auto_install = true,
 
 	highlight = {
-		-- `false` will disable the whole extension
+		-- Enable by default, but disable for some file types (where default
+		-- highlighting looks better; e.g. gitcommit only has diff green/red
+		-- highlighting without treesitter)
 		enable = true,
+		disable = { "gitcommit", "markdown" },
 
 		-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
