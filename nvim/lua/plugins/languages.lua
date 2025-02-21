@@ -13,11 +13,10 @@ return {
 	-- Elixir
 	{
 		"elixir-tools/elixir-tools.nvim",
-		tag = "stable",
+		version = "*",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("elixir").setup()
-		end,
+		event = { "BufReadPre", "BufNewFile" },
+		config = true,
 	},
 
 	-- MIPS Assembly Syntax Highlighting
