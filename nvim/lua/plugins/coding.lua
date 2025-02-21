@@ -1,6 +1,9 @@
 return {
 	-- Automatically set indentation settings
-	"nmac427/guess-indent.nvim",
+	{
+		"nmac427/guess-indent.nvim",
+		opts = { filetype_exclude = { "gitcommit", "markdown", "text" } },
+	},
 
 	-- Better folding
 	{
