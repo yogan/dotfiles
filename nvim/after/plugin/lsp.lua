@@ -14,20 +14,6 @@ require("mason-lspconfig").setup({
 
 lspconfig.lua_ls.setup({})
 
--- Hacky library stuff for lazydev (busted an luassert types are added as
--- requirements to lazydev, see lsp.lua)
-local packer_dir = vim.fn.stdpath("data") .. "/site/pack/packer/start"
-require("lazydev").setup({
-	library = {
-		-- Only load luvit types when the `vim.uv` word is found
-		-- from: https://github.com/folke/lazydev.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
-		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-		-- busted an luassert support when needed
-		{ path = packer_dir .. "/busted/library", words = { "describe" } },
-		{ path = packer_dir .. "/luassert/library", words = { "assert" } },
-	},
-})
-
 -- Extended TypeScript LSP functionality from VS Code
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
 require("lspconfig").vtsls.setup({})

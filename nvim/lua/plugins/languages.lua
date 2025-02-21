@@ -4,10 +4,22 @@ return {
 	"yioneko/nvim-vtsls",
 
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
-	-- (successor of neodev.nvim)
 	{
 		"folke/lazydev.nvim",
-		dependencies = { "LuaCATS/busted", "LuaCATS/luassert" },
+		dependencies = {
+			{ "LuaCATS/luassert", name = "luassert-types", lazy = true },
+			{ "LuaCATS/busted", name = "busted-types", lazy = true },
+		},
+		opts = {
+			library = {
+				-- Only load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				-- Same for busted and luassert support
+				{ path = "luassert-types/library", words = { "assert" } },
+				{ path = "busted-types/library", words = { "describe" } },
+			},
+		},
+		ft = "lua",
 	},
 
 	-- Elixir
