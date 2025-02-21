@@ -1,5 +1,11 @@
 return {
 	"folke/snacks.nvim",
+	dependencies = {
+		"folke/which-key.nvim",
+		"lewis6991/gitsigns.nvim",
+		"github/copilot.vim",
+		"ofseed/copilot-status.nvim",
+	},
 	opts = {
 		picker = {
 			enabled = true,

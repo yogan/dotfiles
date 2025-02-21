@@ -42,6 +42,11 @@ local file_symbols = {
 
 return {
 	"nvim-lualine/lualine.nvim",
+	dependencies = {
+		"jedrzejboczar/possession.nvim",
+		{ "ofseed/copilot-status.nvim", lazy = false },
+		"stevearc/conform.nvim",
+	},
 	opts = {
 		extensions = { "trouble" },
 		options = {
