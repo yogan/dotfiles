@@ -1,6 +1,28 @@
 return {
 	-- Color scheme with high prio so that it is loaded first
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		opts = {
+			custom_highlights = function(colors)
+				return {
+					ColorColumn = { bg = "#1a1a2a" },
+					Folded = { bg = colors.surface0 },
+					UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surface0 },
+				}
+			end,
+			dim_inactive = { enabled = true },
+			show_end_of_buffer = true,
+		},
+
+		config = function(_, opts)
+			require("catppuccin").setup(opts)
+
+			vim.api.nvim_set_hl(0, "ExtraWhitespace", { link = "DiagnosticVirtualTextError" })
+			vim.cmd("colorscheme catppuccin")
+		end,
+	},
 
 	-- Fancy command line / search bar / messages
 	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
