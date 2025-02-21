@@ -63,6 +63,7 @@ return {
 					"packer",
 					"qf",
 					"snacks_dashboard",
+					"oil",
 				},
 			},
 		},
