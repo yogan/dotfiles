@@ -19,10 +19,6 @@ require("lazy").setup({
 	checker = { enabled = true },
 	spec = {
 		-- Color scheme, status bar, icons, other UI stuff
-		{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-		"nvim-lualine/lualine.nvim",
-		"shellRaining/hlchunk.nvim",
-		"HiPhish/rainbow-delimiters.nvim",
 		{
 			"nvim-tree/nvim-web-devicons",
 			opts = { override_by_extension = { ["m"] = { icon = "󰻊", name = "MATLAB" } } },
