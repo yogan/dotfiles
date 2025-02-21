@@ -5,6 +5,9 @@ return {
 	-- Fancy command line / search bar / messages
 	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 
+	-- Git column, inline diffs, blaming, etc.
+	"lewis6991/gitsigns.nvim",
+
 	-- Nerd font icons
 	{
 		"nvim-tree/nvim-web-devicons",

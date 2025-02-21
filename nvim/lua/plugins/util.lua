@@ -59,6 +59,12 @@ return {
 		end,
 	},
 
+	-- Session management
+	{
+		"jedrzejboczar/possession.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+
 	-- Writable quickfix window
 	"stefandtw/quickfix-reflector.vim",
 
