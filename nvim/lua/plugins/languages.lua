@@ -1,8 +1,4 @@
 return {
-	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
-	-- :VtsExec <tab> / :VtsRename
-	"yioneko/nvim-vtsls",
-
 	-- NeoVim specific lua_ls settings (adds types and API docs for vim.* etc.)
 	{
 		"folke/lazydev.nvim",
@@ -22,26 +18,25 @@ return {
 		ft = "lua",
 	},
 
+	-- TypeScript extended LSP functionality (rename file, update imports, etc.)
+	-- :VtsExec <tab> / :VtsRename
+	{
+		"yioneko/nvim-vtsls",
+		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+	},
+
 	-- Elixir
 	{
 		"elixir-tools/elixir-tools.nvim",
 		version = "*",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		event = { "BufReadPre", "BufNewFile" },
 		config = true,
+		event = { "BufReadPre", "BufNewFile" },
+		ft = "elixir",
 	},
 
-	-- MIPS Assembly Syntax Highlighting
-	"harenome/vim-mipssyntax",
-
-	-- Web Assembly Syntax Highlighting
-	"rhysd/vim-wasm",
-
-	-- F# Syntax Highlighting
-	"adelarsq/neofsharp.vim",
-
 	-- Crystal
-	"vim-crystal/vim-crystal",
+	{ "vim-crystal/vim-crystal", ft = "crystal" },
 
 	-- Idris
 	-- Install idris2-lsp via pack as described here:
@@ -50,13 +45,9 @@ return {
 		"ShinKage/idris2-nvim",
 		dependencies = { "neovim/nvim-lspconfig", "MunifTanjim/nui.nvim" },
 		config = true,
-		ft = "idris2", -- lazy-load on file type
+		ft = "idris2",
 	},
 
-	-- GNU Octave (MATLAB)
-	-- This is only syntax highlighting, not a full LSP
-	-- (info pages for Octave functions can be shown with `K`, though)
-	-- There is https://github.com/mathworks/MATLAB-language-server, but this
-	-- requires a real MATLAB installation, not just GNU Octave.
-	"gnu-octave/vim-octave",
+	-- MIPS Assembly Syntax Highlighting
+	{ "harenome/vim-mipssyntax", ft = "mips" },
 }
