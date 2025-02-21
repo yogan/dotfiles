@@ -7,7 +7,7 @@ local function session_name()
 end
 
 local function auto_format()
-	-- see usage in conform.lua and toggle in snacks.lua
+	-- see usage in coding.lua and toggle in snacks.lua
 	---@diagnostic disable-next-line: undefined-field
 	if vim.b.disable_autoformat or vim.g.disable_autoformat then
 		return "󰉥"
