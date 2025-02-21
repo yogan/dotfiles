@@ -31,7 +31,33 @@ return {
 	},
 
 	-- Close buffer helpers
-	"kazhala/close-buffers.nvim",
+	{
+		"kazhala/close-buffers.nvim",
+		dependencies = { "folke/which-key.nvim" },
+		config = function()
+			local cb = require("close_buffers")
+			local wk = require("which-key")
+
+			local function map(l, r, desc)
+				wk.add({
+					{ mode = "n", l, r, desc = desc, icon = "󰓩" },
+					group = "Close Buffers",
+				})
+			end
+
+			map("<leader>bc", function()
+				cb.delete({ type = "this" })
+			end, "Close current buffer")
+
+			map("<leader>bh", function()
+				cb.delete({ type = "hidden" })
+			end, "Close hidden buffers")
+
+			map("<leader>bu", function()
+				cb.delete({ type = "nameless" })
+			end, "Close unnamed buffers")
+		end,
+	},
 
 	-- Writable quickfix window
 	"stefandtw/quickfix-reflector.vim",
