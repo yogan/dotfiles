@@ -1,0 +1,200 @@
+return {
+	-- Treesitter
+	-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
+	-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		-- see https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/treesitter.lua
+		init = function(plugin)
+			require("lazy.core.loader").add_to_rtp(plugin)
+			require("nvim-treesitter.query_predicates")
+		end,
+		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+		event = { "VeryLazy" },
+
+		---@class TSConfig
+		opts = {
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true, -- automatically jump forward to textobject
+					keymaps = {
+						-- All of those can be combine with v, c, d, etc., so e.g.
+						-- cia will change the current parameter (both type and name)
+						-- (vaa will include a neighboring comma)
+
+						["ac"] = { query = "@class.outer", desc = "Select outer class" },
+						["ic"] = { query = "@class.inner", desc = "Select inner class" },
+
+						["af"] = { query = "@function.outer", desc = "Select outer function" },
+						["if"] = { query = "@function.inner", desc = "Select inner function" },
+
+						["aa"] = { query = "@parameter.outer", desc = "Select outer argument" },
+						["ia"] = { query = "@parameter.inner", desc = "Select inner argument" },
+
+						["al"] = { query = "@loop.outer", desc = "Select outer loop" },
+						["il"] = { query = "@loop.inner", desc = "Select inner loop" },
+
+						["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]m"] = { query = "@function.outer", desc = "Next function start" },
+						["]c"] = { query = "@class.outer", desc = "Next class start" },
+					},
+					goto_next_end = {
+						["]M"] = { query = "@function.outer", desc = "Next function end" },
+						["]C"] = { query = "@class.outer", desc = "Next class end" },
+					},
+					goto_previous_start = {
+						["[m"] = { query = "@function.outer", desc = "Previous function start" },
+						["[c"] = { query = "@class.outer", desc = "Previous class start" },
+					},
+					goto_previous_end = {
+						["[M"] = { query = "@function.outer", desc = "Previous function end" },
+						["[C"] = { query = "@class.outer", desc = "Previous class end" },
+					},
+				},
+				lsp_interop = {
+					enable = true,
+					border = "none",
+					peek_definition_code = {
+						["<leader>e"] = "@function.outer",
+					},
+				},
+			},
+		},
+
+		---@param opts TSConfig
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = {
+			"folke/snacks.nvim",
+			"folke/which-key.nvim",
+			"lewis6991/gitsigns.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+
+		config = function()
+			local rep = require("nvim-treesitter.textobjects.repeatable_move")
+			local gs = require("gitsigns")
+			local sw = require("snacks.words")
+			local wk = require("which-key")
+			local modes = { "n", "x", "o" }
+
+			-- Repeat movement with ; and ,
+			-- ensure ; goes forward and , goes backward regardless of the last direction
+			wk.add({
+				{ mode = modes, ";", rep.repeat_last_move_next, desc = "Repeat last movement (forward)" },
+				{ mode = modes, ",", rep.repeat_last_move_previous, desc = "Repeat last movement (backward)" },
+			})
+
+			-- Make builtin f, F, t, T also repeatable with ; and ,
+			vim.keymap.set(modes, "f", rep.builtin_f_expr, { expr = true })
+			vim.keymap.set(modes, "F", rep.builtin_F_expr, { expr = true })
+			vim.keymap.set(modes, "t", rep.builtin_t_expr, { expr = true })
+			vim.keymap.set(modes, "T", rep.builtin_T_expr, { expr = true })
+
+			-- Make gitsigns.nvim movements repeatable with ; and , keys
+			local next_hunk = function()
+				gs.nav_hunk("next", { preview = false, target = "all" })
+			end
+			local prev_hunk = function()
+				gs.nav_hunk("prev", { preview = false, target = "all" })
+			end
+			local next_hunk_preview = function()
+				gs.nav_hunk("next", { preview = true, target = "all" })
+			end
+			local prev_hunk_preview = function()
+				gs.nav_hunk("prev", { preview = true, target = "all" })
+			end
+			local next_hunk_rep, prev_hunk_rep = rep.make_repeatable_move_pair(next_hunk, prev_hunk)
+			local next_hunk_preview_rep, prev_hunk_preview_rep =
+				rep.make_repeatable_move_pair(next_hunk_preview, prev_hunk_preview)
+			wk.add({
+				{ mode = modes, "]h", next_hunk_rep, icon = "", desc = "Next Git change hunk" },
+				{ mode = modes, "[h", prev_hunk_rep, icon = "", desc = "Previous Git change hunk" },
+				{ mode = modes, "]H", next_hunk_preview_rep, icon = "", desc = "Next Git change hunk (preview)" },
+				{
+					mode = modes,
+					"[H",
+					prev_hunk_preview_rep,
+					icon = "",
+					desc = "Previous Git change hunk (preview)",
+				},
+			})
+
+			-- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
+			local next_error = function()
+				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+			end
+			local prev_error = function()
+				vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+			end
+			-- FIXME: next/prev diag are not repeatable for some reason
+			local next_diag_rep, prev_diag_rep =
+				rep.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
+			local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
+			wk.add({
+				-- stylua: ignore start
+				{ mode = modes, "]d", next_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Next diagnostic" },
+				{ mode = modes, "[d", prev_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Previous diagnostic" },
+				{ mode = modes, "]e", next_error_rep, icon = "", desc = "Next error" },
+				{ mode = modes, "[e", prev_error_rep, icon = "", desc = "Previous error" },
+				-- stylua: ignore end
+			})
+
+			-- Make Snacks word LSP reference movements repeatable with ; and , keys
+			local function next_word()
+				sw.jump(vim.v.count1, true)
+			end
+			local function prev_word()
+				sw.jump(-vim.v.count1, true)
+			end
+			local next_word_rep, prev_word_rep = rep.make_repeatable_move_pair(next_word, prev_word)
+			wk.add({
+				{ mode = modes, "]w", next_word_rep, icon = "", desc = "Next word" },
+				{ mode = modes, "[w", prev_word_rep, icon = "", desc = "Previous word" },
+			})
+		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = {
+			"folke/which-key.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {
+			max_lines = 8,
+			multiline_threshold = 3,
+		},
+		config = function(_, opts)
+			local tc = require("treesitter-context")
+			local wk = require("which-key")
+
+			tc.setup(opts)
+
+			wk.add({
+				{
+					mode = "n",
+					"[a",
+					function()
+						tc.go_to_context(vim.v.count1)
+					end,
+					desc = "Go to outer context (at level <count>)",
+					icon = "",
+				},
+			})
+		end,
+	},
+}

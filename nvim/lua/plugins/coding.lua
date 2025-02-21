@@ -72,18 +72,4 @@ return {
 		"folke/trouble.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
 	},
-
-	-- Treesitter
-	-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
-	-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
-	},
-	"nvim-treesitter/playground",
-	"nvim-treesitter/nvim-treesitter-context",
-	"nvim-treesitter/nvim-treesitter-textobjects",
 }
