@@ -18,15 +18,6 @@ require("lazy").setup({
 	install = { colorscheme = { "catppuccin-mocha" } },
 	checker = { enabled = true },
 	spec = {
-		{
-			"dstein64/vim-startuptime",
-			cmd = "StartupTime", -- lazy-load on a command
-			-- init since this is a plain old vim plugin
-			init = function()
-				vim.g.startuptime_tries = 10
-			end,
-		},
-
 		-- Highlighting and trimming of trailing whitespace
 		{
 			"ntpeters/vim-better-whitespace",
@@ -39,17 +30,6 @@ require("lazy").setup({
 		-- Commenting stuff
 		"numToStr/Comment.nvim",
 		"JoosepAlviste/nvim-ts-context-commentstring", -- for jsx/tsx support
-
-		-- Oil File Explorer
-		{
-			"stevearc/oil.nvim",
-			config = function()
-				require("oil").setup()
-			end,
-		},
-
-		-- Close buffer helpers
-		"kazhala/close-buffers.nvim",
 
 		-- Git
 		"lewis6991/gitsigns.nvim",
@@ -110,28 +90,8 @@ require("lazy").setup({
 		-- Jump around like a boss (used to be EasyMotion and Leap)
 		"folke/flash.nvim",
 
-		-- Shows not only key mappings, but also registers, marks, etc.
-		{
-			"folke/which-key.nvim",
-			event = "VeryLazy",
-			opts = {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			},
-			keys = {
-				{
-					"<leader>?",
-					function()
-						require("which-key").show({ global = false })
-					end,
-					desc = "Buffer Local Keymaps (which-key)",
-				},
-			},
-		},
-
-		-- Undo tree
-		"mbbill/undotree",
+		-- (Auto) Formatter
+		"stevearc/conform.nvim",
 
 		-- LSP & Friends
 		{
@@ -176,10 +136,6 @@ require("lazy").setup({
 				require("inc_rename").setup({})
 			end,
 		},
-
-		-- (Auto) Formatter
-		"stevearc/conform.nvim",
-
 		-- Trouble: project wide diagnostics
 		{
 			"folke/trouble.nvim",
@@ -189,16 +145,6 @@ require("lazy").setup({
 		-- GitHub Copilot
 		"github/copilot.vim",
 		"ofseed/copilot-status.nvim",
-
-		-- Writable quickfix window
-		"stefandtw/quickfix-reflector.vim",
-
-		-- Find and display URLs (:UrlView)
-		-- :UrlView packer shows URLs of all installed packer plugins
-		"axieax/urlview.nvim",
-
-		-- Just for fun
-		"eandrju/cellular-automaton.nvim",
 
 		{ import = "plugins" },
 	},
