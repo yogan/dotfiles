@@ -91,10 +91,13 @@ local function setup_lspconfig()
 
 	-- fish LSP - needs to be build from source (easy), see:
 	-- https://github.com/ndonfris/fish-lsp?tab=readme-ov-file#installation
-	lspconfig.fish_lsp.setup({
-		-- copying just fish-lsp to e.g. /usr/local/bin doesn't work, so:
-		cmd = { os.getenv("HOME") .. "/src/fish-lsp/bin/fish-lsp", "start" },
-	})
+	local fish_lsp_bin = os.getenv("HOME") .. "/src/fish-lsp/bin/fish-lsp"
+	if vim.fn.filereadable(fish_lsp_bin) then
+		lspconfig.fish_lsp.setup({
+			-- copying just fish-lsp to e.g. /usr/local/bin doesn't work, so:
+			cmd = { os.getenv("HOME") .. "/src/fish-lsp/bin/fish-lsp", "start" },
+		})
+	end
 
 	-- Python: Pyright (Mason)
 	lspconfig.pyright.setup({})
