@@ -18,6 +18,11 @@ local function hide_cursor_in_dashboard()
 			---@diagnostic disable-next-line: param-type-mismatch
 			vim.api.nvim_set_hl(0, "Cursor", hl)
 			vim.cmd("set guicursor+=a:Cursor/lCursor")
+
+			-- Even more cleanliness (no fold column, no end of buffer chars)
+			-- No need to restore those in closed event, buffer local only.
+			vim.opt_local.foldcolumn = "0"
+			vim.opt_local.fillchars:append("eob: ")
 		end,
 	})
 
