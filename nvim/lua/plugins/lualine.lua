@@ -1,11 +1,3 @@
-local function session_name()
-	local session_ok, session = pcall(require, "possession.session")
-	if not session_ok or not session.get_session_name() then
-		return ""
-	end
-	return " " .. session.get_session_name()
-end
-
 local function auto_format()
 	-- see usage in coding.lua and toggle in snacks.lua
 	---@diagnostic disable-next-line: undefined-field
@@ -43,7 +35,6 @@ local file_symbols = {
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
-		"jedrzejboczar/possession.nvim",
 		{ "ofseed/copilot-status.nvim", lazy = false },
 		"stevearc/conform.nvim",
 	},
@@ -68,7 +59,7 @@ return {
 			},
 		},
 		sections = {
-			lualine_a = { session_name, macro },
+			lualine_a = { macro },
 			lualine_b = { "branch" },
 			lualine_c = {
 				{

@@ -68,8 +68,9 @@ return {
 
 	-- Session management
 	{
-		"jedrzejboczar/possession.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		"folke/persistence.nvim",
+		event = "BufReadPre", -- only start saving when a file was opened
+		config = true,
 	},
 
 	-- Writable quickfix window
