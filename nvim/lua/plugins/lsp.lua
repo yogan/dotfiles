@@ -190,40 +190,30 @@ return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
-		dependencies = {
-			{ "neovim/nvim-lspconfig", config = setup_lspconfig },
-
-			-- Mason to install and manage LSP servers
-			{
-				"williamboman/mason.nvim",
-				config = true,
-				dependencies = {
-					"williamboman/mason-lspconfig.nvim",
-					opts = { ensure_installed = { "lua_ls" } },
-				},
-			},
-
-			-- Completions
-			{
-				"hrsh7th/nvim-cmp",
-				dependencies = {
-					"hrsh7th/cmp-buffer",
-					"hrsh7th/cmp-path",
-					"hrsh7th/cmp-nvim-lsp",
-					"hrsh7th/cmp-nvim-lua",
-					"saadparwaiz1/cmp_luasnip",
-					"onsails/lspkind-nvim", -- icons in completion menu
-					-- Snippets
-					{ "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
-				},
-				config = setup_cmp,
-			},
-		},
 		config = function()
 			setup_lsp_zero()
 			setup_diagnostics()
 		end,
 	},
+
+	{ "neovim/nvim-lspconfig", config = setup_lspconfig },
+
+	-- Mason to install and manage LSP servers
+	{ "williamboman/mason.nvim", config = true },
+	{ "williamboman/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls" } } },
+
+	-- Completions
+	{ "hrsh7th/nvim-cmp", config = setup_cmp },
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-nvim-lua",
+	"saadparwaiz1/cmp_luasnip",
+	"onsails/lspkind-nvim", -- icons in completion menu
+
+	-- Snippets
+	"L3MON4D3/LuaSnip",
+	"rafamadriz/friendly-snippets",
 
 	-- LSP Fidget
 	{ "j-hui/fidget.nvim", config = true },
