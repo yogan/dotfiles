@@ -1,11 +1,24 @@
+local function has_session()
+	local p = require("persistence")
+	local cur = p.current()
+	for _, session in ipairs(p.list()) do
+		if session == cur then
+			return true
+		end
+	end
+	return false
+end
+
 return {
 	"folke/snacks.nvim",
 	dependencies = {
+		"folke/persistence.nvim",
 		"folke/which-key.nvim",
 		"lewis6991/gitsigns.nvim",
 		"github/copilot.vim",
 		"ofseed/copilot-status.nvim",
 	},
+	---@type snacks.plugins.Config
 	opts = {
 		picker = {
 			enabled = true,
@@ -45,6 +58,20 @@ return {
 		bigfile = { enabled = true },
 		dashboard = {
 			enabled = true,
+			preset = {
+				-- stylua: ignore start
+				keys = {
+					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "g", desc = "Grep", action = ":lua Snacks.dashboard.pick('live_grep')" },
+					{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+					{ icon = " ", key = "c", desc = "Configure NeoVim", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+					{ icon = " ", key = "s", desc = "Session Restore", enabled = has_session, section = "session" },
+					{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+				},
+				-- stylua: ignore end
+			},
 			sections = {
 				{
 					section = "terminal",
@@ -53,13 +80,12 @@ return {
 					--	              won't break animation
 					random = 420, -- for some reason this helps to avoid showing an
 					--               old logo for a short time before the new one
-					height = 9,
+					height = 12,
 					width = 69,
 					indent = -5,
 				},
-				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+				{ icon = " ", title = "Shortcuts", section = "keys", indent = 2, padding = 1 },
 				{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-				{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{ section = "startup" },
 			},
 		},
