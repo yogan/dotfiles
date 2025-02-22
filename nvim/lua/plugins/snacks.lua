@@ -250,7 +250,7 @@ return {
 		-- Special things
 		map("<F1>", sp.help, "Help Pages")
 		map("<leader>,", sp.spelling, "Spelling")
-		map_with_icon("<leader>D", "<Cmd>lua Snacks.dashboard()<CR>", "Dashboard", "󱥇")
+		map_with_icon("<leader>D", "<Cmd>lua Snacks.dashboard()<CR>", "Dashboard", "󱝁")
 		map_with_icon("<leader>E", sp.explorer, "Explorer", "")
 		Snacks.toggle.zen():map("<leader>z")
 
