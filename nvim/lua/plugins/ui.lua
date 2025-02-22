@@ -47,6 +47,9 @@ return {
 		},
 	},
 
+	-- Automatically clear search highlights after 5 seconds
+	{ "sahlte/timed-highlight.nvim", opts = { highlight_timeout_ms = 5000 } },
+
 	-- Indent guides
 	{
 		"shellRaining/hlchunk.nvim",
