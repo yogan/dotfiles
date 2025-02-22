@@ -27,6 +27,9 @@ return {
 	-- Fancy command line / search bar / messages
 	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 
+	-- Automatically clear search highlights after moving away from them
+	"romainl/vim-cool",
+
 	-- Nerd font icons
 	{
 		"nvim-tree/nvim-web-devicons",
@@ -45,13 +48,6 @@ return {
 			legacy_computing_symbols_support = false,
 			smear_insert_mode = false,
 		},
-	},
-
-	-- Automatically clear search highlights after 5 seconds
-	{
-		"sahlte/timed-highlight.nvim",
-		event = "BufRead",
-		opts = { highlight_timeout_ms = 5000 },
 	},
 
 	-- Indent guides
