@@ -79,8 +79,21 @@ return {
 	-- Undo tree
 	"mbbill/undotree",
 
-	-- Find and open URLs (:UrlView lazy for plugin websites)
-	"axieax/urlview.nvim",
+	-- Find and open URLs in browser
+	{
+		"axieax/urlview.nvim",
+		config = function()
+			require("urlview").setup({
+				default_action = "system",
+				sorted = false,
+			})
+
+			require("which-key").add({
+				{ mode = "n", "<leader>uu", "<Cmd>UrlView<CR>", desc = "View buffer URLs", icon = "" },
+				{ mode = "n", "<leader>up", "<Cmd>UrlView lazy<CR>", desc = "View lazy plugin URLs", icon = "󰒲" },
+			})
+		end,
+	},
 
 	-- Just for fun
 	"eandrju/cellular-automaton.nvim",
