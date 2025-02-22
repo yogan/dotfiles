@@ -85,6 +85,9 @@ return {
 			},
 		},
 		bigfile = { enabled = true },
+
+		-- See https://github.com/folke/snacks.nvim/discussions/111 for a lot of
+		-- cool dashboard setups.
 		dashboard = {
 			enabled = true,
 			preset = {
@@ -117,6 +120,7 @@ return {
 				{ section = "startup", padding = 2 },
 			},
 		},
+
 		words = { enabled = true },
 		zen = {
 			-- You can add any `Snacks.toggle` id here.
