@@ -9,6 +9,30 @@ local function has_session()
 	return false
 end
 
+local function hide_cursor_in_dashboard()
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "SnacksDashboardOpened",
+		callback = function()
+			local hl = vim.api.nvim_get_hl(0, { name = "Cursor", create = true })
+			hl.blend = 100
+			---@diagnostic disable-next-line: param-type-mismatch
+			vim.api.nvim_set_hl(0, "Cursor", hl)
+			vim.cmd("set guicursor+=a:Cursor/lCursor")
+		end,
+	})
+
+	vim.api.nvim_create_autocmd("User", {
+		pattern = "SnacksDashboardClosed",
+		callback = function()
+			local hl = vim.api.nvim_get_hl(0, { name = "Cursor", create = true })
+			hl.blend = 0
+			---@diagnostic disable-next-line: param-type-mismatch
+			vim.api.nvim_set_hl(0, "Cursor", hl)
+			vim.cmd("set guicursor+=a:Cursor/lCursor")
+		end,
+	})
+end
+
 return {
 	"folke/snacks.nvim",
 	dependencies = {
@@ -131,6 +155,8 @@ return {
 	},
 	config = function(_, opts)
 		require("snacks").setup(opts)
+
+		hide_cursor_in_dashboard()
 
 		local sp = require("snacks.picker")
 		local wk = require("which-key")
