@@ -112,11 +112,11 @@ return {
 					--	              won't break animation
 					random = 420, -- for some reason this helps to avoid showing an
 					--               old logo for a short time before the new one
-					height = 12,
+					height = 11,
 					width = 69,
 					indent = -5,
 				},
-				{ section = "keys", indent = 2, padding = 2, gap = 1 },
+				{ section = "keys",    indent = 2, padding = 2, gap = 1 },
 				{ section = "startup", padding = 2 },
 			},
 		},
