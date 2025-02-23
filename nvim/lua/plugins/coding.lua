@@ -311,7 +311,12 @@ return {
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
-		config = true,
+		opts = {
+			keymaps = {
+				visual = "gs", -- default is S, but this clashes with leap
+				visual_line = false, -- I don't see the point to surround full lines
+			},
+		},
 	},
 
 	-- Trouble: project wide diagnostics
