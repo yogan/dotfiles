@@ -169,7 +169,9 @@ end
 
 local function setup_diagnostics()
 	vim.diagnostic.config({
-		virtual_text = true, -- show inline errors at the end of lines
+		-- NOTE: keep in sync with toggle in `snacks.lua`
+		-- empty prefix (no block icon), and closer to the line of code
+		virtual_text = { prefix = "", spacing = 2 },
 		update_in_insert = false,
 		float = {
 			header = "",

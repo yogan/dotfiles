@@ -308,11 +308,17 @@ return {
 				id = "diag_virtual_text",
 				name = " Diagnostics Virtual Text",
 				get = function()
-					---@diagnostic disable-next-line: return-type-mismatch
-					return vim.diagnostic.config().virtual_text
+					return vim.diagnostic.config().virtual_text ~= false
 				end,
 				set = function(state)
-					vim.diagnostic.config({ virtual_text = state })
+					if state then
+						-- NOTE: keep in sync with default in `lsp.lua`
+						vim.diagnostic.config({
+							virtual_text = { prefix = "", spacing = 2 },
+						})
+					else
+						vim.diagnostic.config({ virtual_text = false })
+					end
 				end,
 			})
 			:map("<leader>tv")
