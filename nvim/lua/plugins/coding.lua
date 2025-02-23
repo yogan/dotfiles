@@ -320,7 +320,44 @@ return {
 	},
 
 	-- Trouble: project wide diagnostics
-	{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+	{
+		"folke/trouble.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		cmd = "Trouble",
+		opts = {},
+		keys = {
+			{
+				"<leader>xx",
+				"<Cmd>Trouble diagnostics toggle<CR>",
+				desc = "Diagnostics",
+			},
+			{
+				"<leader>xb",
+				"<Cmd>Trouble diagnostics toggle filter.buf=0<CR>",
+				desc = "Buffer Diagnostics",
+			},
+			{
+				"<leader>xs",
+				"<Cmd>Trouble symbols toggle focus=false<CR>",
+				desc = "Symbols",
+			},
+			{
+				"<leader>xr",
+				"<Cmd>Trouble lsp toggle focus=false win.position=right<CR>",
+				desc = "LSP References/Definitions/…",
+			},
+			{
+				"<leader>xl",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xq",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
 
 	-- GitHub Copilot
 	{
