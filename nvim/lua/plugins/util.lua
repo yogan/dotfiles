@@ -77,7 +77,15 @@ return {
 	"stefandtw/quickfix-reflector.vim",
 
 	-- Undo tree
-	"mbbill/undotree",
+	{
+		"mbbill/undotree",
+		event = "BufRead",
+		config = function()
+			require("which-key").add({
+				{ mode = "n", "<leader>U", vim.cmd.UndotreeToggle, desc = "Toggle undo tree", icon = "󰕍" },
+			})
+		end,
+	},
 
 	-- Find and open URLs in browser
 	{
