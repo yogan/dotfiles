@@ -43,9 +43,6 @@ return {
 	dependencies = {
 		"folke/persistence.nvim",
 		"folke/which-key.nvim",
-		"lewis6991/gitsigns.nvim",
-		"github/copilot.vim",
-		"ofseed/copilot-status.nvim",
 	},
 	---@type snacks.plugins.Config
 	opts = {
@@ -116,7 +113,7 @@ return {
 					width = 69,
 					indent = -5,
 				},
-				{ section = "keys",    indent = 2, padding = 2, gap = 1 },
+				{ section = "keys", indent = 2, padding = 2, gap = 1 },
 				{ section = "startup", padding = 2 },
 			},
 		},
