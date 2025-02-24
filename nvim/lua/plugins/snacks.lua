@@ -272,7 +272,6 @@ return {
 		map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
 
 		-- <leader>s namespace for various snacks pickers
-		map('<leader>s"', sp.registers, "Registers")
 		map("<leader>s/", sp.search_history, "Search History")
 		map("<leader>sa", sp.autocmds, "Autocmds")
 		map("<leader>sc", sp.command_history, "Command History")
@@ -284,16 +283,19 @@ return {
 		map("<leader>si", sp.icons, "Icons")
 		map("<leader>sj", sp.jumps, "Jumps")
 		map("<leader>sk", sp.keymaps, "Keymaps")
-		map("<leader>sl", sp.loclist, "Location List")
 		map("<leader>sM", sp.man, "Man Pages")
 		map("<leader>sm", sp.marks, "Marks")
 		map("<leader>so", sp.colorschemes, "Colorschemes")
+		map("<leader>sp", sp.pickers, "Pickers")
+		map("<leader>sQ", sp.loclist, "Location List")
 		map("<leader>sq", sp.qflist, "Quickfix List")
-		map("<leader>sR", sp.resume, "Resume")
+		map("<leader>sr", sp.recent, "Recent Files")
+		map("<leader>ss", sp.resume, "Resume Last Picker")
+		map("<leader>sT", comments_fixme, "FIXME Comments")
+		map("<leader>st", comments_todo, "TODO Comments")
 		map("<leader>su", sp.undo, "Undo History")
 		map("<leader>sv", vim_config_files, "Vim Config Files")
-		map("<leader>st", comments_todo, "TODO Comments")
-		map("<leader>sT", comments_fixme, "FIXME Comments")
+		map('<leader>s"', sp.registers, "Registers")
 
 		local function quick_lsp()
 			sp.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
@@ -307,8 +309,8 @@ return {
 		map("gr", sp.lsp_references, "References")
 		map("gi", sp.lsp_implementations, "Goto Implementations")
 		map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
-		map("<leader>ss", sp.lsp_symbols, "LSP Symbols")
-		map("<leader>sS", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
+		map("<leader>sl", sp.lsp_symbols, "LSP Symbols")
+		map("<leader>sL", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
 		map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
 
 		--- Toggles (using <leader>t namespace) ----------------------------------------
