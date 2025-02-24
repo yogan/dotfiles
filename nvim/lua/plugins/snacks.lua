@@ -64,41 +64,6 @@ return {
 	},
 	---@type snacks.plugins.Config
 	opts = {
-		picker = {
-			enabled = true,
-			win = {
-				input = {
-					bo = {
-						textwidth = 0,
-					},
-				},
-				preview = {
-					wo = {
-						number = false,
-						spell = false,
-						wrap = false,
-						statuscolumn = "",
-						foldcolumn = "0",
-					},
-				},
-			},
-		},
-		toggle = {
-			which_key = true,
-			notify = true,
-			icon = {
-				enabled = " ",
-				disabled = " ",
-			},
-			color = {
-				enabled = "yellow",
-				disabled = "red",
-			},
-			wk_desc = {
-				enabled = "",
-				disabled = "",
-			},
-		},
 		bigfile = { enabled = true },
 
 		-- See https://github.com/folke/snacks.nvim/discussions/111 for a lot of
@@ -134,7 +99,52 @@ return {
 			},
 		},
 
+		notifier = {
+			enabled = true,
+			level = vim.log.levels.INFO,
+			margin = { top = 1, right = 1, bottom = 1 },
+			top_down = false,
+		},
+
+		picker = {
+			enabled = true,
+			win = {
+				input = {
+					bo = {
+						textwidth = 0,
+					},
+				},
+				preview = {
+					wo = {
+						number = false,
+						spell = false,
+						wrap = false,
+						statuscolumn = "",
+						foldcolumn = "0",
+					},
+				},
+			},
+		},
+
+		toggle = {
+			which_key = true,
+			notify = true,
+			icon = {
+				enabled = " ",
+				disabled = " ",
+			},
+			color = {
+				enabled = "yellow",
+				disabled = "red",
+			},
+			wk_desc = {
+				enabled = "",
+				disabled = "",
+			},
+		},
+
 		words = { enabled = true },
+
 		zen = {
 			-- You can add any `Snacks.toggle` id here.
 			-- Toggle state is restored when the window is closed.
@@ -253,6 +263,10 @@ return {
 			search_lines(vim.fn.expand("<cword>"))
 		end
 
+		local function notifications()
+			require("snacks.notifier").show_history({ reverse = false })
+		end
+
 		-- Important pickers on control + key
 		map("<C-b>", sp.buffers, "Buffers")
 		map("<C-f>", sp.grep, "Grep")
@@ -285,6 +299,7 @@ return {
 		map("<leader>sk", sp.keymaps, "Keymaps")
 		map("<leader>sM", sp.man, "Man Pages")
 		map("<leader>sm", sp.marks, "Marks")
+		map("<leader>sn", notifications, "Notifications")
 		map("<leader>so", sp.colorschemes, "Colorschemes")
 		map("<leader>sp", sp.pickers, "Pickers")
 		map("<leader>sQ", sp.loclist, "Location List")
