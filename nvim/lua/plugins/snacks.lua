@@ -270,13 +270,13 @@ return {
 		-- Important pickers on control + key
 		map("<C-b>", sp.buffers, "Buffers")
 		map("<C-f>", sp.grep, "Grep")
-		map("<C-g>", sp.grep_buffers, "Grep buffers")
+		map("<C-g>", sp.grep_buffers, "Grep Buffers")
 		map("<C-l>", search_lines, "Search Buffer Lines")
-		map("<C-p>", smart_picker, "Find files")
+		map("<C-p>", smart_picker, "Find Files")
 
 		-- Special things
 		map("<F1>", sp.help, "Help Pages")
-		map("<leader>,", sp.spelling, "Spelling")
+		map("<leader>,", sp.spelling, "Spelling Corrections")
 		map_with_icon("<leader>D", "<Cmd>lua Snacks.dashboard()<CR>", "Dashboard", "󱝁")
 		map_with_icon("<leader>E", sp.explorer, "Explorer", "")
 		Snacks.toggle.zen():map("<leader>z")
@@ -330,11 +330,11 @@ return {
 
 		--- Toggles (using <leader>t namespace) ----------------------------------------
 
-		Snacks.toggle.option("spell", { name = "󰓆 Spell" }):map("<leader>ts")
-		Snacks.toggle.option("wrap", { name = "󰖶 Wrap" }):map("<leader>tw")
-		Snacks.toggle.option("list", { name = "󱁐 List" }):map("<leader>tl")
+		Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
+		Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
+		Snacks.toggle.option("list", { name = "󱁐 List (Visible Whitespace)" }):map("<leader>tl")
 		Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
-		Snacks.toggle.treesitter({ name = " Treesitter Highlight" }):map("<leader>tt")
+		Snacks.toggle.treesitter({ name = " Treesitter Highlighting" }):map("<leader>tt")
 
 		Snacks.toggle
 			.new({
