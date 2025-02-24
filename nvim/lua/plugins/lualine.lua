@@ -1,3 +1,17 @@
+local function trunc(hide_width, trunc_width, trunc_len, max_len)
+	return function(str)
+		local win_width = vim.fn.winwidth(0)
+		if hide_width and win_width < hide_width then
+			return ""
+		elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+			return str:sub(1, trunc_len) .. "…"
+		elseif max_len and #str > max_len then
+			return str:sub(1, max_len) .. "…"
+		end
+		return str
+	end
+end
+
 local function macro()
 	local reg = vim.fn.reg_recording()
 	if reg == "" then
@@ -11,10 +25,10 @@ end
 local function lsp_clients()
 	local current_buffer = vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.get_clients({ bufnr = current_buffer })
-	if not clients then
+	if not clients or #clients == 0 then
 		return ""
 	end
-	return " LSP " .. #clients
+	return "LSP " .. #clients
 end
 
 local file_symbols = {
@@ -48,7 +62,12 @@ return {
 		},
 		sections = {
 			lualine_a = { macro },
-			lualine_b = { "branch" },
+			lualine_b = {
+				{
+					"branch",
+					fmt = trunc(90, 124, 16, 40),
+				},
+			},
 			lualine_c = {
 				{
 					"filename",
@@ -57,14 +76,27 @@ return {
 				},
 			},
 			lualine_x = { "location", "selectioncount" },
-			lualine_y = { "filetype", lsp_clients },
+			lualine_y = {
+				{
+					"filetype",
+					colored = false,
+					icon_only = true,
+					separator = "",
+					padding = { left = 1, right = 0 },
+				},
+				{
+					lsp_clients,
+					separator = "",
+					padding = { left = 0, right = 1 },
+				},
+			},
 			lualine_z = {},
 		},
 		winbar = {
 			lualine_b = {
 				{
 					"filetype",
-					colored = false,
+					colored = true,
 					icon_only = true,
 					separator = "",
 					padding = { left = 1, right = 0 },
