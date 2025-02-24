@@ -20,11 +20,21 @@ local function macro()
 	return " REC " .. reg
 end
 
--- TODO a click handler that shows the names of the LSP clients in a floating
--- popup would be nice
 local function lsp_clients()
 	local current_buffer = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients({ bufnr = current_buffer })
+	return vim.lsp.get_clients({ bufr = current_buffer })
+end
+
+local function lsp_client_names()
+	local names = {}
+	for _, client in ipairs(lsp_clients()) do
+		table.insert(names, client.name)
+	end
+	return table.concat(names, ", ")
+end
+
+local function lsp_clients_number()
+	local clients = lsp_clients()
 	if not clients or #clients == 0 then
 		return ""
 	end
@@ -85,9 +95,20 @@ return {
 					padding = { left = 1, right = 0 },
 				},
 				{
-					lsp_clients,
+					lsp_clients_number,
 					separator = "",
 					padding = { left = 0, right = 1 },
+					on_click = function(_, button, _)
+						if button == "l" then
+							require("snacks.notify").info(lsp_client_names(), {
+								title = "LSP Clients",
+								style = "fancy",
+								id = "lsp_clients",
+							})
+						elseif button == "r" then
+							require("snacks.picker").lsp_config({ attached = true })
+						end
+					end,
 				},
 			},
 			lualine_z = {},
