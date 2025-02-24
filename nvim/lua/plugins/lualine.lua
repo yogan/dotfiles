@@ -76,6 +76,9 @@ return {
 				{
 					"branch",
 					fmt = trunc(90, 124, 16, 40),
+					on_click = function()
+						require("snacks.picker").git_branches()
+					end,
 				},
 			},
 			lualine_c = {
@@ -83,6 +86,9 @@ return {
 					"filename",
 					path = 1,
 					symbols = file_symbols,
+					on_click = function()
+						require("snacks.picker").files()
+					end,
 				},
 			},
 			lualine_x = { "location", "selectioncount" },
@@ -121,16 +127,36 @@ return {
 					icon_only = true,
 					separator = "",
 					padding = { left = 1, right = 0 },
+					on_click = function()
+						require("snacks.picker").buffers()
+					end,
 				},
 				{
 					"filename",
 					path = 0,
 					symbols = file_symbols,
 					padding = { left = 0, right = 1 },
+					on_click = function()
+						require("snacks.picker").buffers()
+					end,
 				},
 			},
-			lualine_x = { "diagnostics" },
-			lualine_y = { "diff" },
+			lualine_x = {
+				{
+					"diagnostics",
+					on_click = function()
+						require("snacks.picker").diagnostics_buffer()
+					end,
+				},
+			},
+			lualine_y = {
+				{
+					"diff",
+					on_click = function()
+						require("gitsigns.actions").diffthis()
+					end,
+				},
+			},
 		},
 		inactive_winbar = {
 			lualine_c = {
