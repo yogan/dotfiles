@@ -10,17 +10,39 @@ local function has_session()
 end
 
 local function hide_cursor_in_dashboard()
+	local function cursor_blend(value)
+		local hl = vim.api.nvim_get_hl(0, { name = "Cursor", create = true })
+		hl.blend = value
+
+		---@diagnostic disable-next-line: param-type-mismatch
+		vim.api.nvim_set_hl(0, "Cursor", hl)
+		vim.cmd("set guicursor+=a:Cursor/lCursor")
+	end
+
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "SnacksDashboardOpened",
 		callback = function()
-			local hl = vim.api.nvim_get_hl(0, { name = "Cursor", create = true })
-			hl.blend = 100
-			---@diagnostic disable-next-line: param-type-mismatch
-			vim.api.nvim_set_hl(0, "Cursor", hl)
-			vim.cmd("set guicursor+=a:Cursor/lCursor")
+			cursor_blend(100)
 
-			-- Even more cleanliness (no fold column, no end of buffer chars)
-			-- No need to restore those in closed event, buffer local only.
+			-- Two auto commands for the snacks dashboard buffer, so that the
+			-- cursor is shown again when a picker gets opened (and hidden again
+			-- when it gets closed).
+			vim.api.nvim_create_autocmd("WinEnter", {
+				buffer = vim.api.nvim_get_current_buf(),
+				callback = function()
+					cursor_blend(100)
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("WinLeave", {
+				buffer = vim.api.nvim_get_current_buf(),
+				callback = function()
+					cursor_blend(0)
+				end,
+			})
+
+			-- Even more cleanliness (no fold column, no end of buffer chars).
+			-- No need to restore those, buffer local only.
 			vim.opt_local.foldcolumn = "0"
 			vim.opt_local.fillchars:append("eob: ")
 		end,
@@ -29,11 +51,7 @@ local function hide_cursor_in_dashboard()
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "SnacksDashboardClosed",
 		callback = function()
-			local hl = vim.api.nvim_get_hl(0, { name = "Cursor", create = true })
-			hl.blend = 0
-			---@diagnostic disable-next-line: param-type-mismatch
-			vim.api.nvim_set_hl(0, "Cursor", hl)
-			vim.cmd("set guicursor+=a:Cursor/lCursor")
+			cursor_blend(0)
 		end,
 	})
 end
