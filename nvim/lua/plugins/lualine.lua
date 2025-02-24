@@ -1,28 +1,20 @@
-local function auto_format()
-	-- see usage in coding.lua and toggle in snacks.lua
-	---@diagnostic disable-next-line: undefined-field
-	if vim.b.disable_autoformat or vim.g.disable_autoformat then
-		return "󰉥"
-	end
-	return "󰊄"
-end
-
-local function indent_setting()
-	---@diagnostic disable-next-line: undefined-field
-	if vim.opt.expandtab:get() then
-		---@diagnostic disable-next-line: undefined-field
-		return vim.opt.shiftwidth:get() .. "␣"
-	else
-		return "↹"
-	end
-end
-
 local function macro()
 	local reg = vim.fn.reg_recording()
 	if reg == "" then
 		return ""
 	end
 	return " REC " .. reg
+end
+
+-- TODO a click handler that shows the names of the LSP clients in a floating
+-- popup would be nice
+local function lsp_clients()
+	local current_buffer = vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients({ bufnr = current_buffer })
+	if not clients then
+		return ""
+	end
+	return " LSP " .. #clients
 end
 
 local file_symbols = {
@@ -34,10 +26,6 @@ local file_symbols = {
 
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = {
-		{ "ofseed/copilot-status.nvim", lazy = false },
-		"stevearc/conform.nvim",
-	},
 	opts = {
 		extensions = { "trouble" },
 		options = {
@@ -69,18 +57,7 @@ return {
 				},
 			},
 			lualine_x = { "location", "selectioncount" },
-			lualine_y = {
-				indent_setting,
-				auto_format,
-				{
-					"copilot",
-					show_running = true,
-					symbols = {
-						spinners = require("copilot-status.spinners").dots,
-					},
-					padding = { left = 1, right = 0 },
-				},
-			},
+			lualine_y = { "filetype", lsp_clients },
 			lualine_z = {},
 		},
 		winbar = {
