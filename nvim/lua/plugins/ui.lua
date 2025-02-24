@@ -4,6 +4,7 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
+		---@type CatppuccinOptions
 		opts = {
 			custom_highlights = function(colors)
 				return {
@@ -14,6 +15,7 @@ return {
 			end,
 			dim_inactive = { enabled = true },
 			show_end_of_buffer = true,
+			transparent_background = false,
 		},
 
 		config = function(_, opts)
