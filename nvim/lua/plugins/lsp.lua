@@ -2,11 +2,35 @@
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	lspconfig.lua_ls.setup({})
+	-- Lua
+	lspconfig.lua_ls.setup({
+		settings = {
+			Lua = {
+				-- See https://github.com/LuaLS/lua-language-server/wiki/Settings#hint
+				hint = {
+					enable = true,
+					arrayIndex = "Disable",
+				},
+			},
+		},
+	})
 
 	-- Extended TypeScript LSP functionality from VS Code
+	local vtsInlayHints = {
+		parameterNames = { enabled = "literals" },
+		parameterTypes = { enabled = true },
+		variableTypes = { enabled = true },
+		propertyDeclarationTypes = { enabled = true },
+		functionLikeReturnTypes = { enabled = true },
+		enumMemberValues = { enabled = true },
+	}
 	require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-	require("lspconfig").vtsls.setup({})
+	require("lspconfig").vtsls.setup({
+		settings = {
+			javascript = { inlayHints = vtsInlayHints },
+			typescript = { inlayHints = vtsInlayHints },
+		},
+	})
 
 	-- JSON with JSON Schema support, see:
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
@@ -204,6 +228,20 @@ return {
 	-- Mason to install and manage LSP servers
 	{ "williamboman/mason.nvim", config = true },
 	{ "williamboman/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls" } } },
+
+	-- Inline hints
+	{
+		"chrisgrieser/nvim-lsp-endhints",
+		event = "LspAttach",
+		opts = { autoEnableHints = true },
+		config = function(_, opts)
+			require("lsp-endhints").setup(opts)
+
+			-- start with a defined state (otherwise snacks toggles are wrong)
+			vim.lsp.inlay_hint.enable(opts.autoEnableHints)
+			vim.g.snacks_toggle_lsp_hints_end = opts.autoEnableHints
+		end,
+	},
 
 	-- Completions
 	{ "hrsh7th/nvim-cmp", config = setup_cmp },

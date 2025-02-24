@@ -469,5 +469,30 @@ return {
 				end,
 			})
 			:map("<leader>tC")
+
+		Snacks.toggle
+			.new({
+				id = "inline_hints",
+				name = " LSP Inline Hints",
+				get = vim.lsp.inlay_hint.is_enabled,
+				set = function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+				end,
+			})
+			:map("<leader>ti")
+
+		Snacks.toggle
+			.new({
+				id = "inline_hints_end",
+				name = " LSP Inline Hints at Line End",
+				get = function()
+					return vim.g.snacks_toggle_lsp_hints_end
+				end,
+				set = function()
+					require("lsp-endhints").toggle()
+					vim.g.snacks_toggle_lsp_hints_end = not vim.g.snacks_toggle_lsp_hints_end
+				end,
+			})
+			:map("<leader>tI")
 	end,
 }
