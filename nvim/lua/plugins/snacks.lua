@@ -123,10 +123,8 @@ return {
 				{
 					section = "terminal",
 					cmd = "nvim-logo.sh",
-					ttl = 5, -- sec.; so that cached output (~/.cache/nvim/snacks)
-					--	              won't break animation
-					random = 420, -- for some reason this helps to avoid showing an
-					--               old logo for a short time before the new one
+					ttl = 0, -- disable cache (~/.cache/nvim/snacks), as it gets
+					--          very large pretty fast due to the animations
 					height = 11,
 					width = 69,
 					indent = -5,
