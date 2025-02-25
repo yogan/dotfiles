@@ -108,10 +108,15 @@ return {
 
 		picker = {
 			enabled = true,
+
 			win = {
 				input = {
-					bo = {
-						textwidth = 0,
+					bo = { textwidth = 0 },
+					keys = {
+						-- Make ^U work as usual in insert mode (clear line).
+						-- In normal mode, and when list or preview has focus,
+						-- ^U will still scroll up.
+						["<C-u>"] = { "<C-u>", mode = { "i" }, expr = true },
 					},
 				},
 				preview = {
