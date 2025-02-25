@@ -6,14 +6,28 @@ return {
 		priority = 1000,
 		---@type CatppuccinOptions
 		opts = {
+			color_overrides = {
+				-- for original colors, see palettes/mocha.lua in plugin
+				mocha = {
+					-- a bit darker and less blue than the default
+					base = "#1b1b27",
+					-- define a new color, somewhere between surface0 and base
+					surbase = "#212231",
+				},
+			},
+			---@param colors CtpColors<"string">|{surbase: string}
 			custom_highlights = function(colors)
 				return {
-					ColorColumn = { bg = "#1a1a2a" },
-					Folded = { bg = colors.surface0 },
-					UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surface0 },
+					ColorColumn = { bg = colors.mantle },
+					Folded = { bg = colors.surbase },
+					UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surbase },
 				}
 			end,
-			dim_inactive = { enabled = true },
+			dim_inactive = {
+				enabled = true,
+				percentage = 0.25,
+				shade = "light",
+			},
 			show_end_of_buffer = true,
 			transparent_background = false,
 		},
