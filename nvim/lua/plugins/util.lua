@@ -112,7 +112,7 @@ return {
 				default = {
 					augend.integer.alias.decimal,
 					augend.integer.alias.hex,
-					augend.date.alias["%Y/%m/%d"],
+					augend.date.alias["%Y-%m-%d"],
 					augend.hexcolor.new({ case = "lower" }),
 				},
 			})
