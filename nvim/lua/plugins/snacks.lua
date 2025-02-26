@@ -195,6 +195,7 @@ return {
 		hide_cursor_in_dashboard()
 
 		local sp = require("snacks.picker")
+		local sr = require("snacks.rename")
 		local wk = require("which-key")
 
 		local function map(l, r, desc, mode)
@@ -310,6 +311,7 @@ return {
 		map("<leader>sQ", sp.loclist, "Location List")
 		map("<leader>sq", sp.qflist, "Quickfix List")
 		map("<leader>sr", sp.recent, "Recent Files")
+		map("<leader>sR", sr.rename_file, "Rename File")
 		map("<leader>ss", sp.resume, "Resume Last Picker")
 		map("<leader>sT", comments_fixme, "FIXME Comments")
 		map("<leader>st", comments_todo, "TODO Comments")
