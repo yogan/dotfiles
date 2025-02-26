@@ -448,7 +448,7 @@ return {
 		Snacks.toggle
 			.new({
 				id = "copilot",
-				name = " Copilot",
+				name = " Copilot",
 				get = function()
 					return require("copilot-status").is_enabled()
 				end,

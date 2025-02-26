@@ -102,7 +102,6 @@ return {
 				},
 				{
 					lsp_clients_number,
-					separator = "",
 					padding = { left = 0, right = 1 },
 					on_click = function(_, button, _)
 						if button == "l" then
@@ -115,6 +114,14 @@ return {
 							require("snacks.picker").lsp_config({ attached = true })
 						end
 					end,
+				},
+				{
+					"copilot",
+					show_running = true,
+					symbols = {
+						spinners = require("copilot-status.spinners").arc,
+						status = { enabled = "", disabled = "" },
+					},
 				},
 			},
 			lualine_z = {},
