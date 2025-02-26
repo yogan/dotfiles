@@ -21,24 +21,57 @@ local function macro()
 end
 
 local function lsp_clients()
-	local current_buffer = vim.api.nvim_get_current_buf()
-	return vim.lsp.get_clients({ bufr = current_buffer })
-end
+	local buf = vim.api.nvim_get_current_buf()
+	local clients = vim.lsp.get_clients()
+	local attached = {}
+	local not_attached = {}
 
-local function lsp_client_names()
-	local names = {}
-	for _, client in ipairs(lsp_clients()) do
-		table.insert(names, client.name)
+	for _, client in ipairs(clients) do
+		if client.name ~= "GitHub Copilot" then
+			if client.attached_buffers[buf] then
+				table.insert(attached, client.name)
+			else
+				table.insert(not_attached, client.name)
+			end
+		end
 	end
-	return table.concat(names, ", ")
+
+	return { attached, not_attached }
 end
 
 local function lsp_clients_number()
-	local clients = lsp_clients()
-	if not clients or #clients == 0 then
+	local attached, not_attached = unpack(lsp_clients())
+
+	if #attached == 0 and #not_attached == 0 then
 		return ""
 	end
-	return "LSP " .. #clients
+
+	return "LSP " .. #attached .. "/" .. (#attached + #not_attached)
+end
+
+local function lsp_clients_notify()
+	local attached, not_attached = unpack(lsp_clients())
+
+	if #attached == 0 and #not_attached == 0 then
+		return "No LSP clients attached"
+	end
+
+	local text = ""
+	if #attached > 0 then
+		text = text .. "󰖩 " .. table.concat(attached, ", ")
+	end
+	if text ~= "" and #not_attached > 0 then
+		text = text .. "\n"
+	end
+	if #not_attached > 0 then
+		text = text .. "󰖪 " .. table.concat(not_attached, ", ")
+	end
+
+	require("snacks.notify").info(text, {
+		title = "LSP Clients",
+		style = "fancy",
+		id = "lsp_clients",
+	})
 end
 
 local file_symbols = {
@@ -105,11 +138,7 @@ return {
 					padding = { left = 0, right = 1 },
 					on_click = function(_, button, _)
 						if button == "l" then
-							require("snacks.notify").info(lsp_client_names(), {
-								title = "LSP Clients",
-								style = "fancy",
-								id = "lsp_clients",
-							})
+							lsp_clients_notify()
 						elseif button == "r" then
 							require("snacks.picker").lsp_config({ attached = true })
 						end
