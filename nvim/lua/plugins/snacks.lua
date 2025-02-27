@@ -220,31 +220,30 @@ return {
 		local function comments_todo()
 			---@diagnostic disable-next-line: undefined-field
 			sp.todo_comments({
+				-- concatenation hacks to avoid being detected here
 				keywords = {
-					"FIXME",
-					"FIXIT",
-					"BUG",
-					"BUGS",
-					"WARNING",
-					"WARNINGS",
-					"ATTENTION",
-					"TODO",
-					"TODOS",
-					"ISSUE",
-					"ISSUES",
-					"NOTE",
-					"NOTES",
-					"INFO",
-					"INFOS",
-					"HINT",
-					"HINTS",
+					"F" .. "IXME", "F" .. "IXIT",
+					"B" .. "UG", "B" .. "UGS",
+					"W" .. "ARNING", "W" .. "ARNINGS",
+					"A" .. "TTENTION",
+					"T" .. "ODO", "T" .. "ODOS",
+					"I" .. "SSUE", "I" .. "SSUES",
+					"N" .. "OTE", "N" .. "OTES",
+					"I" .. "NFO", "I" .. "NFOS",
+					"H" .. "INT", "H" .. "INTS",
 				},
 			})
 		end
 
 		local function comments_fixme()
 			---@diagnostic disable-next-line: undefined-field
-			sp.todo_comments({ keywords = { "FIXME", "FIXIT", "BUG", "BUGS" } })
+			sp.todo_comments({
+				-- concatenation hacks to avoid being detected here
+				keywords = {
+					"F" .. "IXME", "F" .. "IXIT",
+					"B" .. "UG", "B" .. "UGS"
+				}
+			})
 		end
 
 		local function vim_config_files()
@@ -313,8 +312,8 @@ return {
 		map("<leader>sr", sp.recent, "Recent Files")
 		map("<leader>sR", sr.rename_file, "Rename File")
 		map("<leader>ss", sp.resume, "Resume Last Picker")
-		map("<leader>sT", comments_fixme, "FIXME Comments")
-		map("<leader>st", comments_todo, "TODO Comments")
+		map("<leader>sT", comments_fixme, "F" .. "IXME Comments")
+		map("<leader>st", comments_todo, "T" .. "ODO Comments")
 		map("<leader>su", sp.undo, "Undo History")
 		map("<leader>sv", vim_config_files, "Vim Config Files")
 		map('<leader>s"', sp.registers, "Registers")

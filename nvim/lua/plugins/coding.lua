@@ -112,10 +112,11 @@ return {
 		dependencies = "nvim-lua/plenary.nvim",
 		opts = {
 			keywords = {
-				FIX = { icon = " ", color = "error", alt = { "FIXME", "FIXIT", "BUG", "BUGS" } },
-				WARN = { icon = " ", color = "warning", alt = { "WARNING", "WARNINGS", "ATTENTION" } },
-				TODO = { icon = " ", color = "info", alt = { "TODOS", "ISSUE", "ISSUES" } },
-				NOTE = { icon = "󰎞 ", color = "hint", alt = { "NOTES", "INFO", "INFOS", "HINT", "HINTS" } },
+				-- concatenation hacks to avoid being detected here
+				FIX = { icon = " ", color = "error", alt = { "F" .. "IXME", "F" .. "IXIT", "B" .. "UG", "B" .. "UGS" } },
+				WARN = { icon = " ", color = "warning", alt = { "W" .. "ARNING", "W" .. "ARNINGS", "A" .. "TTENTION" } },
+				["T" .. "ODO"] = { icon = " ", color = "info", alt = { "T" .. "ODOS", "I" .. "SSUE", "I" .. "SSUES" } },
+				["N" .. "OTE"] = { icon = "󰎞 ", color = "hint", alt = { "N" .. "OTES", "I" .. "NFO", "I" .. "NFOS", "H" .. "INT", "H" .. "INTS" } },
 			},
 			merge_keywords = false, -- use only keywords listed above, don't include defaults
 			highlight = {
