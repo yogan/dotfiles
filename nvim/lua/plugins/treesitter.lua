@@ -231,6 +231,20 @@ return {
 				{ mode = modes, "]w", next_word_rep, icon = "", desc = "Next word" },
 				{ mode = modes, "[w", prev_word_rep, icon = "", desc = "Previous word" },
 			})
+
+			-- Next/previous spelling error (repeatable)
+			local function next_spelling_error()
+				vim.cmd("normal! ]s")
+			end
+			local function prev_spelling_error()
+				vim.cmd("normal! [s")
+			end
+			local next_spelling_error_rep, prev_spelling_error_rep =
+				rep.make_repeatable_move_pair(next_spelling_error, prev_spelling_error)
+			wk.add({
+				{ mode = modes, "]s", next_spelling_error_rep, icon = "󰓆", desc = "Next spelling error" },
+				{ mode = modes, "[s", prev_spelling_error_rep, icon = "󰓆", desc = "Previous spelling error" },
+			})
 		end,
 	},
 
