@@ -23,8 +23,19 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+---@type LazyConfig
+local opts = {
 	install = { colorscheme = { "catppuccin-mocha" } },
 	checker = { enabled = true },
 	spec = { { import = "plugins" } },
-})
+
+	-- Allow switching to a local version of a plugin for development:
+	--   * clone plugin repo to `~/src/nvim-plugins/`
+	--   * add `dev = true` to plugin spec
+	dev = {
+		path = "~/src/nvim-plugins/",
+		fallback = true,
+	},
+}
+
+require("lazy").setup(opts)
