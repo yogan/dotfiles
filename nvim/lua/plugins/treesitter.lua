@@ -116,15 +116,6 @@ return {
 						["[C"] = { query = "@class.outer", desc = "Previous class end" },
 					},
 				},
-				swap = {
-					enable = true,
-					swap_next = {
-						["<leader>a"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
-					},
-				},
 				lsp_interop = {
 					enable = true,
 					border = "none",
@@ -141,6 +132,7 @@ return {
 		end,
 	},
 
+	-- AST based text objects
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = {
@@ -248,6 +240,7 @@ return {
 		end,
 	},
 
+	-- Keep context line at the top of the window
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = {
@@ -275,6 +268,39 @@ return {
 					icon = "",
 				},
 			})
+		end,
+	},
+
+	-- Navigate between and move around AST nodes
+	{
+		"aaronik/treewalker.nvim",
+
+		opts = {
+			-- Whether to briefly highlight the node after jumping to it
+			highlight = true,
+
+			-- How long should above highlight last (in ms)
+			highlight_duration = 250,
+
+			-- The color of the above highlight. Must be a valid vim highlight group.
+			-- (see :h highlight-group for options)
+			highlight_group = "CursorLine",
+		},
+
+		config = function(_, opts)
+			require("treewalker").setup(opts)
+
+			-- movement
+			vim.keymap.set({ "n", "v" }, "<M-k>", "<cmd>Treewalker Up<cr>", { silent = true })
+			vim.keymap.set({ "n", "v" }, "<M-j>", "<cmd>Treewalker Down<cr>", { silent = true })
+			vim.keymap.set({ "n", "v" }, "<M-h>", "<cmd>Treewalker Left<cr>", { silent = true })
+			vim.keymap.set({ "n", "v" }, "<M-l>", "<cmd>Treewalker Right<cr>", { silent = true })
+
+			-- swapping
+			vim.keymap.set("n", "<M-S-k>", "<cmd>Treewalker SwapUp<cr>", { silent = true })
+			vim.keymap.set("n", "<M-S-j>", "<cmd>Treewalker SwapDown<cr>", { silent = true })
+			vim.keymap.set("n", "<M-S-h>", "<cmd>Treewalker SwapLeft<cr>", { silent = true })
+			vim.keymap.set("n", "<M-S-l>", "<cmd>Treewalker SwapRight<cr>", { silent = true })
 		end,
 	},
 }
