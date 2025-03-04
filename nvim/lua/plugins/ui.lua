@@ -21,6 +21,7 @@ return {
 					ColorColumn = { bg = colors.mantle },
 					Folded = { bg = colors.surbase },
 					UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surbase },
+					Yank = { bg = "#649dbb" },
 				}
 			end,
 			dim_inactive = {
