@@ -7,10 +7,6 @@ local noremap_silent = { noremap = true, silent = true }
 vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", noremap_silent)
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", noremap_silent)
 
--- move selected lines up and down, with correct indentation (visual J/K)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 -- keep cursor in place when joining lines (J)
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
