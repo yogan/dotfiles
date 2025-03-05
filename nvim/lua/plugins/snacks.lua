@@ -131,6 +131,8 @@ return {
 			},
 		},
 
+		statuscolumn = { enabled = true },
+
 		toggle = {
 			which_key = true,
 			notify = true,
