@@ -222,15 +222,23 @@ return {
 			sp.todo_comments({
 				-- concatenation hacks to avoid being detected here
 				keywords = {
-					"F" .. "IXME", "F" .. "IXIT",
-					"B" .. "UG", "B" .. "UGS",
-					"W" .. "ARNING", "W" .. "ARNINGS",
+					"F" .. "IXME",
+					"F" .. "IXIT",
+					"B" .. "UG",
+					"B" .. "UGS",
+					"W" .. "ARNING",
+					"W" .. "ARNINGS",
 					"A" .. "TTENTION",
-					"T" .. "ODO", "T" .. "ODOS",
-					"I" .. "SSUE", "I" .. "SSUES",
-					"N" .. "OTE", "N" .. "OTES",
-					"I" .. "NFO", "I" .. "NFOS",
-					"H" .. "INT", "H" .. "INTS",
+					"T" .. "ODO",
+					"T" .. "ODOS",
+					"I" .. "SSUE",
+					"I" .. "SSUES",
+					"N" .. "OTE",
+					"N" .. "OTES",
+					"I" .. "NFO",
+					"I" .. "NFOS",
+					"H" .. "INT",
+					"H" .. "INTS",
 				},
 			})
 		end
@@ -240,9 +248,11 @@ return {
 			sp.todo_comments({
 				-- concatenation hacks to avoid being detected here
 				keywords = {
-					"F" .. "IXME", "F" .. "IXIT",
-					"B" .. "UG", "B" .. "UGS"
-				}
+					"F" .. "IXME",
+					"F" .. "IXIT",
+					"B" .. "UG",
+					"B" .. "UGS",
+				},
 			})
 		end
 
@@ -350,6 +360,7 @@ return {
 					return vim.diagnostic.config().virtual_text ~= false
 				end,
 				set = function(state)
+					require("tiny-inline-diagnostic").toggle()
 					if state then
 						-- NOTE: keep in sync with default in `lsp.lua`
 						vim.diagnostic.config({

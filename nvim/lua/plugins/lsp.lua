@@ -266,4 +266,17 @@ return {
 
 	-- Improved LSP renaming (live preview)
 	{ "smjonas/inc-rename.nvim", config = true },
+
+	-- Fancy diagnostic float windows for current line only
+	-- Can be toggled via snacks (<leader>tv) to "regular" virtual text.
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "LspAttach",
+		priority = 1000, -- needs to be loaded in first
+		opts = { preset = "powerline" },
+		config = function(_, opts)
+			require("tiny-inline-diagnostic").setup(opts)
+			vim.diagnostic.config({ virtual_text = false })
+		end,
+	},
 }
