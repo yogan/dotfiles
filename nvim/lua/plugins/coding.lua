@@ -86,10 +86,26 @@ return {
 		opts = {
 			keywords = {
 				-- concatenation hacks to avoid being detected here
-				FIX = { icon = " ", color = "error", alt = { "F" .. "IXME", "F" .. "IXIT", "B" .. "UG", "B" .. "UGS" } },
-				WARN = { icon = " ", color = "warning", alt = { "W" .. "ARNING", "W" .. "ARNINGS", "A" .. "TTENTION" } },
-				["T" .. "ODO"] = { icon = " ", color = "info", alt = { "T" .. "ODOS", "I" .. "SSUE", "I" .. "SSUES" } },
-				["N" .. "OTE"] = { icon = "󰎞 ", color = "hint", alt = { "N" .. "OTES", "I" .. "NFO", "I" .. "NFOS", "H" .. "INT", "H" .. "INTS" } },
+				FIX = {
+					icon = " ",
+					color = "error",
+					alt = { "F" .. "IXME", "F" .. "IXIT", "B" .. "UG", "B" .. "UGS" },
+				},
+				WARN = {
+					icon = " ",
+					color = "warning",
+					alt = { "W" .. "ARNING", "W" .. "ARNINGS", "A" .. "TTENTION" },
+				},
+				["T" .. "ODO"] = {
+					icon = " ",
+					color = "info",
+					alt = { "T" .. "ODOS", "I" .. "SSUE", "I" .. "SSUES" },
+				},
+				["N" .. "OTE"] = {
+					icon = "󰎞 ",
+					color = "hint",
+					alt = { "N" .. "OTES", "I" .. "NFO", "I" .. "NFOS", "H" .. "INT", "H" .. "INTS" },
+				},
 			},
 			merge_keywords = false, -- use only keywords listed above, don't include defaults
 			highlight = {
