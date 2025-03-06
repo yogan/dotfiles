@@ -117,6 +117,8 @@ return {
 						-- In normal mode, and when list or preview has focus,
 						-- ^U will still scroll up.
 						["<C-u>"] = { "<C-u>", mode = { "i" }, expr = true },
+						-- Add Alt+U as alternative to scroll up half a page.
+						["<M-u>"] = { "list_scroll_up", mode = { "i", "n" } },
 					},
 				},
 				preview = {
