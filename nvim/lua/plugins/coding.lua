@@ -419,4 +419,11 @@ return {
 			}
 		end,
 	},
+
+	-- Highlighting for Storybook files
+	{
+		"davidmh/mdx.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = true,
+	},
 }
