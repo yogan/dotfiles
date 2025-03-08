@@ -41,9 +41,8 @@ local function hide_cursor_in_dashboard()
 				end,
 			})
 
-			-- Even more cleanliness (no fold column, no end of buffer chars).
-			-- No need to restore those, buffer local only.
-			vim.opt_local.foldcolumn = "0"
+			-- Also remove end of buffer character.
+			-- No need to restore this, as it is buffer local only.
 			vim.opt_local.fillchars:append("eob: ")
 		end,
 	})
@@ -127,7 +126,6 @@ return {
 						spell = false,
 						wrap = false,
 						statuscolumn = "",
-						foldcolumn = "0",
 					},
 				},
 			},
@@ -165,7 +163,6 @@ return {
 				spell = false,
 				number = false,
 				relativenumber = false,
-				foldcolumn = false,
 				git_blame = false,
 				git_signs = false,
 				git_sign_column = false,
@@ -494,19 +491,6 @@ return {
 				end,
 			})
 			:map("<leader>td")
-
-		Snacks.toggle
-			.new({
-				id = "foldcolumn",
-				name = " Fold Column",
-				get = function()
-					return vim.o.foldcolumn ~= "0"
-				end,
-				set = function(state)
-					vim.o.foldcolumn = state and "1" or "0"
-				end,
-			})
-			:map("<leader>tC")
 
 		Snacks.toggle
 			.new({
