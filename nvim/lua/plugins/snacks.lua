@@ -131,6 +131,11 @@ return {
 			},
 		},
 
+		scratch = {
+			enabled = true,
+			ft = "markdown",
+		},
+
 		statuscolumn = { enabled = true },
 
 		toggle = {
@@ -349,7 +354,14 @@ return {
 		map("<leader>sL", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
 		map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
 
-		--- Toggles (using <leader>t namespace) ----------------------------------------
+		-- Scratch buffer ----------------------------------------------------------------
+
+		-- stylua: ignore start
+		map("<leader>.",  function() Snacks.scratch()        end, "Toggle Scratch Buffer")
+		map("<leader>sb", function() Snacks.scratch.select() end, "Select Scratch Buffer")
+		-- stylua: ignore start
+
+		--- Toggles (using <leader>t namespace) -----------------------------------------
 
 		Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
 		Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
