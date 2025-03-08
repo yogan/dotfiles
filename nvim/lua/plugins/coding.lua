@@ -28,15 +28,11 @@ return {
 				end,
 			})
 
-			local function map(l, r, desc)
-				wk.add({ { mode = "n", l, r, desc = desc, icon = "󱃅" } })
-			end
+			local function map(l, r, desc) wk.add({ { mode = "n", l, r, desc = desc, icon = "󱃅" } }) end
 
 			local function peek()
 				local winid = ufo.peekFoldedLinesUnderCursor()
-				if not winid then
-					vim.lsp.buf.hover()
-				end
+				if not winid then vim.lsp.buf.hover() end
 			end
 
 			map("zR", ufo.openAllFolds, "Open all folds")
@@ -167,15 +163,11 @@ return {
 			format_on_save = function(bufnr)
 				-- Disable autoformat on certain filetypes
 				local ignore_filetypes = { "sh", "bash" }
-				if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
-					return
-				end
+				if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then return end
 
 				-- Disable with a global or buffer-local variable
 				-- Toggles for those are in snacks.lua
-				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-					return
-				end
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
 
 				return { timeout_ms = 500, lsp_fallback = true }
 			end,
@@ -188,9 +180,7 @@ return {
 				{
 					mode = { "n", "v" },
 					"<leader>f",
-					function()
-						conform.format({ timeout_ms = 500, lsp_fallback = true })
-					end,
+					function() conform.format({ timeout_ms = 500, lsp_fallback = true }) end,
 					desc = "Format file or range (in visual mode)",
 					icon = "󰊄",
 				},
@@ -252,14 +242,6 @@ return {
 
 					local gs = package.loaded.gitsigns
 
-					local function diff_file_staged()
-						gs.diffthis("~")
-					end
-
-					local function blame_popup()
-						gs.blame_line({ full = true })
-					end
-
 					-- Actions
 					map({ "n", "v" }, "<leader>ga", gs.stage_hunk, "Stage hunk")
 					map({ "n", "v" }, "<leader>gr", gs.reset_hunk, "Reset hunk")
@@ -268,8 +250,8 @@ return {
 					map("n", "<leader>gR", gs.reset_buffer, "Reset file")
 					map("n", "<leader>gg", gs.preview_hunk, "Diff hunk")
 					map("n", "<leader>gd", gs.diffthis, "Diff file")
-					map("n", "<leader>gD", diff_file_staged, "Diff file (staged)")
-					map("n", "<leader>gb", blame_popup, "Blame popup")
+					map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff file (staged)")
+					map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame popup")
 
 					-- Text object (e.g. vig -> select current hunk)
 					map({ "o", "x" }, "ig", ":<C-U>Gitsigns select_hunk<CR>", "Select hunk")
@@ -419,12 +401,5 @@ return {
 				["zig"] = true,
 			}
 		end,
-	},
-
-	-- Highlighting for Storybook files
-	{
-		"davidmh/mdx.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = true,
 	},
 }

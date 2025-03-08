@@ -127,9 +127,7 @@ return {
 		},
 
 		---@param opts TSConfig
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
+		config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
 	},
 
 	-- AST based text objects
@@ -163,18 +161,10 @@ return {
 			vim.keymap.set(modes, "T", rep.builtin_T_expr, { expr = true })
 
 			-- Make gitsigns.nvim movements repeatable with ; and , keys
-			local next_hunk = function()
-				gs.nav_hunk("next", { preview = false, target = "all" })
-			end
-			local prev_hunk = function()
-				gs.nav_hunk("prev", { preview = false, target = "all" })
-			end
-			local next_hunk_preview = function()
-				gs.nav_hunk("next", { preview = true, target = "all" })
-			end
-			local prev_hunk_preview = function()
-				gs.nav_hunk("prev", { preview = true, target = "all" })
-			end
+			local next_hunk = function() gs.nav_hunk("next", { preview = false, target = "all" }) end
+			local prev_hunk = function() gs.nav_hunk("prev", { preview = false, target = "all" }) end
+			local next_hunk_preview = function() gs.nav_hunk("next", { preview = true, target = "all" }) end
+			local prev_hunk_preview = function() gs.nav_hunk("prev", { preview = true, target = "all" }) end
 			local next_hunk_rep, prev_hunk_rep = rep.make_repeatable_move_pair(next_hunk, prev_hunk)
 			local next_hunk_preview_rep, prev_hunk_preview_rep =
 				rep.make_repeatable_move_pair(next_hunk_preview, prev_hunk_preview)
@@ -192,12 +182,8 @@ return {
 			})
 
 			-- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
-			local next_diag = function()
-				vim.diagnostic.goto_next({ float = false })
-			end
-			local prev_diag = function()
-				vim.diagnostic.goto_prev({ float = false })
-			end
+			local next_diag = function() vim.diagnostic.goto_next({ float = false }) end
+			local prev_diag = function() vim.diagnostic.goto_prev({ float = false }) end
 			local next_error = function()
 				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, float = false })
 			end
@@ -217,12 +203,8 @@ return {
 			})
 
 			-- Make Snacks word LSP reference movements repeatable with ; and , keys
-			local function next_word()
-				sw.jump(vim.v.count1, true)
-			end
-			local function prev_word()
-				sw.jump(-vim.v.count1, true)
-			end
+			local function next_word() sw.jump(vim.v.count1, true) end
+			local function prev_word() sw.jump(-vim.v.count1, true) end
 			local next_word_rep, prev_word_rep = rep.make_repeatable_move_pair(next_word, prev_word)
 			wk.add({
 				{ mode = modes, "]w", next_word_rep, icon = "", desc = "Next word" },
@@ -230,12 +212,8 @@ return {
 			})
 
 			-- Next/previous spelling error (repeatable)
-			local function next_spelling_error()
-				vim.cmd("normal! ]s")
-			end
-			local function prev_spelling_error()
-				vim.cmd("normal! [s")
-			end
+			local function next_spelling_error() vim.cmd("normal! ]s") end
+			local function prev_spelling_error() vim.cmd("normal! [s") end
 			local next_spelling_error_rep, prev_spelling_error_rep =
 				rep.make_repeatable_move_pair(next_spelling_error, prev_spelling_error)
 			wk.add({
@@ -266,9 +244,7 @@ return {
 				{
 					mode = "n",
 					"[a",
-					function()
-						tc.go_to_context(vim.v.count1)
-					end,
+					function() tc.go_to_context(vim.v.count1) end,
 					desc = "Go to outer context (at level <count>)",
 					icon = "",
 				},

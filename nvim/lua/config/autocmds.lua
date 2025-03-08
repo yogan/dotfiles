@@ -17,9 +17,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = group,
 	pattern = "mdx",
-	callback = function(args)
-		vim.treesitter.start(args.buf, "markdown")
-	end,
+	callback = function(args) vim.treesitter.start(args.buf, "markdown") end,
 })
 
 vim.api.nvim_create_autocmd("VimResized", {

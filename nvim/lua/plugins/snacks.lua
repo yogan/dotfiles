@@ -2,9 +2,7 @@ local function has_session()
 	local p = require("persistence")
 	local cur = p.current()
 	for _, session in ipairs(p.list()) do
-		if session == cur then
-			return true
-		end
+		if session == cur then return true end
 	end
 	return false
 end
@@ -29,16 +27,12 @@ local function hide_cursor_in_dashboard()
 			-- when it gets closed).
 			vim.api.nvim_create_autocmd("WinEnter", {
 				buffer = vim.api.nvim_get_current_buf(),
-				callback = function()
-					cursor_blend(100)
-				end,
+				callback = function() cursor_blend(100) end,
 			})
 
 			vim.api.nvim_create_autocmd("WinLeave", {
 				buffer = vim.api.nvim_get_current_buf(),
-				callback = function()
-					cursor_blend(0)
-				end,
+				callback = function() cursor_blend(0) end,
 			})
 
 			-- Also remove end of buffer character.
@@ -49,9 +43,7 @@ local function hide_cursor_in_dashboard()
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "SnacksDashboardClosed",
-		callback = function()
-			cursor_blend(0)
-		end,
+		callback = function() cursor_blend(0) end,
 	})
 end
 
@@ -219,14 +211,6 @@ return {
 			})
 		end
 
-		local function grep_hidden()
-			sp.grep({ hidden = true })
-		end
-
-		local function smart_picker()
-			sp.smart({ hidden = true })
-		end
-
 		-- NOTE: keep in sync with definitions in todo-comments.lua
 		local function comments_todo()
 			---@diagnostic disable-next-line: undefined-field
@@ -285,20 +269,12 @@ return {
 			})
 		end
 
-		local function search_lines_cword()
-			search_lines(vim.fn.expand("<cword>"))
-		end
-
-		local function notifications()
-			require("snacks.notifier").show_history({ reverse = false })
-		end
-
 		-- Important pickers on control + key
 		map("<C-b>", sp.buffers, "Buffers")
-		map("<C-f>", grep_hidden, "Grep")
+		map("<C-f>", function() sp.grep({ hidden = true }) end, "Grep")
 		map("<C-g>", sp.grep_buffers, "Grep Buffers")
 		map("<C-l>", search_lines, "Search Buffer Lines")
-		map("<C-p>", smart_picker, "Find Files")
+		map("<C-p>", function() sp.smart({ hidden = true }) end, "Find Files")
 
 		-- Special things
 		map("<F1>", sp.help, "Help Pages")
@@ -308,7 +284,7 @@ return {
 		Snacks.toggle.zen():map("<leader>z")
 
 		-- Fancy search stuff
-		map("<leader>8", search_lines_cword, "Search Buffer Lines with Current Word")
+		map("<leader>8", function() search_lines(vim.fn.expand("<cword>")) end, "Search Buffer Lines with Current Word")
 		map("<leader>*", sp.grep_word, "Live grep (word or selection)", { "n", "x" })
 
 		-- <leader>s namespace for various snacks pickers
@@ -325,7 +301,7 @@ return {
 		map("<leader>sk", sp.keymaps, "Keymaps")
 		map("<leader>sM", sp.man, "Man Pages")
 		map("<leader>sm", sp.marks, "Marks")
-		map("<leader>sn", notifications, "Notifications")
+		map("<leader>sn", function() require("snacks.notifier").show_history({ reverse = false }) end, "Notifications")
 		map("<leader>so", sp.colorschemes, "Colorschemes")
 		map("<leader>sp", sp.pickers, "Pickers")
 		map("<leader>sQ", sp.loclist, "Location List")
@@ -339,10 +315,6 @@ return {
 		map("<leader>sv", vim_config_files, "Vim Config Files")
 		map('<leader>s"', sp.registers, "Registers")
 
-		local function quick_lsp()
-			sp.lsp_symbols({ layout = { preset = "vscode", preview = "main" } })
-		end
-
 		-- LSP
 		-- Remember to keep this in sync with the `omit` list of
 		-- `lsp_zero.default_keymaps` in `lsp.lua`.
@@ -353,14 +325,16 @@ return {
 		map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
 		map("<leader>sl", sp.lsp_symbols, "LSP Symbols")
 		map("<leader>sL", sp.lsp_workspace_symbols, "LSP Workspace Symbols")
-		map("<leader><leader>", quick_lsp, "Quick LSP Symbols")
+		map(
+			"<leader><leader>",
+			function() sp.lsp_symbols({ layout = { preset = "vscode", preview = "main" } }) end,
+			"Quick LSP Symbols"
+		)
 
 		-- Scratch buffer ----------------------------------------------------------------
 
-		-- stylua: ignore start
-		map("<leader>.",  function() Snacks.scratch()        end, "Toggle Scratch Buffer")
+		map("<leader>.", function() Snacks.scratch() end, "Toggle Scratch Buffer")
 		map("<leader>sb", function() Snacks.scratch.select() end, "Select Scratch Buffer")
-		-- stylua: ignore start
 
 		--- Toggles (using <leader>t namespace) -----------------------------------------
 
@@ -374,9 +348,7 @@ return {
 			.new({
 				id = "diag_virtual_text",
 				name = " Diagnostics Virtual Text",
-				get = function()
-					return vim.diagnostic.config().virtual_text ~= false
-				end,
+				get = function() return vim.diagnostic.config().virtual_text ~= false end,
 				set = function(state)
 					require("tiny-inline-diagnostic").toggle()
 					if state then
@@ -395,12 +367,8 @@ return {
 			.new({
 				id = "git_blame",
 				name = " Git Blame",
-				get = function()
-					return require("gitsigns.config").config.current_line_blame
-				end,
-				set = function(state)
-					require("gitsigns").toggle_current_line_blame(state)
-				end,
+				get = function() return require("gitsigns.config").config.current_line_blame end,
+				set = function(state) require("gitsigns").toggle_current_line_blame(state) end,
 			})
 			:map("<leader>tb")
 
@@ -408,12 +376,8 @@ return {
 			.new({
 				id = "git_sign_column",
 				name = " Git Sign Column",
-				get = function()
-					return require("gitsigns.config").config.signcolumn
-				end,
-				set = function(state)
-					require("gitsigns").toggle_signs(state)
-				end,
+				get = function() return require("gitsigns.config").config.signcolumn end,
+				set = function(state) require("gitsigns").toggle_signs(state) end,
 			})
 			:map("<leader>tg")
 
@@ -421,13 +385,9 @@ return {
 			.new({
 				id = "number",
 				name = " Line Numbers",
-				get = function()
-					return vim.wo.number
-				end,
+				get = function() return vim.wo.number end,
 				set = function(state)
-					if state then
-						vim.wo.relativenumber = false
-					end
+					if state then vim.wo.relativenumber = false end
 					vim.wo.number = state
 				end,
 			})
@@ -437,13 +397,9 @@ return {
 			.new({
 				id = "relativenumber",
 				name = " Relative Line Numbers",
-				get = function()
-					return vim.wo.relativenumber
-				end,
+				get = function() return vim.wo.relativenumber end,
 				set = function(state)
-					if state then
-						vim.wo.number = false
-					end
+					if state then vim.wo.number = false end
 					vim.wo.relativenumber = state
 				end,
 			})
@@ -453,12 +409,8 @@ return {
 			.new({
 				id = "format_on_save",
 				name = "󰊄 Format on Save (global)",
-				get = function()
-					return not vim.g.disable_autoformat
-				end,
-				set = function(state)
-					vim.g.disable_autoformat = not state
-				end,
+				get = function() return not vim.g.disable_autoformat end,
+				set = function(state) vim.g.disable_autoformat = not state end,
 			})
 			:map("<leader>tf")
 
@@ -466,12 +418,8 @@ return {
 			.new({
 				id = "format_on_save_buffer",
 				name = "󰊄 Format on Save (buffer)",
-				get = function()
-					return not vim.b.disable_autoformat
-				end,
-				set = function(state)
-					vim.b.disable_autoformat = not state
-				end,
+				get = function() return not vim.b.disable_autoformat end,
+				set = function(state) vim.b.disable_autoformat = not state end,
 			})
 			:map("<leader>tF")
 
@@ -479,9 +427,7 @@ return {
 			.new({
 				id = "copilot",
 				name = " Copilot",
-				get = function()
-					return require("copilot-status").is_enabled()
-				end,
+				get = function() return require("copilot-status").is_enabled() end,
 				set = function(state)
 					if state then
 						vim.cmd("Copilot enable")
@@ -496,9 +442,7 @@ return {
 			.new({
 				id = "dim",
 				name = "󰱊 Dimming",
-				get = function()
-					return Snacks.dim.enabled
-				end,
+				get = function() return Snacks.dim.enabled end,
 				set = function(state)
 					if state then
 						Snacks.dim.enable()
@@ -514,9 +458,7 @@ return {
 				id = "inline_hints",
 				name = " LSP Inline Hints",
 				get = vim.lsp.inlay_hint.is_enabled,
-				set = function()
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-				end,
+				set = function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
 			})
 			:map("<leader>ti")
 
@@ -524,9 +466,7 @@ return {
 			.new({
 				id = "inline_hints_end",
 				name = " LSP Inline Hints at Line End",
-				get = function()
-					return vim.g.snacks_toggle_lsp_hints_end
-				end,
+				get = function() return vim.g.snacks_toggle_lsp_hints_end end,
 				set = function()
 					require("lsp-endhints").toggle()
 					vim.g.snacks_toggle_lsp_hints_end = not vim.g.snacks_toggle_lsp_hints_end

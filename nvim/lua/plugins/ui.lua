@@ -102,9 +102,7 @@ return {
 			indent = {
 				enable = true,
 				filter_list = {
-					function(v)
-						return v.level ~= 1
-					end,
+					function(v) return v.level ~= 1 end,
 				},
 				style = {
 					{ fg = "#2a2b3c" }, -- taken from CursorLine bg

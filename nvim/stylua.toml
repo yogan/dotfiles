@@ -4,7 +4,7 @@ indent_type                 = "Tabs"
 indent_width                = 4
 quote_style                 = "AutoPreferDouble"
 call_parentheses            = "Always"
-collapse_simple_statement   = "Never"
+collapse_simple_statement   = "FunctionOnly"
 space_after_function_names  = "Never"
 
 [sort_requires]
