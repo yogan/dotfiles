@@ -213,6 +213,10 @@ return {
 			})
 		end
 
+		local function grep_hidden()
+			sp.grep({ hidden = true })
+		end
+
 		local function smart_picker()
 			sp.smart({ hidden = true })
 		end
@@ -285,7 +289,7 @@ return {
 
 		-- Important pickers on control + key
 		map("<C-b>", sp.buffers, "Buffers")
-		map("<C-f>", sp.grep, "Grep")
+		map("<C-f>", grep_hidden, "Grep")
 		map("<C-g>", sp.grep_buffers, "Grep Buffers")
 		map("<C-l>", search_lines, "Search Buffer Lines")
 		map("<C-p>", smart_picker, "Find Files")
