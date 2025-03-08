@@ -57,6 +57,7 @@ end
 
 return {
 	"folke/snacks.nvim",
+	dev = true,
 	dependencies = {
 		"folke/persistence.nvim",
 		"folke/which-key.nvim",
