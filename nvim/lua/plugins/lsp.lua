@@ -179,10 +179,16 @@ local function setup_lsp_zero()
 			buffer = bufnr,
 			preserve_mappings = false,
 			-- Skipping some default mappings, using Snacks instead (see snacks.lua)
-			omit = { "gd", "gD", "gr", "gi", "gy", "<F2>" },
+			omit = { "gd", "gD", "gr", "gi", "gy", "<F2>", "<F3>" },
 		})
 
 		vim.keymap.set("n", "<F2>", ":IncRename ", { buffer = bufnr })
+		vim.keymap.set(
+			"n",
+			"<F3>",
+			function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+			{ buffer = bufnr, expr = true }
+		)
 
 		local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
 		vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)

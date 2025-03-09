@@ -46,9 +46,9 @@ return {
 
 		map({ "n", "x", "o" }, "s", function() flash.jump() end, "Flash")
 		map({ "n", "x", "o" }, "S", function() flash.treesitter() end, "Flash Treesitter Select")
-		map({ "n", "x", "o" }, "<leader>S", function() flash.jump({ continue = true }) end, "Flash Continue")
-		map({ "n", "v" }, "<leader>l", jump_to_line, "Flash Line")
-		map({ "n", "v" }, "<leader>w", current_word, "Flash Current Word")
+		map({ "n", "x", "o" }, "<M-s>", function() flash.jump({ continue = true }) end, "Flash Continue")
+		map({ "n", "v" }, "<M-l>", jump_to_line, "Flash Line")
+		map({ "n", "v" }, "<M-w>", current_word, "Flash Current Word")
 		map({ "x", "o" }, "R", function() flash.treesitter_search() end, "Flash Treesitter Search")
 		map({ "c" }, "<C-s>", function() flash.toggle() end, "Flash Toggle Search")
 	end,

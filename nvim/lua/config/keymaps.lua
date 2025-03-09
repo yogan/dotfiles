@@ -34,6 +34,13 @@ vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
 -- vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
 -- vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
 
+vim.keymap.set(
+	"n",
+	"<leader>S",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace current word" }
+)
+
 -- replace current word under cursor (with live preview)
 -- (F1 is already help, F2-F4 are used for LSP via lsp-zero)
 vim.keymap.set("n", "<F5>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace current word" })
