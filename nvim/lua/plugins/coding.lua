@@ -32,7 +32,9 @@ return {
 
 			local function peek()
 				local winid = ufo.peekFoldedLinesUnderCursor()
-				if not winid then vim.lsp.buf.hover() end
+				if not winid then
+					vim.lsp.buf.hover()
+				end
 			end
 
 			map("zR", ufo.openAllFolds, "Open all folds")
@@ -163,11 +165,15 @@ return {
 			format_on_save = function(bufnr)
 				-- Disable autoformat on certain filetypes
 				local ignore_filetypes = { "sh", "bash" }
-				if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then return end
+				if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+					return
+				end
 
 				-- Disable with a global or buffer-local variable
 				-- Toggles for those are in snacks.lua
-				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
 
 				return { timeout_ms = 500, lsp_fallback = true }
 			end,
@@ -372,6 +378,7 @@ return {
 				["lua"] = true,
 				["markdown"] = true,
 				["matlab"] = true,
+				["mdx"] = true,
 				["mips"] = true,
 				["nim"] = true,
 				["ocaml"] = true,
