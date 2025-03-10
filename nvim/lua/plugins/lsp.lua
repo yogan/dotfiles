@@ -32,13 +32,15 @@ local function setup_lspconfig()
 		},
 	})
 
+	-- ESLint
+	lspconfig.eslint.setup({})
+
 	-- JSON with JSON Schema support, see:
 	-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
 	-- TL;DR: npm i -g vscode-langservers-extracted
 	lspconfig.jsonls.setup({})
 
-	lspconfig.eslint.setup({})
-
+	-- YAML
 	lspconfig.yamlls.setup({
 		-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 		settings = { yaml = { keyOrdering = false } },
