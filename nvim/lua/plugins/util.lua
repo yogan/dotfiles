@@ -104,7 +104,7 @@ return {
 					augend.integer.alias.decimal,
 					augend.integer.alias.hex,
 					augend.date.alias["%Y-%m-%d"],
-					augend.hexcolor.new({ case = "keep" }),
+					augend.hexcolor.new(),
 				},
 			})
 
