@@ -285,10 +285,10 @@ return {
 		end,
 	},
 
-	-- Surround (there are alternatives and stuff, but this seems fine)
+	-- Surround
 	{
 		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "^3.0.0*",
 		event = "VeryLazy",
 		opts = {
 			keymaps = {
