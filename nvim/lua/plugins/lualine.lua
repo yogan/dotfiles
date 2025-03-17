@@ -20,60 +20,6 @@ local function macro()
 	return " REC " .. reg
 end
 
-local function lsp_clients()
-	local buf = vim.api.nvim_get_current_buf()
-	local clients = vim.lsp.get_clients()
-	local attached = {}
-	local not_attached = {}
-
-	for _, client in ipairs(clients) do
-		if client.name ~= "GitHub Copilot" then
-			if client.attached_buffers[buf] then
-				table.insert(attached, client.name)
-			else
-				table.insert(not_attached, client.name)
-			end
-		end
-	end
-
-	return { attached, not_attached }
-end
-
-local function lsp_clients_number()
-	local attached, not_attached = unpack(lsp_clients())
-
-	if #attached == 0 and #not_attached == 0 then
-		return ""
-	end
-
-	return "LSP " .. #attached .. "/" .. (#attached + #not_attached)
-end
-
-local function lsp_clients_notify()
-	local attached, not_attached = unpack(lsp_clients())
-
-	if #attached == 0 and #not_attached == 0 then
-		return "No LSP clients attached"
-	end
-
-	local text = ""
-	if #attached > 0 then
-		text = text .. "󰖩 " .. table.concat(attached, ", ")
-	end
-	if text ~= "" and #not_attached > 0 then
-		text = text .. "\n"
-	end
-	if #not_attached > 0 then
-		text = text .. "󰖪 " .. table.concat(not_attached, ", ")
-	end
-
-	require("snacks.notify").info(text, {
-		title = "LSP Clients",
-		style = "fancy",
-		id = "lsp_clients",
-	})
-end
-
 local file_symbols = {
 	modified = "",
 	readonly = "󰷤",
@@ -126,19 +72,7 @@ return {
 					"filetype",
 					colored = false,
 					icon_only = true,
-					separator = "",
 					padding = { left = 1, right = 0 },
-				},
-				{
-					lsp_clients_number,
-					padding = { left = 0, right = 1 },
-					on_click = function(_, button, _)
-						if button == "l" then
-							lsp_clients_notify()
-						elseif button == "r" then
-							require("snacks.picker").lsp_config({ attached = true })
-						end
-					end,
 				},
 				{
 					"copilot",
@@ -147,6 +81,13 @@ return {
 						spinners = require("copilot-status.spinners").arc,
 						status = { enabled = "", disabled = "" },
 					},
+				},
+				{
+					"lsp_status",
+					padding = { left = 0, right = 1 },
+					icon = "",
+					ignore_lsp = { "GitHub Copilot" },
+					on_click = function() require("snacks.picker").lsp_config({ attached = true }) end,
 				},
 			},
 			lualine_z = {},
