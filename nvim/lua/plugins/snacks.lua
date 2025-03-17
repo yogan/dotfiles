@@ -2,7 +2,9 @@ local function has_session()
 	local p = require("persistence")
 	local cur = p.current()
 	for _, session in ipairs(p.list()) do
-		if session == cur then return true end
+		if session == cur then
+			return true
+		end
 	end
 	return false
 end
@@ -387,7 +389,9 @@ return {
 				name = " Line Numbers",
 				get = function() return vim.wo.number end,
 				set = function(state)
-					if state then vim.wo.relativenumber = false end
+					if state then
+						vim.wo.relativenumber = false
+					end
 					vim.wo.number = state
 				end,
 			})
@@ -399,7 +403,9 @@ return {
 				name = " Relative Line Numbers",
 				get = function() return vim.wo.relativenumber end,
 				set = function(state)
-					if state then vim.wo.number = false end
+					if state then
+						vim.wo.number = false
+					end
 					vim.wo.relativenumber = state
 				end,
 			})
