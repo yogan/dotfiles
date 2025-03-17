@@ -282,6 +282,9 @@ return {
 			map("<leader>gk", sp.git_log_file, "Log File")
 			map("<leader>gs", sp.git_status, "Status")
 			map("<leader>gh", sp.git_stash, "Stash")
+			map("<leader>gz", function() Snacks.lazygit.open() end, "LazyGit")
+			map("<leader>gZ", function() Snacks.lazygit.log() end, "LazyGit Log")
+			map("<leader>gK", function() Snacks.lazygit.log_file() end, "LazyGit Log File")
 		end,
 	},
 
