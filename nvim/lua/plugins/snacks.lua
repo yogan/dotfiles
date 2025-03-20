@@ -19,33 +19,32 @@ local function hide_cursor_in_dashboard()
 		vim.cmd("set guicursor+=a:Cursor/lCursor")
 	end
 
+	-- required for initial dashboard, BufEnter is too late
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "SnacksDashboardOpened",
 		callback = function()
 			cursor_blend(100)
-
-			-- Two auto commands for the snacks dashboard buffer, so that the
-			-- cursor is shown again when a picker gets opened (and hidden again
-			-- when it gets closed).
-			vim.api.nvim_create_autocmd("WinEnter", {
-				buffer = vim.api.nvim_get_current_buf(),
-				callback = function() cursor_blend(100) end,
-			})
-
-			vim.api.nvim_create_autocmd("WinLeave", {
-				buffer = vim.api.nvim_get_current_buf(),
-				callback = function() cursor_blend(0) end,
-			})
-
-			-- Also remove end of buffer character.
-			-- No need to restore this, as it is buffer local only.
 			vim.opt_local.fillchars:append("eob: ")
+		end,
+		once = true,
+	})
+
+	-- required for re-opening the dashboard later
+	vim.api.nvim_create_autocmd("BufEnter", {
+		callback = function()
+			if vim.bo.filetype == "snacks_dashboard" then
+				cursor_blend(100)
+			end
 		end,
 	})
 
-	vim.api.nvim_create_autocmd("User", {
-		pattern = "SnacksDashboardClosed",
-		callback = function() cursor_blend(0) end,
+	-- make cursor visible again when leaving the dashboard
+	vim.api.nvim_create_autocmd("BufLeave", {
+		callback = function()
+			if vim.bo.filetype == "snacks_dashboard" then
+				cursor_blend(0)
+			end
+		end,
 	})
 end
 
