@@ -96,7 +96,6 @@ return {
 	-- Extended increment/decrement (^A/^X), works for dates, hex colors, etc.
 	{
 		"monaqa/dial.nvim",
-		dev = true,
 		config = function()
 			local augend = require("dial.augend")
 			require("dial.config").augends:register_group({
