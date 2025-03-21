@@ -275,7 +275,7 @@ return {
 		map("<C-f>", function() sp.grep({ hidden = true }) end, "Grep")
 		map("<C-g>", sp.grep_buffers, "Grep Buffers")
 		map("<C-l>", search_lines, "Search Buffer Lines")
-		map("<C-p>", function() sp.smart({ hidden = true }) end, "Find Files")
+		map("<C-p>", function() sp.files({ hidden = true }) end, "Find Files")
 
 		-- Special things
 		map("<F1>", sp.help, "Help Pages")
@@ -295,6 +295,8 @@ return {
 		map("<leader>sC", sp.commands, "Commands")
 		map("<leader>sd", sp.diagnostics, "Diagnostics")
 		map("<leader>sD", sp.diagnostics_buffer, "Buffer Diagnostics")
+		map("<leader>sf", function() sp.files({ hidden = true }) end, "Find Files")
+		map("<leader>sg", function() sp.git_files({ hidden = true }) end, "Git Files")
 		map("<leader>sh", sp.help, "Help Pages")
 		map("<leader>sH", sp.highlights, "Highlights")
 		map("<leader>si", sp.icons, "Icons")
@@ -309,6 +311,7 @@ return {
 		map("<leader>sq", sp.qflist, "Quickfix List")
 		map("<leader>sr", sp.recent, "Recent Files")
 		map("<leader>sR", sr.rename_file, "Rename File")
+		map("<leader>sS", function() sp.smart({ hidden = true }) end, "Smart Find Files")
 		map("<leader>ss", sp.resume, "Resume Last Picker")
 		map("<leader>sT", comments_fixme, "F" .. "IXME Comments")
 		map("<leader>st", comments_todo, "T" .. "ODO Comments")
