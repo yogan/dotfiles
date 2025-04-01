@@ -46,6 +46,9 @@ local function setup_lspconfig()
 		settings = { yaml = { keyOrdering = false } },
 	})
 
+	-- Markdown (install marksman with Mason)
+	lspconfig.marksman.setup({})
+
 	-- No plugin needed, LSP is built-in, see:
 	-- https://github.com/gleam-lang/gleam.vim?tab=readme-ov-file#neovim-users
 	lspconfig.gleam.setup({})
