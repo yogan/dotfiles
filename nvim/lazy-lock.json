@@ -51,6 +51,7 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "quickfix-reflector.vim": { "branch": "master", "commit": "6a6a9e28e1713b9e9db99eec1e6672e5666c01b9" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "de39919a57e1a40a4c7dc5bae0de276f9c616ef3" },
+  "render-markdown.nvim": { "branch": "main", "commit": "1e2e9a386fbe41b869d3d0e000e19db72284585b" },
   "smear-cursor.nvim": { "branch": "main", "commit": "01570fdc358979678380ff8704184307e87d8a29" },
   "tiny-inline-diagnostic.nvim": { "branch": "main", "commit": "15becb1c2a4b90321214d3db45fe36829fc48b8d" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },

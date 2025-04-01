@@ -12,14 +12,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	command = "setlocal formatoptions-=o",
 })
 
--- Treesitter highlighting is generally disabled for markdown files, but I want
--- to enable it for MDX files (for which mdx.nvim sets the ft to treesitter).
-vim.api.nvim_create_autocmd("FileType", {
-	group = group,
-	pattern = "mdx",
-	callback = function(args) vim.treesitter.start(args.buf, "markdown") end,
-})
-
 vim.api.nvim_create_autocmd("VimResized", {
 	group = group,
 	desc = "Resize windows when terminal size changes",

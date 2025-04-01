@@ -22,6 +22,30 @@ return {
 					Folded = { bg = colors.surbase },
 					UfoFoldedEllipsis = { fg = colors.lavender, bg = colors.surbase },
 					Yank = { bg = "#649dbb" },
+
+					["@markup.heading.1.markdown"] = { fg = "#74c7ec" },
+					RenderMarkdownH1 = { fg = "#74c7ec" },
+					RenderMarkdownH1Bg = { bg = "#364f62" },
+
+					["@markup.heading.2.markdown"] = { fg = "#68b0d3" },
+					RenderMarkdownH2 = { fg = "#68b0d3" },
+					RenderMarkdownH2Bg = { bg = "#2f4557" },
+
+					["@markup.heading.3.markdown"] = { fg = "#5c99bb" },
+					RenderMarkdownH3 = { fg = "#5c99bb" },
+					RenderMarkdownH3Bg = { bg = "#293c4d" },
+
+					["@markup.heading.4.markdown"] = { fg = "#5083a3" },
+					RenderMarkdownH4 = { fg = "#5083a3" },
+					RenderMarkdownH4Bg = { bg = "#233343" },
+
+					["@markup.heading.5.markdown"] = { fg = "#446d8b" },
+					RenderMarkdownH5 = { fg = "#446d8b" },
+					RenderMarkdownH5Bg = { bg = "#1d2a39" },
+
+					["@markup.heading.6.markdown"] = { fg = "#385774" },
+					RenderMarkdownH6 = { fg = "#385774" },
+					RenderMarkdownH6Bg = { bg = "#172130" },
 				}
 			end,
 			dim_inactive = {
