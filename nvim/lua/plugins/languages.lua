@@ -69,6 +69,10 @@ return {
 				icons = { "" },
 				position = "inline",
 			},
+			indent = {
+				enabled = true,
+				icon = " ",
+			},
 		},
 	},
 }
