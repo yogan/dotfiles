@@ -17,6 +17,7 @@ return {
 			local wk = require("which-key")
 
 			local ftMap = {
+				markdown = "treesitter",
 				yaml = "indent",
 				-- add empty entry when a ft shall have no folding
 			}
