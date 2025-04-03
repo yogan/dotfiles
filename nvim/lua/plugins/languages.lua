@@ -73,6 +73,14 @@ return {
 				enabled = true,
 				icon = " ",
 			},
+			code = {
+				sign = false,
+				width = "block",
+				language_pad = 2,
+				left_pad = 2,
+				right_pad = 2,
+				min_width = 45,
+			},
 		},
 	},
 }
