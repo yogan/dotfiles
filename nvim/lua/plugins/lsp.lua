@@ -237,8 +237,10 @@ return {
 	{ "neovim/nvim-lspconfig", config = setup_lspconfig },
 
 	-- Mason to install and manage LSP servers
-	{ "williamboman/mason.nvim", config = true },
-	{ "williamboman/mason-lspconfig.nvim", opts = { ensure_installed = { "lua_ls" } } },
+	-- FIXME: Mason is already at v2.x, which currently breaks with my config
+	-- Pinning to v1.x for now, as recommended here: https://github.com/LazyVim/LazyVim/issues/6039
+	{ "mason-org/mason.nvim", version = "^1.0.0", config = true },
+	{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0", opts = { ensure_installed = { "lua_ls" } } },
 
 	-- Inline hints
 	{
