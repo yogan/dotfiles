@@ -2,6 +2,8 @@ return {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
+		lazy = false,
 
 		-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
 		-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
@@ -12,9 +14,6 @@ return {
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
 		end,
-
-		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-		event = { "VeryLazy" },
 
 		---@class TSConfig
 		opts = {
