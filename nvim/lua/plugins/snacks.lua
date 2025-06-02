@@ -50,6 +50,7 @@ end
 
 return {
 	"folke/snacks.nvim",
+	priority = 1000,
 	dev = true,
 	dependencies = {
 		"folke/persistence.nvim",
