@@ -265,6 +265,11 @@ return {
 			-- The color of the above highlight. Must be a valid vim highlight group.
 			-- (see :h highlight-group for options)
 			highlight_group = "CursorLine",
+
+			-- Whether to create a visual selection after a movement to a node.
+			-- If true, highlight is disabled and a visual selection is made in
+			-- its place.
+			select = false,
 		},
 
 		config = function(_, opts)
