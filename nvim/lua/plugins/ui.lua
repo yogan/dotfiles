@@ -53,6 +53,10 @@ return {
 				percentage = 0.25,
 				shade = "light",
 			},
+			float = {
+				transparent = true,
+				solid = false,
+			},
 			show_end_of_buffer = true,
 			transparent_background = false,
 		},
