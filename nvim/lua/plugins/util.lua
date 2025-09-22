@@ -104,6 +104,7 @@ return {
 					augend.integer.alias.hex,
 					augend.date.alias["%Y-%m-%d"],
 					augend.hexcolor.new(),
+					augend.constant.alias.bool,
 				},
 			})
 
