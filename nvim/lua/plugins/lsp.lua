@@ -1,3 +1,29 @@
+local function configure_diagnostics()
+	vim.diagnostic.config({
+		-- NOTE: keep in sync with toggle in `snacks.lua`
+		-- empty prefix (no block icon), and closer to the line of code
+		virtual_text = { prefix = "", spacing = 2 },
+		update_in_insert = false,
+		float = {
+			header = "",
+			border = "rounded",
+			focusable = true,
+		},
+		signs = {
+			text = {
+				[vim.diagnostic.severity.ERROR] = "󰅚",
+				[vim.diagnostic.severity.WARN] = "󰀪",
+				[vim.diagnostic.severity.HINT] = "󰌶",
+				[vim.diagnostic.severity.INFO] = "",
+			},
+		},
+	})
+end
+
+local function setup_lsp_keymaps()
+	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, { remap = false, desc = "LSP: code action ([q]uickfix)" })
+end
+
 -- NOTE: to see available LSP configs, see :help lspconfig-all
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
@@ -173,68 +199,15 @@ local function setup_cmp()
 	})
 end
 
-local function setup_lsp_zero()
-	local lsp_zero = require("lsp-zero")
-
-	---@diagnostic disable-next-line: unused-local
-	lsp_zero.on_attach(function(client, bufnr)
-		-- for default key mappings, see:
-		-- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#lsp-actions
-		lsp_zero.default_keymaps({
-			buffer = bufnr,
-			preserve_mappings = false,
-			-- Skipping some default mappings, using Snacks instead (see snacks.lua)
-			omit = { "gd", "gD", "gr", "gi", "gy", "<F2>", "<F3>" },
-		})
-
-		vim.keymap.set("n", "<F2>", ":IncRename ", { buffer = bufnr })
-		vim.keymap.set(
-			"n",
-			"<F3>",
-			function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-			{ buffer = bufnr, expr = true }
-		)
-
-		local opts = { buffer = bufnr, remap = false, desc = "LSP: code action ([q]uickfix)" }
-		vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, opts)
-	end)
-
-	lsp_zero.setup()
-end
-
-local function setup_diagnostics()
-	vim.diagnostic.config({
-		-- NOTE: keep in sync with toggle in `snacks.lua`
-		-- empty prefix (no block icon), and closer to the line of code
-		virtual_text = { prefix = "", spacing = 2 },
-		update_in_insert = false,
-		float = {
-			header = "",
-			border = "rounded",
-			focusable = true,
-		},
-		signs = {
-			text = {
-				[vim.diagnostic.severity.ERROR] = "󰅚",
-				[vim.diagnostic.severity.WARN] = "󰀪",
-				[vim.diagnostic.severity.HINT] = "󰌶",
-				[vim.diagnostic.severity.INFO] = "",
-			},
-		},
-	})
-end
-
 return {
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		"neovim/nvim-lspconfig",
 		config = function()
-			setup_lsp_zero()
-			setup_diagnostics()
+			setup_lspconfig()
+			setup_lsp_keymaps()
+			configure_diagnostics()
 		end,
 	},
-
-	{ "neovim/nvim-lspconfig", config = setup_lspconfig },
 
 	-- Mason to install and manage LSP servers
 	-- FIXME: Mason is already at v2.x, which currently breaks with my config
@@ -276,7 +249,19 @@ return {
 	{ "j-hui/fidget.nvim", config = true },
 
 	-- Improved LSP renaming (live preview)
-	{ "smjonas/inc-rename.nvim", config = true },
+	{
+		"smjonas/inc-rename.nvim",
+		config = function(_, opts)
+			require("inc_rename").setup(opts)
+			vim.keymap.set("n", "<F2>", ":IncRename ")
+			vim.keymap.set(
+				"n",
+				"<F3>",
+				function() return ":IncRename " .. vim.fn.expand("<cword>") end,
+				{ expr = true }
+			)
+		end,
+	},
 
 	-- Fancy diagnostic float windows for current line only
 	-- Can be toggled via snacks (<leader>tv) to "regular" virtual text.
