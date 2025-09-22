@@ -248,17 +248,23 @@ return {
 	-- LSP Fidget
 	{ "j-hui/fidget.nvim", config = true },
 
-	-- Improved LSP renaming (live preview)
+	-- LSP-based renaming with live preview
 	{
-		"smjonas/inc-rename.nvim",
+		"saecki/live-rename.nvim",
 		config = function(_, opts)
-			require("inc_rename").setup(opts)
-			vim.keymap.set("n", "<F2>", ":IncRename ")
+			require("live-rename").setup(opts)
+			local live_rename = require("live-rename")
 			vim.keymap.set(
 				"n",
-				"<F3>",
-				function() return ":IncRename " .. vim.fn.expand("<cword>") end,
-				{ expr = true }
+				"<leader>r",
+				live_rename.map({ text = "", insert = true }),
+				{ desc = "LSP rename (clear)" }
+			)
+			vim.keymap.set( --
+				"n", --
+				"<leader>R",
+				live_rename.map(),
+				{ desc = "LSP rename (modify)" }
 			)
 		end,
 	},
