@@ -81,6 +81,9 @@ return {
 				right_pad = 2,
 				min_width = 45,
 			},
+			latex = {
+				enabled = false,
+			},
 		},
 	},
 }
