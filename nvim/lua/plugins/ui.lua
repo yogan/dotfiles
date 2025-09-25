@@ -111,6 +111,7 @@ return {
 			distance_stop_animating = 0.5, --           > 0     default: 0.1
 			legacy_computing_symbols_support = false,
 			smear_insert_mode = false,
+			smear_to_cmd = false, -- fixes glitch in noice's cmd/search box
 		},
 	},
 
