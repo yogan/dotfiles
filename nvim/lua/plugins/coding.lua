@@ -376,6 +376,7 @@ return {
 				["javascript"] = true,
 				["javascriptreact"] = true,
 				["json"] = true,
+				["jsonc"] = true,
 				["jsx"] = true,
 				["julia"] = true,
 				["kotlin"] = true,
