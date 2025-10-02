@@ -347,6 +347,23 @@ return {
 		"github/copilot.vim",
 		dependencies = "ofseed/copilot-status.nvim",
 		init = function()
+			-- Copilot requires Node.js v22+, but with fnm, depending on the
+			-- current directory, and its `.nvmrc` file, the current `node` from
+			-- the `$PATH` might be an older version. So, we find a suitable
+			-- Node.js v22+ binary from fnm's installed versions.
+			local fnm_dir = vim.fn.expand("~/.fnm/node-versions")
+			if vim.fn.isdirectory(fnm_dir) == 1 then
+				for _, entry in ipairs(vim.fn.readdir(fnm_dir)) do
+					if entry:match("^v22%.") then
+						local node_path = fnm_dir .. "/" .. entry .. "/installation/bin/node"
+						if vim.fn.executable(node_path) == 1 then
+							vim.g.copilot_node_command = node_path
+							break
+						end
+					end
+				end
+			end
+
 			vim.g.copilot_filetypes = {
 				["*"] = false,
 				["autohotkey"] = true,
