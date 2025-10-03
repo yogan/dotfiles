@@ -28,18 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- C/C++ with Clang
-	lspconfig.clangd.setup({
-		cmd = {
-			"clangd",
-			"--background-index",
-			"--clang-tidy",
-			-- to fix this warning:
-			-- multiple different client offset_encodings detected for buffer, this is not supported yet
-			"--offset-encoding=utf-16",
-		},
-	})
-
 	-- Rust
 	lspconfig.rust_analyzer.setup({
 		settings = {
@@ -84,6 +72,7 @@ end
 
 local function enable_lsps()
 	vim.lsp.enable("bashls") -- Bash (install bash-language-server with Mason)
+	vim.lsp.enable("clangd") -- C/C++ with Clang (install clangd with Mason)
 	vim.lsp.enable("clojure_lsp") -- Clojure (install clojure-lsp with Mason)
 	vim.lsp.enable("crystalline") -- Crystal (install crystalline with Mason)
 	vim.lsp.enable("csharp_ls") -- C# (install csharp-language-server via Mason)
