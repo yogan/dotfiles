@@ -28,17 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- Rust
-	lspconfig.rust_analyzer.setup({
-		settings = {
-			["rust-analyzer"] = {
-				checkOnSave = {
-					command = "clippy",
-				},
-			},
-		},
-	})
-
 	-- Perl Navigator
 	lspconfig.perlnavigator.setup({
 		-- The default is the Git root directory, but this breaks in my AoC
@@ -87,6 +76,7 @@ local function enable_lsps()
 	vim.lsp.enable("nim_langserver") -- Nim (install nimlangserver with Mason)
 	vim.lsp.enable("ocamllsp") -- OCaml (install ocaml-lsp with Mason)
 	vim.lsp.enable("pyright") -- Python (install pyright with Mason)
+	vim.lsp.enable("rust_analyzer") -- Rust (install rust-analyzer with Mason)
 	vim.lsp.enable("vtsls") -- TypeScript (install vtsls with Mason)
 	vim.lsp.enable("yamlls") -- YAML (install yaml-language-server with Mason)
 	vim.lsp.enable("zls") -- Zig (install zls with Mason)
