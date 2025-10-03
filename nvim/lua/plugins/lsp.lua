@@ -28,14 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- Perl Navigator
-	lspconfig.perlnavigator.setup({
-		-- The default is the Git root directory, but this breaks in my AoC
-		-- solutions, where my Perl solutions are in a subdirectory.
-		-- This might not be the right setting all the time, but there it works.
-		root_dir = lspconfig.util.root_pattern("."),
-	})
-
 	-- Julia (install julia-lsp with Mason)
 	-- Taken from https://www.juliabloggers.com/setting-up-julia-lsp-for-neovim
 	-- Make sure ~/.julia/environments/nvim-lspconfig is set up as described
@@ -75,6 +67,7 @@ local function enable_lsps()
 	vim.lsp.enable("marksman") -- Markdown (install marksman with Mason)
 	vim.lsp.enable("nim_langserver") -- Nim (install nimlangserver with Mason)
 	vim.lsp.enable("ocamllsp") -- OCaml (install ocaml-lsp with Mason)
+	vim.lsp.enable("perlnavigator") -- Perl (install perlnavigator with Mason)
 	vim.lsp.enable("pyright") -- Python (install pyright with Mason)
 	vim.lsp.enable("rust_analyzer") -- Rust (install rust-analyzer with Mason)
 	vim.lsp.enable("vtsls") -- TypeScript (install vtsls with Mason)
