@@ -24,26 +24,9 @@ local function setup_lsp_keymaps()
 	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, { remap = false, desc = "LSP: code action ([q]uickfix)" })
 end
 
--- NOTE: to see available LSP configs, see :help lspconfig-all
+-- Deprecated, use setup_lspconfig() instead
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
-
-	-- Lua
-	lspconfig.lua_ls.setup({
-		settings = {
-			Lua = {
-				-- See https://github.com/LuaLS/lua-language-server/wiki/Settings#hint
-				hint = {
-					enable = true,
-
-					-- "Enable"  - Show hint in all tables
-					-- "Auto"    - Only show hint when there is more than 3 items or the table is mixed (indexes and keys)
-					-- "Disable" - Disable array index hints
-					arrayIndex = "Auto",
-				},
-			},
-		},
-	})
 
 	-- Extended TypeScript LSP functionality from VS Code
 	local vtsInlayHints = {
@@ -172,6 +155,9 @@ local function setup_lspconfig()
 	lspconfig.ocamllsp.setup({})
 end
 
+-- The new way.
+local function enable_lsps() vim.lsp.enable("lua_ls") end
+
 local function setup_cmp()
 	local cmp = require("cmp")
 	local lspkind = require("lspkind")
@@ -207,7 +193,8 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			setup_lspconfig()
+			setup_lspconfig() -- deprecated
+			enable_lsps() -- the new way
 			setup_lsp_keymaps()
 			configure_diagnostics()
 		end,
