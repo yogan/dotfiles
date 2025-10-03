@@ -28,20 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- Julia (install julia-lsp with Mason)
-	-- Taken from https://www.juliabloggers.com/setting-up-julia-lsp-for-neovim
-	-- Make sure ~/.julia/environments/nvim-lspconfig is set up as described
-	-- Don't copy/paste makefile, instead download from here:
-	-- https://raw.githubusercontent.com/fredrikekre/.dotfiles/master/.julia/environments/nvim-lspconfig/Makefile
-	lspconfig.julials.setup({
-		on_new_config = function(new_config, _)
-			local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")
-			if (vim.uv.fs_stat(julia) or {}).type == "file" then
-				new_config.cmd[1] = julia
-			end
-		end,
-	})
-
 	-- fish LSP - needs to be build from source (easy), see:
 	-- https://github.com/ndonfris/fish-lsp?tab=readme-ov-file#installation
 	-- Copying fish-lsp to e.g. /usr/local/bin doesn't work, so:
@@ -63,6 +49,7 @@ local function enable_lsps()
 	vim.lsp.enable("gopls") -- Go (install gopls via apt, not Mason, at least when golang itself is installed via apt, otherwise it complains about version stuff)
 	vim.lsp.enable("hls") -- Haskell (stack install haskell-language-server and never touch it again when it works, Haskell toolchain is a bitch)
 	vim.lsp.enable("jsonls") -- JSON with JSON Schema support, npm i -g vscode-langservers-extracted
+	vim.lsp.enable("julials") -- Julia (install (install julia-lsp with Mason)
 	vim.lsp.enable("lua_ls") -- Lua (install lua-language-server with Mason)
 	vim.lsp.enable("marksman") -- Markdown (install marksman with Mason)
 	vim.lsp.enable("nim_langserver") -- Nim (install nimlangserver with Mason)
