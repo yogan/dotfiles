@@ -28,12 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- YAML
-	lspconfig.yamlls.setup({
-		-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
-		settings = { yaml = { keyOrdering = false } },
-	})
-
 	-- C/C++ with Clang
 	lspconfig.clangd.setup({
 		cmd = {
@@ -105,6 +99,7 @@ local function enable_lsps()
 	vim.lsp.enable("ocamllsp") -- OCaml (install ocaml-lsp with Mason)
 	vim.lsp.enable("pyright") -- Python (install pyright with Mason)
 	vim.lsp.enable("vtsls") -- TypeScript (install vtsls with Mason)
+	vim.lsp.enable("yamlls") -- YAML (install yaml-language-server with Mason)
 	vim.lsp.enable("zls") -- Zig (install zls with Mason)
 end
 
