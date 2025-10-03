@@ -28,23 +28,6 @@ end
 local function setup_lspconfig()
 	local lspconfig = require("lspconfig")
 
-	-- Extended TypeScript LSP functionality from VS Code
-	local vtsInlayHints = {
-		parameterNames = { enabled = "literals" },
-		parameterTypes = { enabled = true },
-		variableTypes = { enabled = true },
-		propertyDeclarationTypes = { enabled = true },
-		functionLikeReturnTypes = { enabled = true },
-		enumMemberValues = { enabled = true },
-	}
-	require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-	require("lspconfig").vtsls.setup({
-		settings = {
-			javascript = { inlayHints = vtsInlayHints },
-			typescript = { inlayHints = vtsInlayHints },
-		},
-	})
-
 	-- ESLint
 	lspconfig.eslint.setup({})
 
@@ -156,7 +139,10 @@ local function setup_lspconfig()
 end
 
 -- The new way.
-local function enable_lsps() vim.lsp.enable("lua_ls") end
+local function enable_lsps()
+	vim.lsp.enable("lua_ls")
+	vim.lsp.enable("vtsls")
+end
 
 local function setup_cmp()
 	local cmp = require("cmp")
