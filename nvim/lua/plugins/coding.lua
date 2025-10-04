@@ -142,25 +142,29 @@ return {
 			},
 
 			formatters_by_ft = {
+				-- use Biome or prettierd if available, otherwise fallback to prettier
+				javascript = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				typescript = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				typescriptreact = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				html = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				css = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				json = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+
 				lua = { "stylua" },
-				python = { "isort", "black" }, -- run all in given order
 				sh = { "shfmt" },
-				-- use prettierd if available, otherwise fallback to prettier
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+				python = { "isort", "black" }, -- run all in given order
 				gleam = { "gleam" },
 				nim = { "nimpretty" },
 				elm = { "elm_format" },
 				fortran = { "fprettify" },
+				crystal = { "crystal" },
 				swift = { "swiftformat" }, -- install: clone and build: https://github.com/nicklockwood/SwiftFormat
 				perl = { "perltidy" }, -- install with cpan Perl::Tidy
-				crystal = { "crystal" },
-				-- TODO: csharpier does a pretty bad job, and dotnet format is slow as
-				-- fuck; find something else
-				-- csharp = { "csharpier" }, -- install with Mason
 				ocaml = { "ocamlformat" }, -- install ocamlformat with Mason
+
+				-- TODO: csharpier does a pretty bad job, and dotnet format is slow as fuck; find something else
+				-- csharp = { "csharpier" }, -- install with Mason
 			},
 
 			format_on_save = function(bufnr)
