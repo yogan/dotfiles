@@ -1,6 +1,7 @@
 local function enable_lsps()
 	vim.lsp.enable("bashls") -- Bash (install bash-language-server with Mason)
 	vim.lsp.enable("biome") -- Biome (usually installed project-locally via npm)
+	vim.lsp.enable("cssls") -- CSS (install css-lsp with Mason)
 	vim.lsp.enable("clangd") -- C/C++ with Clang (install clangd with Mason)
 	vim.lsp.enable("clojure_lsp") -- Clojure (install clojure-lsp with Mason)
 	vim.lsp.enable("crystalline") -- Crystal (install crystalline with Mason)
