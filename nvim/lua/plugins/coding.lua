@@ -433,6 +433,9 @@ return {
 				["yaml"] = true,
 				["zig"] = true,
 			}
+
+			vim.keymap.set("i", "<M-l>", "<Plug>(copilot-accept-word)")
+			vim.keymap.set("i", "<M-j>", "<Plug>(copilot-accept-line)")
 		end,
 	},
 }
