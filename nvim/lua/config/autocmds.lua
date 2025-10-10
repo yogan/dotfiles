@@ -124,3 +124,25 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "Yank", timeout = 200 })
 	end,
 })
+
+-- Disable Copilot for coding challenges (like Advent of Code, Exercism)
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = group,
+	desc = "Disable Copilot for coding challenges",
+	pattern = "*",
+	callback = function()
+		local filepath = vim.fn.expand("%:p")
+		local home = os.getenv("HOME")
+		local disable_patterns = {
+			home .. "/work-wsl/advent-of-code/",
+			home .. "/work-wsl/exercism/",
+		}
+
+		for _, pattern in ipairs(disable_patterns) do
+			if filepath:find("^" .. vim.pesc(pattern)) then
+				vim.b.copilot_enabled = false
+				break
+			end
+		end
+	end,
+})
