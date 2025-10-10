@@ -449,6 +449,15 @@ return {
 
 		Snacks.toggle
 			.new({
+				id = "copilot_buffer",
+				name = " Copilot (buffer)",
+				get = function() return vim.b.copilot_enabled end,
+				set = function(state) vim.b.copilot_enabled = state end,
+			})
+			:map("<leader>tC")
+
+		Snacks.toggle
+			.new({
 				id = "dim",
 				name = "󰱊 Dimming",
 				get = function() return Snacks.dim.enabled end,
