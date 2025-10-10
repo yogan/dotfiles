@@ -99,6 +99,9 @@ return {
 	{ "mason-org/mason.nvim", version = "^1.0.0", config = true },
 	{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0", opts = { ensure_installed = { "lua_ls" } } },
 
+	-- Schema store for jsonls and yamlls
+	"b0o/schemastore.nvim",
+
 	-- Inline hints
 	{
 		"chrisgrieser/nvim-lsp-endhints",

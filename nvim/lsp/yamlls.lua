@@ -2,15 +2,13 @@ return {
 	-- https://github.com/redhat-developer/yaml-language-server#language-server-settings
 	settings = {
 		yaml = {
-			keyOrdering = false,
-			schemaStore = {
-				enable = true,
-				url = "https://www.schemastore.org/api/json/catalog.json",
-			},
+			-- disable built-in schemaStore, use schemastore.nvim instead
+			schemaStore = { enable = false, url = "" },
+			schemas = require("schemastore").yaml.schemas(),
+
 			customTags = { "!reference sequence" },
-			format = {
-				singleQuote = true,
-			},
+			format = { singleQuote = true },
+			keyOrdering = false,
 		},
 	},
 }
