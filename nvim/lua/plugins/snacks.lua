@@ -491,5 +491,14 @@ return {
 				end,
 			})
 			:map("<leader>tI")
+
+		Snacks.toggle
+			.new({
+				id = "render_markdown",
+				name = " Render Markdown",
+				get = function() return require("render-markdown").get() end,
+				set = function(state) require("render-markdown").set(state) end,
+			})
+			:map("<leader>tm")
 	end,
 }

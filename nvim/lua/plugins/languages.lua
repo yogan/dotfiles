@@ -85,5 +85,18 @@ return {
 				enabled = false,
 			},
 		},
+		config = function(_, opts)
+			require("render-markdown").setup(opts)
+
+			local wk = require("which-key")
+			wk.add({
+				{
+					mode = { "n" },
+					"<leader>p",
+					function() require("render-markdown").preview() end,
+					desc = "Render Markdown Preview",
+				},
+			})
+		end,
 	},
 }
