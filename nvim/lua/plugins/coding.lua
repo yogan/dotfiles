@@ -116,7 +116,8 @@ return {
 				-- but of course it does not. So let's just pass a table with both
 				-- variants and move on with our live.
 				pattern = { [[<(KEYWORDS)>:]], [[<(KEYWORDS)>]] }, -- vim syntax
-				comments_only = true, -- uses treesitter to match keywords in comments only
+				-- uses treesitter to match keywords in comments only
+				comments_only = true,
 			},
 			search = {
 				pattern = [[\b(KEYWORDS):?\b]], -- ripgrep regex
@@ -436,6 +437,10 @@ return {
 
 			vim.keymap.set("i", "<M-l>", "<Plug>(copilot-accept-word)")
 			vim.keymap.set("i", "<M-j>", "<Plug>(copilot-accept-line)")
+		end,
+		cond = function()
+			-- save RAM on the small vServer
+			return vim.fn.hostname() ~= "ursa-minor"
 		end,
 	},
 }
