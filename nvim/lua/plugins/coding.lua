@@ -439,8 +439,11 @@ return {
 			vim.keymap.set("i", "<M-j>", "<Plug>(copilot-accept-line)")
 		end,
 		cond = function()
-			-- save RAM on the small vServer
-			return vim.fn.hostname() ~= "ursa-minor"
+			local cwd = vim.fn.getcwd()
+			if cwd:find("quantified%-zogan") then
+				return false
+			end
+			return true
 		end,
 	},
 }
