@@ -320,10 +320,10 @@ return {
 		map('<leader>s"', sp.registers, "Registers")
 
 		-- LSP
-		-- Remember to keep this in sync with the `omit` list of
-		-- `lsp_zero.default_keymaps` in `lsp.lua`.
 		map("gd", sp.lsp_definitions, "Goto Definitions")
 		map("gD", sp.lsp_declarations, "Goto Declarations")
+		map("gl", sp.lsp_incoming_calls, "Incoming Calls")
+		map("gL", sp.lsp_outgoing_calls, "Outgoing Calls")
 		map("gr", sp.lsp_references, "References")
 		map("gi", sp.lsp_implementations, "Goto Implementations")
 		map("gy", sp.lsp_type_definitions, "Goto Type Definitions")
