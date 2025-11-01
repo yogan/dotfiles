@@ -335,6 +335,12 @@ return {
 			"Quick LSP Symbols"
 		)
 
+		-- GitHub Issues / PRs
+		map("<leader>Gi", function() sp.gh_issue() end, "GitHub Issues (open)")
+		map("<leader>GI", function() sp.gh_issue({ state = "all" }) end, "GitHub Issues (all)")
+		map("<leader>Gp", function() sp.gh_pr() end, "GitHub Pull Requests (open)")
+		map("<leader>GP", function() sp.gh_pr({ state = "all" }) end, "GitHub Pull Requests (all)")
+
 		-- Scratch buffer ----------------------------------------------------------------
 
 		map("<leader>.", function() Snacks.scratch() end, "Toggle Scratch Buffer")
