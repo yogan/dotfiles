@@ -216,6 +216,17 @@ return {
 			--    <leader>Wig - current git change hunk
 			vim.g.better_whitespace_operator = "<leader>W"
 
+			-- map <leader>w to strip whitespace for whole buffer
+			require("which-key").add({
+				{
+					mode = "n",
+					"<leader>w",
+					":StripWhitespace<CR>",
+					desc = "Strip trailing whitespace",
+					icon = "󰉿",
+				},
+			})
+
 			vim.g.better_whitespace_filetypes_blacklist = {
 				"diff",
 				"git",
