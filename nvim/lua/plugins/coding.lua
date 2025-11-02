@@ -408,6 +408,7 @@ return {
 				["java"] = true,
 				["javascript"] = true,
 				["javascriptreact"] = true,
+				["jq"] = true,
 				["json"] = true,
 				["jsonc"] = true,
 				["jsx"] = true,
