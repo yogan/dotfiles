@@ -57,3 +57,15 @@ vim.keymap.set("n", "q", "<nop>")
 local cmd_history_opts = { expr = true, replace_keycodes = false }
 vim.keymap.set("c", "<C-p>", 'wildmenumode() ? "\\<C-p>" : "\\<Up>"', cmd_history_opts)
 vim.keymap.set("c", "<C-n>", 'wildmenumode() ? "\\<C-n>" : "\\<Down>"', cmd_history_opts)
+
+vim.keymap.set("n", "yp", function()
+	local path = vim.fn.expand("%:.")
+	vim.fn.setreg("+", path)
+	print("Yanked relative path: " .. path)
+end, { desc = "Yank relative path of current buffer to clipboard" })
+
+vim.keymap.set("n", "yP", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	print("Yanked absolute path: " .. path)
+end, { desc = "Yank absolute path of current buffer to clipboard" })
