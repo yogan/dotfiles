@@ -4,15 +4,15 @@ return {
 		"folke/lazydev.nvim",
 		dependencies = {
 			{ "LuaCATS/luassert", name = "luassert-types", lazy = true },
-			{ "LuaCATS/busted", name = "busted-types", lazy = true },
+			{ "LuaCATS/busted",   name = "busted-types",   lazy = true },
 		},
 		opts = {
 			library = {
 				-- Only load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "${3rd}/luv/library",     words = { "vim%.uv" } },
 				-- Same for busted and luassert support
 				{ path = "luassert-types/library", words = { "assert" } },
-				{ path = "busted-types/library", words = { "describe" } },
+				{ path = "busted-types/library",   words = { "describe" } },
 			},
 		},
 		ft = "lua",
@@ -68,9 +68,10 @@ return {
 			heading = {
 				icons = { "" },
 				position = "inline",
+				signs = { '𝟭 ', '𝟮 ', '𝟯 ', '𝟰 ', '𝟱 ', '𝟲 ' },
 			},
 			indent = {
-				enabled = true,
+				enabled = false,
 				icon = " ",
 			},
 			code = {
