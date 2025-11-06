@@ -181,15 +181,10 @@ return {
 			})
 
 			-- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
-			local next_diag = function() vim.diagnostic.goto_next({ float = false }) end
-			local prev_diag = function() vim.diagnostic.goto_prev({ float = false }) end
-			local next_error = function()
-				vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR, float = false })
-			end
-			local prev_error = function()
-				vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR, float = false })
-			end
-			-- FIXME: next/prev diag are not repeatable for some reason
+			local next_diag = function() vim.diagnostic.jump({ count = 1 }) end
+			local prev_diag = function() vim.diagnostic.jump({ count = -1 }) end
+			local next_error = function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end
+			local prev_error = function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end
 			local next_diag_rep, prev_diag_rep = rep.make_repeatable_move_pair(next_diag, prev_diag)
 			local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
 			wk.add({
