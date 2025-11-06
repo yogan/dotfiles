@@ -42,6 +42,9 @@ vim.keymap.set(
 	{ desc = "Replace current word" }
 )
 
+-- show diagnostics in a floating window
+vim.keymap.set("n", "<leader>K", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+
 -- make current file executable (shell scripts)
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
 
