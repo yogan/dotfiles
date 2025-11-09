@@ -447,8 +447,10 @@ return {
 				["zig"] = true,
 			}
 
-			vim.keymap.set("i", "<M-l>", "<Plug>(copilot-accept-word)")
-			vim.keymap.set("i", "<M-j>", "<Plug>(copilot-accept-line)")
+			-- Insert mode: Tab completes the full thing, make Ctrl+l and Ctrl+j
+			-- accept word (l = right) and line (j = down) respectively
+			vim.keymap.set("i", "<C-l>", "<Plug>(copilot-accept-word)")
+			vim.keymap.set("i", "<C-j>", "<Plug>(copilot-accept-line)")
 		end,
 		cond = function()
 			local cwd = vim.fn.getcwd()
