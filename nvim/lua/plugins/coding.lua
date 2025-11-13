@@ -109,18 +109,12 @@ return {
 			merge_keywords = false, -- use only keywords listed above, don't include defaults
 			highlight = {
 				before = "",
-				keyword = "wide_bg",
+				keyword = "bg", -- NOTE: do NOT put wide_bg here, not compatible with my custom pattern below
 				after = "fg",
-				-- Listing the pattern twice is a workaround. The trailing : shall be optional,
-				-- which should work with e.g. :\? or :\= or :\{,1} or some other vim regex magic,
-				-- but of course it does not. So let's just pass a table with both
-				-- variants and move on with our live.
-				pattern = { [[<(KEYWORDS)>:]], [[<(KEYWORDS)>]] }, -- vim syntax
-				-- uses treesitter to match keywords in comments only
-				comments_only = true,
+				pattern = [[.*<(KEYWORDS)\s*>]],
 			},
 			search = {
-				pattern = [[\b(KEYWORDS):?\b]], -- ripgrep regex
+				pattern = [[\b(KEYWORDS)\b]], -- ripgrep regex
 			},
 		},
 	},
