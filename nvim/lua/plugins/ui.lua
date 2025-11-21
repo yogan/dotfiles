@@ -106,12 +106,45 @@ return {
 	{
 		"sphamba/smear-cursor.nvim",
 		opts = {
-			stiffness = 0.8, --                         [0, 1]  default: 0.6
-			trailing_stiffness = 0.5, --                [0, 1]  default: 0.3
-			distance_stop_animating = 0.5, --           > 0     default: 0.1
-			legacy_computing_symbols_support = false,
-			smear_insert_mode = false,
 			smear_to_cmd = false, -- fixes glitch in noice's cmd/search box
+			never_draw_over_target = true, -- don't hide my current position
+			hide_target_hack = true, -- same (?)
+			--
+			-- Fire hazard preset from docs:
+			--
+			-- cursor_color = "#ff4000",
+			-- particles_enabled = true,
+			-- stiffness = 0.5,
+			-- trailing_stiffness = 0.2,
+			-- trailing_exponent = 5,
+			-- damping = 0.6,
+			-- gradient_exponent = 0,
+			-- gamma = 1,
+			-- particle_spread = 1,
+			-- particles_per_second = 500,
+			-- particles_per_length = 50,
+			-- particle_max_lifetime = 800,
+			-- particle_max_initial_velocity = 20,
+			-- particle_velocity_from_cursor = 0.5,
+			-- particle_damping = 0.15,
+			-- particle_gravity = -50,
+			-- min_distance_emit_particles = 0,
+			--
+			-- Snow preset from
+			-- https://old.reddit.com/r/neovim/comments/1p1z43w/particle_effects_in_smearcursornvim_let_it/npx36yh/
+			--
+			cursor_color = "#ffffff",
+			gradient_exponent = 0,
+			particles_enabled = true,
+			particle_spread = 1,
+			particles_per_second = 100,
+			particles_per_length = 50,
+			particle_max_lifetime = 1500,
+			particle_max_initial_velocity = 10,
+			particle_velocity_from_cursor = 0,
+			particle_random_velocity = 300,
+			particle_damping = 0.1,
+			particle_gravity = 50,
 		},
 	},
 
