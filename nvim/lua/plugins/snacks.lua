@@ -166,6 +166,7 @@ return {
 				git_signs = false,
 				git_sign_column = false,
 				diag_virtual_text = false,
+				code_lens = false,
 			},
 			win = {
 				-- Based on the default from:
@@ -350,7 +351,7 @@ return {
 
 		Snacks.toggle.option("spell", { name = "󰓆 Spell Checking" }):map("<leader>ts")
 		Snacks.toggle.option("wrap", { name = "󰖶 Wrap Long Lines" }):map("<leader>tw")
-		Snacks.toggle.option("list", { name = "󱁐 List (Visible Whitespace)" }):map("<leader>tl")
+		Snacks.toggle.option("list", { name = "󱁐 List (Visible Whitespace)" }):map("<leader>tW")
 		Snacks.toggle.diagnostics({ name = " Diagnostics" }):map("<leader>tD")
 		Snacks.toggle.treesitter({ name = " Treesitter Highlighting" }):map("<leader>tt")
 
@@ -372,6 +373,21 @@ return {
 				end,
 			})
 			:map("<leader>tv")
+
+		Snacks.toggle
+			.new({
+				id = "code_lens",
+				name = "󱡴 Code Lens",
+				get = function() return require("lensline").is_enabled() end,
+				set = function(state)
+					if state then
+						require("lensline").enable()
+					else
+						require("lensline").disable()
+					end
+				end,
+			})
+			:map("<leader>tl")
 
 		Snacks.toggle
 			.new({
