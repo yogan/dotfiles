@@ -521,5 +521,14 @@ return {
 				set = function(state) require("render-markdown").set(state) end,
 			})
 			:map("<leader>tm")
+
+		Snacks.toggle
+			.new({
+				id = "smear_cursor",
+				name = "󰳽 Smear Cursor",
+				get = function() return require("smear_cursor").enabled end,
+				set = function(state) require("smear_cursor").enabled = state end,
+			})
+			:map("<leader>tS")
 	end,
 }
