@@ -18,6 +18,13 @@ vim.api.nvim_create_autocmd("VimResized", {
 	command = "wincmd =",
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+	group = group,
+	desc = "Refresh LSP code lens",
+	pattern = "*",
+	callback = function() vim.lsp.codelens.refresh({ bufnr = 0 }) end,
+})
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	group = group,
 	desc = "Enable spell checking for certain file types",
