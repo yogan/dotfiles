@@ -169,4 +169,34 @@ return {
 			vim.diagnostic.config({ virtual_text = false })
 		end,
 	},
+
+	-- Code Lens line
+	{
+		"oribarilan/lensline.nvim",
+		tag = "2.0.0", -- or: branch = 'release/2.x' for latest non-breaking updates
+		event = "LspAttach",
+		opts = {
+			profiles = {
+				{
+					name = "minimal",
+					providers = {
+						{
+							name = "usages",
+							show_zero = true,
+							breakdown = false,
+							icon_for_single = "󰌹 ", -- icon when only one attribute or aggregate display
+						},
+						{ name = "last_author" },
+					},
+					style = {
+						highlight = "LspInlayHint",
+						-- highlight = "TinyInlineInvDiagnosticVirtualTextHint",
+						placement = "inline",
+						prefix = "",
+						render = "focused", -- render lenses only for focused function
+					},
+				},
+			},
+		},
+	},
 }
