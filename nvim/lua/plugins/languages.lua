@@ -18,6 +18,13 @@ return {
 		ft = "lua",
 	},
 
+	-- TypeScript
+	{
+		"pmizio/typescript-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
+
 	-- Elixir
 	{
 		"elixir-tools/elixir-tools.nvim",

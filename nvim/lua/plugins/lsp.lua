@@ -22,13 +22,17 @@ local function enable_lsps()
 	vim.lsp.enable("perlnavigator") -- Perl (install perlnavigator with Mason)
 	vim.lsp.enable("pyright") -- Python (install pyright with Mason)
 	vim.lsp.enable("rust_analyzer") -- Rust (install rust-analyzer with Mason)
-	vim.lsp.enable("ts_ls") -- TypeScript (install typescript-language-server with Mason)
 	vim.lsp.enable("yamlls") -- YAML (install yaml-language-server with Mason)
 	vim.lsp.enable("zls") -- Zig (install zls with Mason)
 end
 
 local function setup_lsp_keymaps()
-	vim.keymap.set("n", "<leader>q", vim.lsp.buf.code_action, { remap = false, desc = "LSP: code action ([q]uickfix)" })
+	vim.keymap.set(
+		{ "n", "x", "v" },
+		"<leader>q",
+		vim.lsp.buf.code_action,
+		{ remap = false, desc = "LSP: code action ([q]uickfix)" }
+	)
 end
 
 local function configure_diagnostics()
