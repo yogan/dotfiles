@@ -109,6 +109,12 @@ return {
 			smear_to_cmd = false, -- fixes glitch in noice's cmd/search box
 			never_draw_over_target = true, -- don't hide my current position
 			hide_target_hack = true, -- same (?)
+
+			-- `true` would prevent background from showing up when moving
+			-- through a visual selection block, or jumping between windows,
+			-- but some Unicode replacement characters show up then
+			legacy_computing_symbols_support = false,
+
 			--
 			-- Fire hazard preset from docs:
 			--
@@ -133,7 +139,7 @@ return {
 			-- Snow preset from
 			-- https://old.reddit.com/r/neovim/comments/1p1z43w/particle_effects_in_smearcursornvim_let_it/npx36yh/
 			--
-			cursor_color = "#ffffff",
+			cursor_color = "Cursor",
 			gradient_exponent = 0,
 			particles_enabled = true,
 			particle_spread = 1,
