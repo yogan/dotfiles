@@ -105,6 +105,7 @@ return {
 					augend.date.alias["%Y-%m-%d"],
 					augend.hexcolor.new(),
 					augend.constant.alias.bool,
+					augend.constant.alias.Bool, -- for True/False in e.g. Python
 					augend.constant.new({ elements = { "let", "const" } }),
 				},
 			})
