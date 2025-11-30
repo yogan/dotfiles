@@ -33,6 +33,15 @@ local function setup_lsp_keymaps()
 		vim.lsp.buf.code_action,
 		{ remap = false, desc = "LSP: code action ([q]uickfix)" }
 	)
+
+	-- Add the <C-s> = show signature help to normal mode as well
+	-- (per default, it's only in insert mode)
+	vim.keymap.set(
+		"n",
+		"<C-s>",
+		function() vim.lsp.buf.signature_help({ border = "round" }) end,
+		{ remap = false, desc = "LSP: signature help" }
+	)
 end
 
 local function configure_diagnostics()
