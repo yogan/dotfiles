@@ -16,6 +16,7 @@ local function enable_lsps()
 	vim.lsp.enable("jsonls") -- JSON with JSON Schema support, npm i -g vscode-langservers-extracted
 	vim.lsp.enable("julials") -- Julia (install julia-lsp with Mason)
 	vim.lsp.enable("lua_ls") -- Lua (install lua-language-server with Mason)
+	vim.lsp.enable("kotlin_lsp") -- Kotlin (install kotlin-lsp with Mason)
 	vim.lsp.enable("marksman") -- Markdown (install marksman with Mason)
 	vim.lsp.enable("nim_langserver") -- Nim (install nimlangserver with Mason)
 	vim.lsp.enable("ocamllsp") -- OCaml (install ocaml-lsp with Mason)
