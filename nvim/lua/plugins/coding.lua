@@ -392,6 +392,7 @@ return {
 				["erlang"] = true,
 				["fish"] = true,
 				["fortran"] = true,
+				["fsharp"] = true,
 				["gitcommit"] = true,
 				["gleam"] = true,
 				["go"] = true,
