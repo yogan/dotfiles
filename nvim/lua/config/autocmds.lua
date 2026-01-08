@@ -146,3 +146,24 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		end
 	end,
 })
+
+-- Set filetype for .env.* files to match .env
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = group,
+	desc = "Set filetype for .env.* files",
+	pattern = ".env.*",
+	callback = function() vim.bo.filetype = "sh" end,
+})
+
+-- Disable diagnostics for .env files when LSP attaches
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = group,
+	desc = "Disable diagnostics for .env and .env.* files",
+	callback = function(event)
+		local bufnr = event.buf
+		local bufname = vim.api.nvim_buf_get_name(bufnr)
+		if string.match(bufname, "/%.env$") or string.match(bufname, "/%.env%.") then
+			vim.diagnostic.enable(false, { bufnr = bufnr })
+		end
+	end,
+})
