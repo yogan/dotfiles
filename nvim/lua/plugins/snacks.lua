@@ -213,7 +213,7 @@ return {
 			})
 		end
 
-		-- NOTE: keep in sync with definitions in todo-comments.lua
+		-- NOTE: keep in sync with definitions in coding.lua
 		local function comments_todo()
 			---@diagnostic disable-next-line: undefined-field
 			sp.todo_comments({
