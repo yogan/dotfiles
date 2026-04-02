@@ -140,79 +140,61 @@ return {
 		},
 
 		config = function()
-			local rep = require("nvim-treesitter.textobjects.repeatable_move")
 			local gs = require("gitsigns")
 			local sw = require("snacks.words")
 			local wk = require("which-key")
 			local modes = { "n", "x", "o" }
 
-			-- Repeat movement with ; and ,
-			-- ensure ; goes forward and , goes backward regardless of the last direction
-			wk.add({
-				{ mode = modes, ";", rep.repeat_last_move_next, desc = "Repeat last movement (forward)" },
-				{ mode = modes, ",", rep.repeat_last_move_previous, desc = "Repeat last movement (backward)" },
-			})
-
-			-- Make builtin f, F, t, T also repeatable with ; and ,
-			vim.keymap.set(modes, "f", rep.builtin_f_expr, { expr = true })
-			vim.keymap.set(modes, "F", rep.builtin_F_expr, { expr = true })
-			vim.keymap.set(modes, "t", rep.builtin_t_expr, { expr = true })
-			vim.keymap.set(modes, "T", rep.builtin_T_expr, { expr = true })
-
-			-- Make gitsigns.nvim movements repeatable with ; and , keys
+			-- Move between Git change hunks
+			---@diagnostic disable-next-line: missing-fields
 			local next_hunk = function() gs.nav_hunk("next", { preview = false, target = "all" }) end
+			---@diagnostic disable-next-line: missing-fields
 			local prev_hunk = function() gs.nav_hunk("prev", { preview = false, target = "all" }) end
+			---@diagnostic disable-next-line: missing-fields
 			local next_hunk_preview = function() gs.nav_hunk("next", { preview = true, target = "all" }) end
+			---@diagnostic disable-next-line: missing-fields
 			local prev_hunk_preview = function() gs.nav_hunk("prev", { preview = true, target = "all" }) end
-			local next_hunk_rep, prev_hunk_rep = rep.make_repeatable_move_pair(next_hunk, prev_hunk)
-			local next_hunk_preview_rep, prev_hunk_preview_rep =
-				rep.make_repeatable_move_pair(next_hunk_preview, prev_hunk_preview)
 			wk.add({
-				{ mode = modes, "]h", next_hunk_rep, icon = "", desc = "Next Git change hunk" },
-				{ mode = modes, "[h", prev_hunk_rep, icon = "", desc = "Previous Git change hunk" },
-				{ mode = modes, "]H", next_hunk_preview_rep, icon = "", desc = "Next Git change hunk (preview)" },
+				{ mode = modes, "]h", next_hunk, icon = "", desc = "Next Git change hunk" },
+				{ mode = modes, "[h", prev_hunk, icon = "", desc = "Previous Git change hunk" },
+				{ mode = modes, "]H", next_hunk_preview, icon = "", desc = "Next Git change hunk (preview)" },
 				{
 					mode = modes,
 					"[H",
-					prev_hunk_preview_rep,
-					icon = "",
+					prev_hunk_preview,
+					icon = "",
 					desc = "Previous Git change hunk (preview)",
 				},
 			})
 
-			-- Make diagnostics (mostly LSP) movements repeatable with ; and , keys
+			-- Move between diagnostics
 			local next_diag = function() vim.diagnostic.jump({ count = 1 }) end
 			local prev_diag = function() vim.diagnostic.jump({ count = -1 }) end
 			local next_error = function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end
 			local prev_error = function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end
-			local next_diag_rep, prev_diag_rep = rep.make_repeatable_move_pair(next_diag, prev_diag)
-			local next_error_rep, prev_error_rep = rep.make_repeatable_move_pair(next_error, prev_error)
 			wk.add({
 				-- stylua: ignore start
-				{ mode = modes, "]d", next_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Next diagnostic" },
-				{ mode = modes, "[d", prev_diag_rep, icon = { icon = "", color = "yellow" }, desc = "Previous diagnostic" },
-				{ mode = modes, "]e", next_error_rep, icon = "", desc = "Next error" },
-				{ mode = modes, "[e", prev_error_rep, icon = "", desc = "Previous error" },
+				{ mode = modes, "]d", next_diag, icon = { icon = "", color = "yellow" }, desc = "Next diagnostic" },
+				{ mode = modes, "[d", prev_diag, icon = { icon = "", color = "yellow" }, desc = "Previous diagnostic" },
+				{ mode = modes, "]e", next_error, icon = "", desc = "Next error" },
+				{ mode = modes, "[e", prev_error, icon = "", desc = "Previous error" },
 				-- stylua: ignore end
 			})
 
-			-- Make Snacks word LSP reference movements repeatable with ; and , keys
+			-- Snacks word LSP reference movements
 			local function next_word() sw.jump(vim.v.count1, true) end
 			local function prev_word() sw.jump(-vim.v.count1, true) end
-			local next_word_rep, prev_word_rep = rep.make_repeatable_move_pair(next_word, prev_word)
 			wk.add({
-				{ mode = modes, "]w", next_word_rep, icon = "", desc = "Next word" },
-				{ mode = modes, "[w", prev_word_rep, icon = "", desc = "Previous word" },
+				{ mode = modes, "]w", next_word, icon = "", desc = "Next word" },
+				{ mode = modes, "[w", prev_word, icon = "", desc = "Previous word" },
 			})
 
-			-- Next/previous spelling error (repeatable)
+			-- Next/previous spelling error
 			local function next_spelling_error() vim.cmd("normal! ]s") end
 			local function prev_spelling_error() vim.cmd("normal! [s") end
-			local next_spelling_error_rep, prev_spelling_error_rep =
-				rep.make_repeatable_move_pair(next_spelling_error, prev_spelling_error)
 			wk.add({
-				{ mode = modes, "]s", next_spelling_error_rep, icon = "󰓆", desc = "Next spelling error" },
-				{ mode = modes, "[s", prev_spelling_error_rep, icon = "󰓆", desc = "Previous spelling error" },
+				{ mode = modes, "]s", next_spelling_error, icon = "󰓆", desc = "Next spelling error" },
+				{ mode = modes, "[s", prev_spelling_error, icon = "󰓆", desc = "Previous spelling error" },
 			})
 		end,
 	},
