@@ -167,3 +167,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
+
+-- Hide "[Process exited 0]" shown in Snacks dashboard after nvim-logo.sh exits.
+-- See: https://github.com/neovim/neovim/discussions/38315
+vim.api.nvim_clear_autocmds({ group = "nvim.terminal", event = "TermClose" })
