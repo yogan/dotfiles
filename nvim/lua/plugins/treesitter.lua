@@ -2,18 +2,12 @@ return {
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
+		branch = "main",
 		lazy = false,
 
 		-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
 		-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
 		build = ":TSUpdate",
-
-		-- see https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/treesitter.lua
-		init = function(plugin)
-			require("lazy.core.loader").add_to_rtp(plugin)
-			require("nvim-treesitter.query_predicates")
-		end,
 
 		---@class TSConfig
 		opts = {
@@ -42,7 +36,11 @@ return {
 				-- highlighting looks better; e.g. gitcommit only has diff green/red
 				-- highlighting without treesitter)
 				enable = true,
-				disable = { "dockerfile", "gitcommit", "tmux" },
+				disable = {
+					"dockerfile",
+					"gitcommit",
+					"tmux",
+				},
 
 				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -124,9 +122,6 @@ return {
 				},
 			},
 		},
-
-		---@param opts TSConfig
-		config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
 	},
 
 	-- AST based text objects
