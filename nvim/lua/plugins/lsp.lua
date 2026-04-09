@@ -1,31 +1,32 @@
 local function enable_lsps()
-	vim.lsp.enable("bashls") -- Bash (install bash-language-server with Mason)
-	vim.lsp.enable("biome") -- Biome (usually installed project-locally via npm)
-	vim.lsp.enable("clangd") -- C/C++ with Clang (install clangd with Mason)
+	vim.lsp.enable("bashls")      -- Bash (install bash-language-server with Mason)
+	vim.lsp.enable("biome")       -- Biome (usually installed project-locally via npm)
+	vim.lsp.enable("clangd")      -- C/C++ with Clang (install clangd with Mason)
 	vim.lsp.enable("clojure_lsp") -- Clojure (install clojure-lsp with Mason)
 	vim.lsp.enable("crystalline") -- Crystal (install crystalline with Mason)
-	vim.lsp.enable("csharp_ls") -- C# (install csharp-language-server via Mason)
-	vim.lsp.enable("cssls") -- CSS (install css-lsp with Mason)
-	vim.lsp.enable("dartls") -- Dart (works out of the box when dart is installed)
-	vim.lsp.enable("eslint") -- ESLint (package-local npm version will be used)
-	vim.lsp.enable("fish_lsp") -- fish (download bin to ~/.local/bin, see https://github.com/ndonfris/fish-lsp?tab=readme-ov-file#download-standalone-binary)
+	vim.lsp.enable("csharp_ls")   -- C# (install csharp-language-server via Mason)
+	vim.lsp.enable("cssls")       -- CSS (install css-lsp with Mason)
+	vim.lsp.enable("dartls")      -- Dart (works out of the box when dart is installed)
+	vim.lsp.enable("eslint")      -- ESLint (package-local npm version will be used)
+	vim.lsp.enable("fish_lsp")    -- fish (download bin to ~/.local/bin, see https://github.com/ndonfris/fish-lsp?tab=readme-ov-file#download-standalone-binary)
 	vim.lsp.enable("fsautocomplete") -- F# (install fsautocomplete with Mason)
-	vim.lsp.enable("gleam") -- Gleam (no plugin needed, LSP is built-in)
-	vim.lsp.enable("gopls") -- Go (install gopls via apt, not Mason, at least when golang itself is installed via apt, otherwise it complains about version stuff)
-	vim.lsp.enable("hls") -- Haskell (stack install haskell-language-server and never touch it again when it works, Haskell toolchain is a bitch)
-	vim.lsp.enable("jqls") -- jq (install jq-lsp with Mason)
-	vim.lsp.enable("jsonls") -- JSON with JSON Schema support, npm i -g vscode-langservers-extracted
-	vim.lsp.enable("julials") -- Julia (install julia-lsp with Mason)
-	vim.lsp.enable("lua_ls") -- Lua (install lua-language-server with Mason)
-	vim.lsp.enable("kotlin_lsp") -- Kotlin (install kotlin-lsp with Mason)
-	vim.lsp.enable("marksman") -- Markdown (install marksman with Mason)
+	vim.lsp.enable("gleam")       -- Gleam (no plugin needed, LSP is built-in)
+	vim.lsp.enable("gopls")       -- Go (install gopls via apt, not Mason, at least when golang itself is installed via apt, otherwise it complains about version stuff)
+	vim.lsp.enable("hls")         -- Haskell (stack install haskell-language-server and never touch it again when it works, Haskell toolchain is a bitch)
+	vim.lsp.enable("jqls")        -- jq (install jq-lsp with Mason)
+	vim.lsp.enable("jsonls")      -- JSON with JSON Schema support, npm i -g vscode-langservers-extracted
+	vim.lsp.enable("julials")     -- Julia (install julia-lsp with Mason)
+	vim.lsp.enable("lua_ls")      -- Lua (install lua-language-server with Mason)
+	vim.lsp.enable("kotlin_lsp")  -- Kotlin (install kotlin-lsp with Mason)
+	vim.lsp.enable("marksman")    -- Markdown (install marksman with Mason)
 	vim.lsp.enable("nim_langserver") -- Nim (install nimlangserver with Mason)
-	vim.lsp.enable("ocamllsp") -- OCaml (install ocaml-lsp with Mason)
+	vim.lsp.enable("ocamllsp")    -- OCaml (install ocaml-lsp with Mason)
 	vim.lsp.enable("perlnavigator") -- Perl (install perlnavigator with Mason)
-	vim.lsp.enable("pyright") -- Python (install pyright with Mason)
+	-- vim.lsp.enable("pyright")     -- Python (install pyright with Mason)
+	vim.lsp.enable("ruff")        -- Python (uv tool install ruff)
 	vim.lsp.enable("rust_analyzer") -- Rust (install rust-analyzer with Mason)
-	vim.lsp.enable("yamlls") -- YAML (install yaml-language-server with Mason)
-	vim.lsp.enable("zls") -- Zig (install zls with Mason)
+	vim.lsp.enable("yamlls")      -- YAML (install yaml-language-server with Mason)
+	vim.lsp.enable("zls")         -- Zig (install zls with Mason)
 end
 
 local function setup_lsp_keymaps()
@@ -75,9 +76,9 @@ local function setup_cmp()
 	cmp.setup({
 		sources = {
 			{ name = "nvim_lsp", keyword_length = 3 },
-			{ name = "luasnip", keyword_length = 2, max_item_count = 10 },
-			{ name = "buffer", keyword_length = 3, max_item_count = 15 },
-			{ name = "path", keyword_length = 2 },
+			{ name = "luasnip",  keyword_length = 2, max_item_count = 10 },
+			{ name = "buffer",   keyword_length = 3, max_item_count = 15 },
+			{ name = "path",     keyword_length = 2 },
 		},
 		---@diagnostic disable-next-line: missing-fields
 		formatting = {
@@ -112,7 +113,7 @@ return {
 	-- Mason to install and manage LSP servers
 	-- FIXME: Mason is already at v2.x, which currently breaks with my config
 	-- Pinning to v1.x for now, as recommended here: https://github.com/LazyVim/LazyVim/issues/6039
-	{ "mason-org/mason.nvim", version = "^1.0.0", config = true },
+	{ "mason-org/mason.nvim",           version = "^1.0.0", config = true },
 	{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0", opts = { ensure_installed = { "lua_ls" } } },
 
 	-- Schema store for jsonls and yamlls
@@ -133,7 +134,7 @@ return {
 	},
 
 	-- Completions
-	{ "hrsh7th/nvim-cmp", config = setup_cmp },
+	{ "hrsh7th/nvim-cmp",  config = setup_cmp },
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path",
 	"hrsh7th/cmp-nvim-lsp",
