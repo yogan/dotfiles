@@ -137,14 +137,14 @@ return {
 			},
 
 			formatters_by_ft = {
-				-- use Biome or prettierd if available, otherwise fallback to prettier
-				javascript = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				typescript = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				html = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				css = { "biome-check", "prettierd", "prettier", stop_after_first = true },
-				json = { "biome-check", "prettierd", "prettier", stop_after_first = true },
+				-- use oxfmt, Biome or prettierd if available, otherwise fallback to prettier
+				javascript = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				typescript = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				typescriptreact = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				html = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				css = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
+				json = { "oxfmt", "biome-check", "prettierd", "prettier", stop_after_first = true },
 
 				lua = { "stylua" },
 				sh = { "shfmt" },
