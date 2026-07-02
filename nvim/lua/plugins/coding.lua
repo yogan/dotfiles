@@ -353,19 +353,40 @@ return {
 		init = function()
 			-- Copilot requires Node.js v22+, but with fnm, depending on the
 			-- current directory, and its `.nvmrc` file, the current `node` from
-			-- the `$PATH` might be an older version. So, we find a suitable
+			-- the `$PATH` might be an older version. So, we find the newest
 			-- Node.js v22+ binary from fnm's installed versions.
-			local fnm_dir = vim.fn.expand("~/.fnm/node-versions")
-			if vim.fn.isdirectory(fnm_dir) == 1 then
-				for _, entry in ipairs(vim.fn.readdir(fnm_dir)) do
-					if entry:match("^v22%.") then
-						local node_path = fnm_dir .. "/" .. entry .. "/installation/bin/node"
-						if vim.fn.executable(node_path) == 1 then
-							vim.g.copilot_node_command = node_path
-							break
+			local fnm_dirs = {
+				vim.fn.expand("~/.local/share/fnm/node-versions"),
+				vim.fn.expand("~/.fnm/node-versions"),
+			}
+			local best = { path = nil, version = { -1, -1, -1 } }
+			for _, fnm_dir in ipairs(fnm_dirs) do
+				if vim.fn.isdirectory(fnm_dir) == 1 then
+					for _, entry in ipairs(vim.fn.readdir(fnm_dir)) do
+						local major, minor, patch = entry:match("^v(%d+)%.(%d+)%.(%d+)")
+						major, minor, patch = tonumber(major), tonumber(minor), tonumber(patch)
+						if major and major >= 22 then
+							local ver = { major, minor, patch }
+							local newer = false
+							for i = 1, 3 do
+								if ver[i] ~= best.version[i] then
+									newer = ver[i] > best.version[i]
+									break
+								end
+							end
+							if newer then
+								local node_path = fnm_dir .. "/" .. entry .. "/installation/bin/node"
+								if vim.fn.executable(node_path) == 1 then
+									best.path = node_path
+									best.version = ver
+								end
+							end
 						end
 					end
 				end
+			end
+			if best.path then
+				vim.g.copilot_node_command = best.path
 			end
 
 			vim.g.copilot_filetypes = {
