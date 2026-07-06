@@ -54,13 +54,13 @@ return {
 	-- Highlighting for Storybook files
 	{
 		"davidmh/mdx.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		dependencies = { "romus204/tree-sitter-manager.nvim" },
 	},
 
 	-- Markdown
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		dependencies = { "romus204/tree-sitter-manager.nvim", "nvim-tree/nvim-web-devicons" },
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {

@@ -1,137 +1,82 @@
 return {
-	-- Treesitter
+	-- Treesitter parser manager.
+	--
+	-- Replaces the archived nvim-treesitter (archived 2026-04-03). Neovim 0.12
+	-- ships treesitter in core (highlight, folding, indent, incremental
+	-- selection) but has no parser installer; this plugin fills that gap and
+	-- reuses nvim-treesitter's curated highlight queries.
+	--
+	-- Requires the `tree-sitter` CLI (a C compiler and git). On macOS the CLI
+	-- lives in its own Homebrew formula, separate from the library:
+	--   brew install tree-sitter-cli
 	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
+		"romus204/tree-sitter-manager.nvim",
 		lazy = false,
 
-		-- NOTE for Windows: Treesitter requires a C compiler. This one works fine:
-		-- https://github.com/skeeto/w64devkit (unzip somewhere, add bin/ to PATH)
-		build = ":TSUpdate",
-
-		---@class TSConfig
+		---@module "tree-sitter-manager"
 		opts = {
-			-- A list of parser names, or 'all'
+			-- Parsers to install at startup. Neovim already bundles parsers +
+			-- queries for c, lua, markdown, query, vim and vimdoc, so only the
+			-- extras are listed here.
 			ensure_installed = {
-				"c",
 				"javascript",
-				"lua",
 				"python",
 				"regex",
 				"rust",
 				"typescript",
-				"vim",
-				"vimdoc",
 			},
 
-			-- Install parsers synchronously (only applied to `ensure_installed`)
-			sync_install = false,
-
-			-- Automatically install missing parsers when entering buffer
-			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+			-- Auto-install a parser the first time a new filetype is opened.
 			auto_install = true,
 
-			highlight = {
-				-- Enable by default, but disable for some file types (where default
-				-- highlighting looks better; e.g. gitcommit only has diff green/red
-				-- highlighting without treesitter)
-				enable = true,
-				disable = {
-					"dockerfile",
-					"gitcommit",
-					"tmux",
-				},
-
-				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-				-- Using this option may slow down your editor, and you may see some duplicate highlights.
-				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = false,
+			-- Don't auto-install the parsers Neovim already ships (so
+			-- tree-sitter-manager doesn't shadow the bundled versions), plus
+			-- gitcommit which we keep on legacy syntax.
+			noauto_install = {
+				"c",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"query",
+				"vim",
+				"vimdoc",
+				"gitcommit",
 			},
 
-			-- see https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#incremental-selection
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					-- Starting the selection with meta-v already starts with the
-					-- current node selected and does not have the bug that when
-					-- shrinking the selection it shrinks down to the last selection.
-					-- This only happens when we entered visual mode normally and then
-					-- use `L` and `H` to grow and shrink the selection, but it should
-					-- usually not be a problem.
-					-- HINT: there is also `S` from `flash` to directly select a
-					-- (arbitrary) node region around the cursor
-					init_selection = "<M-v>",
-					node_incremental = "L",
-					node_decremental = "H",
-					scope_incremental = false, -- disabled, not needed
-				},
-			},
-
-			-- See: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-			textobjects = {
-				select = {
-					enable = true,
-					lookahead = true, -- automatically jump forward to textobject
-					keymaps = {
-						-- All of those can be combine with v, c, d, etc., so e.g.
-						-- cia will change the current parameter (both type and name)
-						-- (vaa will include a neighboring comma)
-
-						["ac"] = { query = "@class.outer", desc = "Select outer class" },
-						["ic"] = { query = "@class.inner", desc = "Select inner class" },
-
-						["af"] = { query = "@function.outer", desc = "Select outer function" },
-						["if"] = { query = "@function.inner", desc = "Select inner function" },
-
-						["aa"] = { query = "@parameter.outer", desc = "Select outer argument" },
-						["ia"] = { query = "@parameter.inner", desc = "Select inner argument" },
-
-						["al"] = { query = "@loop.outer", desc = "Select outer loop" },
-						["il"] = { query = "@loop.inner", desc = "Select inner loop" },
-
-						["a/"] = { query = "@comment.outer", desc = "Select outer comment" },
-					},
-				},
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]m"] = { query = "@function.outer", desc = "Next function start" },
-						["]c"] = { query = "@class.outer", desc = "Next class start" },
-					},
-					goto_next_end = {
-						["]M"] = { query = "@function.outer", desc = "Next function end" },
-						["]C"] = { query = "@class.outer", desc = "Next class end" },
-					},
-					goto_previous_start = {
-						["[m"] = { query = "@function.outer", desc = "Previous function start" },
-						["[c"] = { query = "@class.outer", desc = "Previous class start" },
-					},
-					goto_previous_end = {
-						["[M"] = { query = "@function.outer", desc = "Previous function end" },
-						["[C"] = { query = "@class.outer", desc = "Previous class end" },
-					},
-				},
-				lsp_interop = {
-					enable = true,
-					border = "none",
-					peek_definition_code = {
-						["<leader>e"] = "@function.outer",
-					},
-				},
+			-- Keep legacy `:h syntax` for gitcommit: its treesitter parser drops
+			-- the diff red/green highlighting of the commit body.
+			nohighlight = {
+				"gitcommit",
 			},
 		},
+
+		config = function(_, opts)
+			require("tree-sitter-manager").setup(opts)
+
+			-- Incremental selection is provided by Neovim core (0.12+): in visual
+			-- mode `an`/`in` grow/shrink to the parent/child node, `]n`/`[n` move
+			-- to the next/previous node and `]N`/`[N` expand to them. Falls back
+			-- to `vim.lsp.buf.selection_range()` when no parser is available.
+			--
+			-- Map those to friendlier keys: meta-v starts the selection at the
+			-- node under the cursor, `L`/`H` grow/shrink it.
+			-- HINT: there is also `S` from `flash` to directly select a
+			-- (arbitrary) node region around the cursor.
+			vim.keymap.set("n", "<M-v>", "van", { remap = true, desc = "Select node" })
+			vim.keymap.set("x", "L", "an", { remap = true, desc = "Grow node selection" })
+			vim.keymap.set("x", "H", "in", { remap = true, desc = "Shrink node selection" })
+		end,
 	},
 
 	-- AST based text objects
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
 		dependencies = {
 			"folke/snacks.nvim",
 			"folke/which-key.nvim",
 			"lewis6991/gitsigns.nvim",
-			"nvim-treesitter/nvim-treesitter",
+			"romus204/tree-sitter-manager.nvim",
 		},
 
 		config = function()
@@ -140,15 +85,96 @@ return {
 			local wk = require("which-key")
 			local modes = { "n", "x", "o" }
 
+			-- Text objects have no built-in keymap option; select/move are wired
+			-- up manually via the module functions further down.
+			require("nvim-treesitter-textobjects").setup({
+				select = {
+					-- Automatically jump forward to the text object.
+					lookahead = true,
+				},
+				move = {
+					-- Whether to set jumps in the jumplist.
+					set_jumps = true,
+				},
+			})
+
+			local ts_select = require("nvim-treesitter-textobjects.select")
+			local ts_move = require("nvim-treesitter-textobjects.move")
+
+			-- Select text objects. All of these can be combined with v, c, d,
+			-- etc., so e.g. cia will change the current parameter (both type and
+			-- name) (vaa will include a neighboring comma).
+			local function select_map(key, query, desc)
+				vim.keymap.set(
+					{ "x", "o" },
+					key,
+					function() ts_select.select_textobject(query, "textobjects") end,
+					{ desc = desc }
+				)
+			end
+			select_map("ac", "@class.outer", "Select outer class")
+			select_map("ic", "@class.inner", "Select inner class")
+			select_map("af", "@function.outer", "Select outer function")
+			select_map("if", "@function.inner", "Select inner function")
+			select_map("aa", "@parameter.outer", "Select outer argument")
+			select_map("ia", "@parameter.inner", "Select inner argument")
+			select_map("al", "@loop.outer", "Select outer loop")
+			select_map("il", "@loop.inner", "Select inner loop")
+			select_map("a/", "@comment.outer", "Select outer comment")
+
+			-- Move between text objects. The moves are made repeatable with
+			-- `;`/`,` below (flash.nvim yields those keys for this on purpose).
+			local function move_map(key, fn, query, desc)
+				vim.keymap.set(modes, key, function() fn(query, "textobjects") end, { desc = desc })
+			end
+			move_map("]m", ts_move.goto_next_start, "@function.outer", "Next function start")
+			move_map("]c", ts_move.goto_next_start, "@class.outer", "Next class start")
+			move_map("]M", ts_move.goto_next_end, "@function.outer", "Next function end")
+			move_map("]C", ts_move.goto_next_end, "@class.outer", "Next class end")
+			move_map("[m", ts_move.goto_previous_start, "@function.outer", "Previous function start")
+			move_map("[c", ts_move.goto_previous_start, "@class.outer", "Previous class start")
+			move_map("[M", ts_move.goto_previous_end, "@function.outer", "Previous function end")
+			move_map("[C", ts_move.goto_previous_end, "@class.outer", "Previous class end")
+
+			-- Make the moves above repeatable: `;` repeats the last textobject
+			-- move forward, `,` backward (regardless of the original direction).
+			-- Also route the built-in `f`/`F`/`t`/`T` through the same machinery
+			-- so `;`/`,` repeat those too ("all kinds of motions").
+			local ts_repeat = require("nvim-treesitter-textobjects.repeatable_move")
+			vim.keymap.set(modes, ";", ts_repeat.repeat_last_move_next, { desc = "Repeat last move forward" })
+			vim.keymap.set(modes, ",", ts_repeat.repeat_last_move_previous, { desc = "Repeat last move backward" })
+			vim.keymap.set(modes, "f", ts_repeat.builtin_f_expr, { expr = true })
+			vim.keymap.set(modes, "F", ts_repeat.builtin_F_expr, { expr = true })
+			vim.keymap.set(modes, "t", ts_repeat.builtin_t_expr, { expr = true })
+			vim.keymap.set(modes, "T", ts_repeat.builtin_T_expr, { expr = true })
+
+			-- Wrap a forward/backward move pair so it plugs into the same
+			-- repeat machinery: `;` replays the last one forward, `,` backward.
+			-- Returns the two directional functions ready to be mapped.
+			local function repeatable_pair(forward_fn, backward_fn)
+				local move = ts_repeat.make_repeatable_move(function(opts)
+					if opts.forward then
+						forward_fn()
+					else
+						backward_fn()
+					end
+				end)
+				return function() move({ forward = true }) end, function() move({ forward = false }) end
+			end
+
 			-- Move between Git change hunks
-			---@diagnostic disable-next-line: missing-fields
-			local next_hunk = function() gs.nav_hunk("next", { preview = false, target = "all" }) end
-			---@diagnostic disable-next-line: missing-fields
-			local prev_hunk = function() gs.nav_hunk("prev", { preview = false, target = "all" }) end
-			---@diagnostic disable-next-line: missing-fields
-			local next_hunk_preview = function() gs.nav_hunk("next", { preview = true, target = "all" }) end
-			---@diagnostic disable-next-line: missing-fields
-			local prev_hunk_preview = function() gs.nav_hunk("prev", { preview = true, target = "all" }) end
+			local function nav_hunk(dir, preview)
+				---@diagnostic disable-next-line: missing-fields
+				gs.nav_hunk(dir, { preview = preview, target = "all" })
+			end
+			local next_hunk, prev_hunk = repeatable_pair(
+				function() nav_hunk("next", false) end,
+				function() nav_hunk("prev", false) end
+			)
+			local next_hunk_preview, prev_hunk_preview = repeatable_pair(
+				function() nav_hunk("next", true) end,
+				function() nav_hunk("prev", true) end
+			)
 			wk.add({
 				{ mode = modes, "]h", next_hunk, icon = "", desc = "Next Git change hunk" },
 				{ mode = modes, "[h", prev_hunk, icon = "", desc = "Previous Git change hunk" },
@@ -163,10 +189,14 @@ return {
 			})
 
 			-- Move between diagnostics
-			local next_diag = function() vim.diagnostic.jump({ count = 1 }) end
-			local prev_diag = function() vim.diagnostic.jump({ count = -1 }) end
-			local next_error = function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end
-			local prev_error = function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end
+			local next_diag, prev_diag = repeatable_pair(
+				function() vim.diagnostic.jump({ count = 1 }) end,
+				function() vim.diagnostic.jump({ count = -1 }) end
+			)
+			local next_error, prev_error = repeatable_pair(
+				function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+				function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end
+			)
 			wk.add({
 				-- stylua: ignore start
 				{ mode = modes, "]d", next_diag, icon = { icon = "", color = "yellow" }, desc = "Next diagnostic" },
@@ -177,16 +207,20 @@ return {
 			})
 
 			-- Snacks word LSP reference movements
-			local function next_word() sw.jump(vim.v.count1, true) end
-			local function prev_word() sw.jump(-vim.v.count1, true) end
+			local next_word, prev_word = repeatable_pair(
+				function() sw.jump(vim.v.count1, true) end,
+				function() sw.jump(-vim.v.count1, true) end
+			)
 			wk.add({
 				{ mode = modes, "]w", next_word, icon = "", desc = "Next word" },
 				{ mode = modes, "[w", prev_word, icon = "", desc = "Previous word" },
 			})
 
 			-- Next/previous spelling error
-			local function next_spelling_error() vim.cmd("normal! ]s") end
-			local function prev_spelling_error() vim.cmd("normal! [s") end
+			local next_spelling_error, prev_spelling_error = repeatable_pair(
+				function() vim.cmd("normal! ]s") end,
+				function() vim.cmd("normal! [s") end
+			)
 			wk.add({
 				{ mode = modes, "]s", next_spelling_error, icon = "󰓆", desc = "Next spelling error" },
 				{ mode = modes, "[s", prev_spelling_error, icon = "󰓆", desc = "Previous spelling error" },
@@ -199,7 +233,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = {
 			"folke/which-key.nvim",
-			"nvim-treesitter/nvim-treesitter",
+			"romus204/tree-sitter-manager.nvim",
 		},
 		opts = {
 			max_lines = 8,
