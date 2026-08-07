@@ -292,6 +292,16 @@ return {
 			map("<leader>gL", sp.git_log_line, "Log Line")
 			map("<leader>gk", sp.git_log_file, "Log File")
 			map("<leader>gs", sp.git_status, "Status")
+			map("<leader>gS", function()
+				-- Drop entries with no unstaged (working tree) changes, i.e. fully-staged files.
+				sp.git_status({
+					transform = function(item)
+						if item.status:sub(2, 2) == " " then
+							return false
+						end
+					end,
+				})
+			end, "Status (unstaged)")
 			map("<leader>gh", sp.git_stash, "Stash")
 			map("<leader>gz", function() Snacks.lazygit.open() end, "LazyGit")
 			map("<leader>gZ", function() Snacks.lazygit.log() end, "LazyGit Log")
