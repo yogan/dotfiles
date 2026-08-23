@@ -9,6 +9,11 @@ return {
 	-- Requires the `tree-sitter` CLI (a C compiler and git). On macOS the CLI
 	-- lives in its own Homebrew formula, separate from the library:
 	--   brew install tree-sitter-cli
+	-- On Debian/Ubuntu: `cli-tools-check.sh -i tree-sitter` (env repo).
+	--
+	-- Also needs git >= 2.46: the plugin passes `--no-advice` unconditionally,
+	-- and older git fails every parser install. Ubuntu 24.04 ships 2.43 and
+	-- needs the git-core PPA.
 	{
 		"romus204/tree-sitter-manager.nvim",
 		lazy = false,
