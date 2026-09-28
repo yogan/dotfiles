@@ -1,0 +1,14 @@
+{
+  "args": [
+    "--host-resolver-rules=MAP * ~NOTFOUND",
+    "--proxy-server=127.0.0.1:9",
+    "--proxy-bypass-list=<-loopback>",
+    "--disable-background-networking",
+    "--disable-component-update",
+    "--disable-domain-reliability",
+    "--disable-sync",
+    "--no-pings",
+    "--metrics-recording-only",
+    "--safebrowsing-disable-auto-update"
+  ]
+}

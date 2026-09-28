@@ -110,7 +110,18 @@ return {
 			doc = { float = false },
 			-- surface conversion errors only where mmdc is installed, so
 			-- machines without it don't get an error per mermaid block
-			convert = { notify = vim.fn.executable("mmdc") == 1 },
+			convert = {
+				notify = vim.fn.executable("mmdc") == 1,
+				-- same as the snacks default, plus a puppeteer config that
+				-- launches Chrome with all networking blocked, so diagrams
+				-- never fetch remote resources
+				mermaid = function()
+					local theme = vim.o.background == "light" and "neutral" or "dark"
+					local puppeteer = vim.fn.stdpath("config") .. "/mermaid/puppeteer.json"
+					-- stylua: ignore
+					return { "-p", puppeteer, "-i", "{src}", "-o", "{file}", "-b", "transparent", "-t", theme, "-s", "{scale}" }
+				end,
+			},
 		},
 
 		notifier = {
