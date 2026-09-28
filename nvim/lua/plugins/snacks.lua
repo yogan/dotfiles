@@ -48,6 +48,13 @@ local function hide_cursor_in_dashboard()
 	})
 end
 
+-- brew's mermaid-cli doesn't bundle puppeteer's headless Chrome; let `mmdc`
+-- (used by snacks.image for mermaid diagrams) use the system Chrome instead.
+local chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+if not vim.env.PUPPETEER_EXECUTABLE_PATH and vim.uv.fs_stat(chrome) then
+	vim.env.PUPPETEER_EXECUTABLE_PATH = chrome
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -90,6 +97,20 @@ return {
 				{ section = "keys", indent = 2, padding = 2, gap = 1 },
 				{ section = "startup", padding = 2 },
 			},
+		},
+
+		-- Inline images (incl. mermaid diagrams) in markdown via the kitty
+		-- graphics protocol. Requires `mmdc` (brew: mermaid-cli), `magick`
+		-- (brew: imagemagick) and Google Chrome (see above).
+		-- Degrades to plain text where the terminal or tools are missing.
+		image = {
+			enabled = true,
+			-- only inline (needs kitty unicode placeholders); no float fallback
+			-- on terminals without them
+			doc = { float = false },
+			-- surface conversion errors only where mmdc is installed, so
+			-- machines without it don't get an error per mermaid block
+			convert = { notify = vim.fn.executable("mmdc") == 1 },
 		},
 
 		notifier = {

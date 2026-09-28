@@ -80,6 +80,9 @@ return {
 				left_pad = 2,
 				right_pad = 2,
 				min_width = 45,
+				-- The default "hide" conceals the closing fence line, which also
+				-- hides the snacks.image mermaid diagram attached below it.
+				border = "thin",
 			},
 			latex = {
 				enabled = false,
