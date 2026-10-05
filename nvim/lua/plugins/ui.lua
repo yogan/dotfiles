@@ -158,6 +158,32 @@ return {
 			particle_damping = 0.1,
 			particle_gravity = 50,
 		},
+		config = function(_, opts)
+			require("smear_cursor").setup(opts)
+
+			-- Without legacy_computing_symbols_support, smear-cursor creates its
+			-- (non-inverted) highlight groups with blend = 0, so the floating window's
+			-- Normal bg is painted opaquely behind particles/smear characters. This
+			-- looks wrong over CursorLine, inactive windows (NormalNC), etc.
+			-- Force blend = 100 so the underlying bg shows through.
+			local color = require("smear_cursor.color")
+			local orig_get_hl_group = color.get_hl_group
+			local patched = {}
+			color.get_hl_group = function(o)
+				local name = orig_get_hl_group(o)
+				if not (o and o.inverted) and not patched[name] then
+					local hl = vim.api.nvim_get_hl(0, { name = name })
+					hl.blend = 100
+					---@diagnostic disable-next-line: param-type-mismatch
+					vim.api.nvim_set_hl(0, name, hl)
+					patched[name] = true
+				end
+				return name
+			end
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				callback = function() patched = {} end,
+			})
+		end,
 	},
 
 	-- Indent guides
