@@ -111,8 +111,23 @@ return {
 	-- Animated cursor
 	{
 		"sphamba/smear-cursor.nvim",
+		config = function(_, opts)
+			require("smear_cursor").setup(opts)
+			-- smear_insert_mode = false only suppresses the smear, not particles
+			-- (cursor moves become "jumps", but the particle loop keeps running).
+			-- Toggle particles off in insert/replace mode explicitly.
+			local cfg = require("smear_cursor.config")
+			vim.api.nvim_create_autocmd("ModeChanged", {
+				group = vim.api.nvim_create_augroup("smear_cursor_no_insert_particles", {}),
+				callback = function()
+					local mode = vim.api.nvim_get_mode().mode
+					cfg.particles_enabled = not (mode:sub(1, 1) == "i" or mode:sub(1, 1) == "R")
+				end,
+			})
+		end,
 		opts = {
 			smear_to_cmd = false, -- fixes glitch in noice's cmd/search box
+			smear_insert_mode = false,
 			never_draw_over_target = true, -- don't hide my current position
 			hide_target_hack = true, -- same (?)
 
@@ -125,11 +140,15 @@ return {
 			--
 			cursor_color = "#ff4000",
 			particles_enabled = true,
-			stiffness = 0.5,
-			trailing_stiffness = 0.2,
-			trailing_exponent = 5,
+			-- Preset used stiffness 0.5, trailing_stiffness 0.2, trailing_exponent 5,
+			-- gradient_exponent 0: long, opaque tail that covers text when holding
+			-- w/b (esp. over SSH). Use plugin defaults for a short, fading smear.
+			stiffness = 0.6,
+			trailing_stiffness = 0.45,
+			trailing_exponent = 3,
 			damping = 0.6,
-			gradient_exponent = 0,
+			gradient_exponent = 1,
+			max_length = 10, -- default 25
 			gamma = 1,
 			particle_spread = 1,
 			particles_per_second = 500,
